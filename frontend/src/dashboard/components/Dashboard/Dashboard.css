@@ -1,0 +1,1672 @@
+/* Dashboard Layout Styles */
+.dashboard-layout {
+  height: 100vh;
+  background-color: var(--mantine-color-gray-0);
+}
+
+/* =============== RESPONSIVE BREAKPOINTS =============== */
+/* Mobile: < 768px */
+/* Tablet: 768px - 1023px */  
+/* Desktop: >= 1024px */
+
+/* =============== MOBILE STYLES =============== */
+@media (max-width: 767px) {
+  .dashboard-layout {
+    height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Скрыть десктопные элементы на мобильных */
+  .left-navigation,
+  .right-panel,
+  .desktop-panel {
+    display: none !important;
+  }
+
+  /* Мобильный заголовок */
+  .mobile-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--app-color-surface);
+    border-bottom: 1px solid var(--mantine-color-gray-3);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Центральный контент на мобильных */
+  .central-content {
+    padding: 8px !important;
+    margin: 0 !important;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+
+  /* Нижняя навигация */
+  /* Удалено - больше не используется */
+
+  /* Карточки на мобильных */
+  .mobile-card {
+    margin-bottom: 12px;
+    border-radius: 12px;
+    padding: 16px;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden;
+  }
+
+  .mobile-main {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .mobile-content {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Адаптивная навигация */
+  .touch-nav-item {
+    min-height: 48px !important;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .touch-nav-item:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+  }
+
+  .touch-card {
+    min-height: 64px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .touch-card:active {
+    transform: scale(0.99);
+    transition: transform 0.1s ease;
+  }
+
+  .touch-icon-button {
+    min-width: 44px;
+    min-height: 44px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .mobile-card:active {
+    transform: scale(0.98);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Мобильные event карточки */
+  .mobile-event-card {
+    padding: 12px;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    transition: all 0.2s ease;
+  }
+
+  .mobile-event-card:active {
+    transform: scale(0.98);
+    background-color: var(--mantine-color-blue-0);
+  }
+
+  /* Оптимизированная навигация */
+  .mobile-nav-item {
+    min-height: 56px;
+    padding: 12px 16px;
+    margin: 4px 8px;
+    border-radius: 12px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    transition: all 0.2s ease;
+  }
+
+  .mobile-nav-item:active {
+    transform: scale(0.98);
+    background-color: var(--mantine-color-blue-1);
+  }
+
+  /* Floating Action Button стили */
+  .mobile-fab {
+    position: fixed;
+    bottom: 24px;
+    right: 16px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    transition: all 0.3s ease;
+    z-index: 999;
+  }
+
+  .mobile-fab:active {
+    transform: scale(0.9);
+  }
+
+  /* Мобильный заголовок */
+  .mobile-header {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  /* Адаптивная сетка */
+  .mobile-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 8px;
+  }
+
+  /* Мобильные формы */
+  .mobile-form {
+    padding: 16px;
+  }
+
+  .mobile-form .mantine-TextInput-root,
+  .mobile-form .mantine-Textarea-root,
+  .mobile-form .mantine-Select-root {
+    margin-bottom: 16px;
+  }
+
+  .mobile-form .mantine-TextInput-input,
+  .mobile-form .mantine-Textarea-input,
+  .mobile-form .mantine-Select-input {
+    min-height: 44px;
+    font-size: 16px;
+    padding: 12px 16px;
+    border-radius: 12px;
+  }
+
+  /* Мобильные модальные окна */
+  .mobile-modal {
+    margin: 0;
+    height: 100vh;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+
+  .mobile-modal .mantine-Modal-content {
+    height: 100vh;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+
+  /* Sticky элементы */
+  .mobile-sticky {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--app-color-surface);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  /* Кнопки на мобильных - увеличенные для touch */
+  .mobile-button {
+    min-height: 44px;
+    padding: 12px 16px;
+    font-size: 16px;
+    border-radius: 12px;
+    touch-action: manipulation;
+  }
+
+  /* Текст на мобильных */
+  .mobile-text-large {
+    font-size: 18px;
+    line-height: 1.4;
+  }
+
+  .mobile-text-medium {
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  .mobile-text-small {
+    font-size: 14px;
+    line-height: 1.3;
+  }
+}
+
+/* =============== TABLET STYLES =============== */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .dashboard-layout {
+    height: 100vh;
+    position: relative;
+  }
+
+  /* Скрыть мобильные элементы */
+  .mobile-header {
+    display: none !important;
+  }
+
+  /* Левая навигация на планшетах */
+  .left-navigation {
+    flex: 0 0 25% !important;
+    max-width: 200px !important;
+    min-width: 180px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: var(--mantine-color-gray-4) var(--mantine-color-gray-1);
+  }
+
+  /* Тонкий скроллбар для планшетов */
+  .left-navigation::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .left-navigation::-webkit-scrollbar-track {
+    background: var(--mantine-color-gray-0);
+  }
+
+  .left-navigation::-webkit-scrollbar-thumb {
+    background: var(--mantine-color-gray-3);
+    border-radius: 2px;
+  }
+
+  /* Правая панель управляется через RightPanel компонент */
+  .right-panel {
+    display: block !important;
+    position: relative;
+    z-index: 999;
+  }
+
+  /* Центральный контент на планшетах */
+  .central-content {
+    padding: 16px;
+    margin: 0;
+    flex: 1;
+  }
+
+  /* Карточки на планшетах */
+  .tablet-card {
+    margin-bottom: 16px;
+    border-radius: 12px;
+    padding: 20px;
+  }
+
+  /* Оптимизация для сенсорных экранов */
+  .touch-optimized {
+    min-height: 44px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* iPad Pro 11" specific */
+  @media (min-width: 834px) and (max-width: 834px) {
+    .left-navigation {
+      max-width: 220px !important;
+    }
+    
+    .central-content {
+      padding: 20px;
+    }
+  }
+}
+
+/* =============== LARGE TABLET / SMALL LAPTOP STYLES =============== */
+@media (min-width: 1025px) and (max-width: 1366px) {
+  .dashboard-layout {
+    height: 100vh;
+  }
+
+  /* Скрыть мобильные элементы */
+  .mobile-header {
+    display: none !important;
+  }
+
+  /* Левая навигация для небольших ноутбуков */
+  .left-navigation {
+    flex: 0 0 22% !important;
+    max-width: 240px !important;
+    min-width: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: var(--mantine-color-gray-4) var(--mantine-color-gray-1);
+  }
+
+  /* Стандартный скроллбар для небольших ноутбуков */
+  .left-navigation::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .left-navigation::-webkit-scrollbar-track {
+    background: var(--mantine-color-gray-1);
+    border-radius: 3px;
+  }
+
+  .left-navigation::-webkit-scrollbar-thumb {
+    background: var(--mantine-color-gray-4);
+    border-radius: 3px;
+  }
+
+  .left-navigation::-webkit-scrollbar-thumb:hover {
+    background: var(--mantine-color-gray-6);
+  }
+
+  /* Правая панель для небольших ноутбуков */
+  .right-panel {
+    flex: 0 0 28% !important;
+    max-width: 340px !important;
+    min-width: 280px;
+  }
+
+  /* Центральный контент */
+  .central-content {
+    padding: 20px;
+    flex: 1;
+  }
+
+  /* Оптимизация для iPad Pro 12.9" */
+  @media (min-width: 1024px) and (max-width: 1366px) and (-webkit-min-device-pixel-ratio: 2) {
+    .left-navigation {
+      max-width: 250px !important;
+    }
+    
+    .right-panel {
+      max-width: 360px !important;
+    }
+    
+    .central-content {
+      padding: 24px;
+    }
+  }
+}
+
+/* =============== LAPTOP & DESKTOP STYLES =============== */
+
+/* Small Laptops (1367px - 1600px) */
+@media (min-width: 1367px) and (max-width: 1600px) {
+  .dashboard-layout {
+    height: 100vh;
+  }
+
+  .left-navigation {
+    flex: 0 0 20% !important;
+    max-width: 260px !important;
+    min-width: 220px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: var(--mantine-color-gray-4) var(--mantine-color-gray-1);
+  }
+
+  .left-navigation::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .left-navigation::-webkit-scrollbar-track {
+    background: var(--mantine-color-gray-1);
+    border-radius: 3px;
+  }
+
+  .left-navigation::-webkit-scrollbar-thumb {
+    background: var(--mantine-color-gray-4);
+    border-radius: 3px;
+  }
+
+  .left-navigation::-webkit-scrollbar-thumb:hover {
+    background: var(--mantine-color-gray-6);
+  }
+
+  .right-panel {
+    flex: 0 0 30% !important;
+    max-width: 380px !important;
+    min-width: 320px;
+  }
+
+  .central-content {
+    padding: 24px;
+    flex: 1;
+  }
+}
+
+/* Medium Laptops (1601px - 1920px) */
+@media (min-width: 1601px) and (max-width: 1920px) {
+  .dashboard-layout {
+    height: 100vh;
+  }
+
+  .left-navigation {
+    flex: 0 0 18% !important;
+    max-width: 280px !important;
+    min-width: 240px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: var(--mantine-color-gray-4) var(--mantine-color-gray-1);
+  }
+
+  .left-navigation::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .left-navigation::-webkit-scrollbar-track {
+    background: var(--mantine-color-gray-1);
+    border-radius: 4px;
+  }
+
+  .left-navigation::-webkit-scrollbar-thumb {
+    background: var(--mantine-color-gray-4);
+    border-radius: 4px;
+  }
+
+  .left-navigation::-webkit-scrollbar-thumb:hover {
+    background: var(--mantine-color-gray-6);
+  }
+
+  .right-panel {
+    flex: 0 0 32% !important;
+    max-width: 400px !important;
+    min-width: 340px;
+  }
+
+  .central-content {
+    padding: 28px;
+    flex: 1;
+  }
+}
+
+/* Large Laptops & Desktops (> 1920px) */
+@media (min-width: 1921px) {
+  .dashboard-layout {
+    height: 100vh;
+  }
+
+  .left-navigation {
+    flex: 0 0 16% !important;
+    max-width: 300px !important;
+    min-width: 260px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: var(--mantine-color-gray-4) var(--mantine-color-gray-1);
+  }
+
+  .left-navigation::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .left-navigation::-webkit-scrollbar-track {
+    background: var(--mantine-color-gray-1);
+    border-radius: 4px;
+  }
+
+  .left-navigation::-webkit-scrollbar-thumb {
+    background: var(--mantine-color-gray-4);
+    border-radius: 4px;
+  }
+
+  .left-navigation::-webkit-scrollbar-thumb:hover {
+    background: var(--mantine-color-gray-6);
+  }
+
+  .right-panel {
+    flex: 0 0 30% !important;
+    max-width: 420px !important;
+    min-width: 360px;
+  }
+
+  .central-content {
+    padding: 32px;
+    flex: 1;
+  }
+}
+
+/* Left Navigation Styles */
+.left-navigation {
+  background-color: var(--mantine-color-dark-8);
+  border-right: 1px solid var(--mantine-color-gray-3);
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--mantine-color-gray-4) var(--mantine-color-gray-1);
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  position: relative;
+}
+
+/* Custom scrollbar for left navigation */
+.left-navigation::-webkit-scrollbar {
+  width: 6px;
+}
+
+.left-navigation::-webkit-scrollbar-track {
+  background: var(--mantine-color-gray-1);
+  border-radius: 3px;
+}
+
+.left-navigation::-webkit-scrollbar-thumb {
+  background: var(--mantine-color-gray-4);
+  border-radius: 3px;
+  transition: background-color 0.2s ease;
+}
+
+.left-navigation::-webkit-scrollbar-thumb:hover {
+  background: var(--mantine-color-gray-6);
+}
+
+/* Dark mode support for left navigation */
+[data-mantine-color-scheme="dark"] .left-navigation {
+  background-color: var(--mantine-color-dark-8);
+  border-right-color: var(--mantine-color-dark-4);
+  scrollbar-color: var(--mantine-color-dark-4) var(--mantine-color-dark-7);
+}
+
+/* Dark mode scrollbar styles */
+[data-mantine-color-scheme="dark"] .left-navigation::-webkit-scrollbar-track {
+  background: var(--mantine-color-dark-7);
+}
+
+[data-mantine-color-scheme="dark"] .left-navigation::-webkit-scrollbar-thumb {
+  background: var(--mantine-color-dark-4);
+}
+
+[data-mantine-color-scheme="dark"] .left-navigation::-webkit-scrollbar-thumb:hover {
+  background: var(--mantine-color-dark-3);
+}
+
+[data-mantine-color-scheme="dark"] .left-navigation .nav-item {
+  color: var(--mantine-color-white);
+}
+
+[data-mantine-color-scheme="dark"] .left-navigation .nav-item:hover {
+  background-color: var(--mantine-color-dark-6);
+}
+
+[data-mantine-color-scheme="dark"] .left-navigation .nav-item.active {
+  background-color: var(--mantine-color-blue-9);
+  color: var(--mantine-color-white);
+}
+
+/* Additional dark mode styles for text elements */
+[data-mantine-color-scheme="dark"] .left-navigation .mantine-Text-root {
+  color: var(--mantine-color-white) !important;
+}
+
+[data-mantine-color-scheme="dark"] .left-navigation .mantine-Text-root[data-c="dimmed"] {
+  color: var(--mantine-color-gray-4) !important;
+}
+
+[data-mantine-color-scheme="dark"] .left-navigation .mantine-Paper-root {
+  background-color: var(--mantine-color-dark-7);
+  border-color: var(--mantine-color-dark-4);
+}
+
+[data-mantine-color-scheme="dark"] .left-navigation .mantine-Divider-root {
+  border-color: var(--mantine-color-dark-4);
+}
+
+.nav-item {
+  transition: all 0.2s ease;
+  border-radius: var(--app-radius-md);
+  margin: 4px 0;
+}
+
+.nav-item:hover {
+  background-color: var(--mantine-color-gray-1);
+}
+
+.nav-item.active {
+  background-color: var(--mantine-color-blue-0);
+  border-left: 3px solid var(--mantine-color-blue-6);
+}
+
+/* Central Content Styles */
+.central-content {
+  background-color: var(--app-color-surface);
+  height: 100vh;
+}
+
+.content-section {
+  padding: var(--app-spacing-lg);
+  min-height: 100%;
+}
+
+/* Right Panel Styles */
+.right-panel {
+  background-color: var(--app-color-surface) !important;
+  border-left: 1px solid var(--mantine-color-gray-3);
+  height: auto !important;
+  min-height: 100vh !important;
+  display: block !important;
+  visibility: visible !important;
+}
+
+/* Progress Bar Styles */
+.progress-ring {
+  transition: all 0.3s ease;
+}
+
+.progress-bar {
+  transition: all 0.3s ease;
+}
+
+/* Card Styles */
+.status-card {
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border-radius: var(--app-radius-lg);
+  box-shadow: var(--app-shadow-sm);
+}
+
+.status-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--app-shadow-md);
+}
+
+/* University Card Styles */
+.university-card {
+  transition: all 0.2s ease;
+  height: 100%;
+  border-radius: var(--app-radius-lg);
+}
+
+.university-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--app-shadow-md);
+}
+
+.suitability-high {
+  border-left: 4px solid var(--mantine-color-green-6);
+}
+
+.suitability-medium {
+  border-left: 4px solid var(--mantine-color-yellow-6);
+}
+
+.suitability-low {
+  border-left: 4px solid var(--mantine-color-red-6);
+}
+
+/* AI Chat Styles */
+.ai-message {
+  animation: fadeIn 0.3s ease;
+}
+
+.ai-message.user {
+  background-color: var(--mantine-color-green-0);
+  margin-left: 32px;
+}
+
+.ai-message.ai {
+  background-color: var(--mantine-color-blue-0);
+  margin-right: 32px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animation Classes */
+.slide-in-right {
+  animation: slideInRight 0.3s ease;
+}
+
+.slide-in-left {
+  animation: slideInLeft 0.3s ease;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Responsive Design */
+  @media (max-width: 992px) {
+  .dashboard-layout {
+    flex-direction: column;
+  }
+
+  .left-navigation {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    border-right: none;
+    border-bottom: 1px solid var(--mantine-color-gray-3);
+  }
+
+  .central-content {
+    flex: 1 1 100% !important;
+    height: auto;
+    min-height: auto;
+  }
+
+  .right-panel {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .left-navigation,
+  .right-panel {
+    height: auto;
+    max-height: 200px;
+  }
+  
+  .central-content {
+    height: calc(100vh - 200px);
+  }
+}
+
+/* Dark Mode Support */
+[data-mantine-color-scheme="dark"] .dashboard-layout {
+  background-color: var(--mantine-color-dark-7);
+}
+
+[data-mantine-color-scheme="dark"] .central-content {
+  background-color: var(--mantine-color-dark-8);
+}
+
+[data-mantine-color-scheme="dark"] .nav-item:hover {
+  background-color: var(--mantine-color-dark-6);
+}
+
+[data-mantine-color-scheme="dark"] .status-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+[data-mantine-color-scheme="dark"] .university-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Dark gradients adjustments */
+[data-mantine-color-scheme="dark"] .headerCard,
+[data-mantine-color-scheme="dark"] .recommendationsCard,
+[data-mantine-color-scheme="dark"] .statsCard,
+[data-mantine-color-scheme="dark"] .notificationsCard {
+  filter: brightness(0.9) contrast(1.05);
+}
+
+[data-mantine-color-scheme="dark"] .text-gradient {
+  background: linear-gradient(45deg, var(--mantine-color-blue-4), var(--mantine-color-purple-4));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Custom Scrollbar */
+.dashboard-layout ::-webkit-scrollbar {
+  width: 6px;
+}
+
+.dashboard-layout ::-webkit-scrollbar-track {
+  background: var(--mantine-color-gray-1);
+}
+
+.dashboard-layout ::-webkit-scrollbar-thumb {
+  background: var(--mantine-color-gray-4);
+  border-radius: 3px;
+}
+
+.dashboard-layout ::-webkit-scrollbar-thumb:hover {
+  background: var(--mantine-color-gray-6);
+}
+
+/* Loading States */
+.loading-skeleton {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Button Hover Effects */
+.btn-hover {
+  transition: all 0.2s ease;
+}
+
+.btn-hover:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--app-shadow-sm);
+}
+
+/* Form Styles */
+.form-section {
+  background-color: var(--mantine-color-gray-0);
+  border-radius: var(--app-radius-md);
+  padding: var(--app-spacing-md);
+  margin-bottom: var(--app-spacing-md);
+}
+
+/* Badge Styles */
+.badge-pulse {
+  animation: pulse 2s infinite;
+}
+
+/* Modal Styles */
+.modal-content {
+  border-radius: var(--app-radius-lg);
+}
+
+/* Timeline Styles */
+.timeline-item {
+  position: relative;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: 12px;
+  top: 24px;
+  bottom: -8px;
+  width: 2px;
+  background-color: var(--mantine-color-gray-3);
+}
+
+.timeline-item:last-child::before {
+  display: none;
+}
+
+/* File Upload Styles */
+.file-upload-area {
+  border: 2px dashed var(--mantine-color-gray-4);
+  border-radius: var(--app-radius-md);
+  padding: var(--app-spacing-lg);
+  text-align: center;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.file-upload-area:hover {
+  border-color: var(--mantine-color-blue-4);
+  background-color: var(--mantine-color-blue-0);
+}
+
+.file-upload-area.dragover {
+  border-color: var(--mantine-color-blue-6);
+  background-color: var(--mantine-color-blue-1);
+}
+
+/* Notification Styles */
+.notification-success {
+  background-color: var(--mantine-color-green-0);
+  border-left: 4px solid var(--mantine-color-green-6);
+}
+
+.notification-warning {
+  background-color: var(--mantine-color-yellow-0);
+  border-left: 4px solid var(--mantine-color-yellow-6);
+}
+
+.notification-error {
+  background-color: var(--mantine-color-red-0);
+  border-left: 4px solid var(--mantine-color-red-6);
+}
+
+/* Utility Classes */
+.text-gradient {
+  background: linear-gradient(45deg, var(--mantine-color-blue-6), var(--mantine-color-purple-6));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.shadow-soft {
+  box-shadow: var(--app-shadow-sm);
+}
+
+.shadow-medium {
+  box-shadow: var(--app-shadow-md);
+}
+
+.shadow-strong {
+  box-shadow: var(--app-shadow-lg);
+}
+
+/* =============== TOUCH OPTIMIZATIONS =============== */
+@media (pointer: coarse) {
+  /* Touch-friendly button sizes */
+  .touch-button {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px 16px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    font-size: 16px;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+  }
+
+  .touch-button:active {
+    transform: scale(0.98);
+    background-color: var(--mantine-color-gray-2);
+  }
+
+  /* Touch-friendly navigation items */
+  .touch-nav-item {
+    min-height: 48px;
+    padding: 12px 16px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    border-radius: 12px;
+    margin: 4px 0;
+  }
+
+  .touch-nav-item:active {
+    transform: scale(0.98);
+    background-color: var(--mantine-color-blue-1);
+  }
+
+  /* Touch-friendly input fields */
+  .touch-input {
+    min-height: 44px;
+    font-size: 16px; /* Prevent zoom on iOS */
+    padding: 12px 16px;
+    border-radius: 12px;
+  }
+
+  /* Touch-friendly clickable areas */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+  }
+
+  .touch-target:active {
+    transform: scale(0.95);
+  }
+
+  /* Touch-friendly card interactions */
+  .touch-card {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+
+  .touch-card:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Увеличенные области клика для мелких элементов */
+  .touch-icon-button {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 10px;
+    border-radius: 50%;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .touch-icon-button:active {
+    transform: scale(0.9);
+    background-color: var(--mantine-color-gray-1);
+  }
+
+  /* Drag handles для мобильных панелей */
+  .mobile-drag-handle {
+    width: 36px;
+    height: 4px;
+    background-color: var(--mantine-color-gray-4);
+    border-radius: 2px;
+    margin: 8px auto;
+    touch-action: manipulation;
+  }
+
+  /* Оптимизация для жестов */
+  .swipe-area {
+    touch-action: pan-x pan-y;
+    overscroll-behavior: contain;
+  }
+
+  /* Увеличенные отступы для пальцев */
+  .touch-spacing {
+    margin: 8px 0;
+    padding: 8px 12px;
+  }
+}
+
+/* =============== HOVER STATES (Desktop only) =============== */
+@media (hover: hover) and (pointer: fine) {
+  .hover-effect:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease;
+  }
+
+  .nav-item:hover {
+    background-color: var(--mantine-color-gray-1);
+    transition: background-color 0.2s ease;
+  }
+
+  .button-hover:hover {
+    transform: scale(1.02);
+    transition: transform 0.2s ease;
+  }
+}
+
+/* =============== SCROLLING OPTIMIZATIONS =============== */
+.smooth-scroll {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* =============== ANIMATION OPTIMIZATIONS =============== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =============== HIGH DPI OPTIMIZATIONS =============== */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .high-dpi-image {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* =============== DARK MODE ADAPTATIONS =============== */
+@media (prefers-color-scheme: dark) {
+  .auto-dark {
+    background-color: var(--mantine-color-dark-7);
+    color: var(--mantine-color-gray-0);
+  }
+}
+
+/* =============== LANDSCAPE/PORTRAIT OPTIMIZATIONS =============== */
+
+/* Tablet Landscape */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  .dashboard-layout {
+    height: 100vh;
+  }
+
+  .left-navigation {
+    flex: 0 0 30% !important;
+    max-width: 240px !important;
+  }
+
+  .central-content {
+    padding: 12px;
+  }
+
+  .right-panel {
+    position: fixed;
+    right: -340px;
+    top: 0;
+    height: 100vh;
+    width: 320px;
+    transition: right 0.3s ease;
+    z-index: 1000;
+  }
+
+  .right-panel.visible {
+    right: 0;
+  }
+
+  .landscape-compact {
+    padding: 8px;
+    margin: 4px 0;
+  }
+
+  /* Optimized for iPad landscape modes */
+  .landscape-nav-item {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  .landscape-card {
+    padding: 12px;
+    margin-bottom: 8px;
+  }
+}
+
+/* Tablet Portrait */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+  .dashboard-layout {
+    height: 100vh;
+  }
+
+  .left-navigation {
+    flex: 0 0 25% !important;
+    max-width: 200px !important;
+  }
+
+  .central-content {
+    padding: 16px;
+  }
+
+  .portrait-spacing {
+    padding: 16px;
+    margin: 8px 0;
+  }
+
+  .portrait-card {
+    padding: 16px;
+    margin-bottom: 12px;
+    border-radius: 12px;
+  }
+}
+
+/* Small Mobile Landscape (rare but possible) */
+@media (max-width: 767px) and (orientation: landscape) {
+  .mobile-header {
+    padding: 8px 16px;
+  }
+
+  .mobile-bottom-nav {
+    padding: 4px 16px 8px 16px;
+  }
+
+  .landscape-compact {
+    padding: 8px;
+    margin: 4px 0;
+  }
+}
+
+/* Mobile Portrait */
+@media (max-width: 767px) and (orientation: portrait) {
+  .portrait-spacing {
+    padding: 16px;
+    margin: 8px 0;
+  }
+}
+
+/* =============== ACCESSIBILITY IMPROVEMENTS =============== */
+@media (prefers-contrast: high) {
+  .high-contrast {
+    border: 2px solid currentColor;
+    background-color: transparent;
+  }
+}
+
+/* Focus indicators */
+.focus-visible:focus-visible {
+  outline: 2px solid var(--mantine-color-blue-6);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* =============== PERFORMANCE OPTIMIZATIONS =============== */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.performance-optimized {
+  contain: layout;
+  content-visibility: auto;
+}
+
+/* =============== RESPONSIVE CONTAINERS =============== */
+.responsive-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+@media (min-width: 768px) {
+  .responsive-container {
+    padding: 0 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-container {
+    padding: 0 32px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .responsive-container {
+    max-width: 1200px;
+    padding: 0 40px;
+  }
+}
+
+/* =============== DEVICE-SPECIFIC OPTIMIZATIONS =============== */
+
+/* iPad Mini (768px x 1024px) */
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+  
+  .dashboard-layout {
+    font-size: 14px;
+  }
+  
+  .left-navigation {
+    max-width: 180px !important;
+  }
+  
+  .central-content {
+    padding: 12px;
+  }
+  
+  .status-card, .university-card {
+    padding: 12px;
+    font-size: 13px;
+  }
+}
+
+/* iPad Air & Pro 10.5" (834px x 1112px, 834px x 1194px) */
+@media only screen 
+  and (min-device-width: 834px) 
+  and (max-device-width: 834px) 
+  and (-webkit-min-device-pixel-ratio: 2) {
+  
+  .dashboard-layout {
+    font-size: 15px;
+  }
+  
+  .left-navigation {
+    max-width: 200px !important;
+  }
+  
+  .central-content {
+    padding: 16px;
+  }
+  
+  .status-card, .university-card {
+    padding: 14px;
+    font-size: 14px;
+  }
+}
+
+/* iPad Pro 11" (834px x 1194px) */
+@media only screen 
+  and (min-device-width: 834px) 
+  and (max-device-width: 1194px) 
+  and (-webkit-min-device-pixel-ratio: 2) {
+  
+  .dashboard-layout {
+    font-size: 15px;
+  }
+  
+  .left-navigation {
+    max-width: 220px !important;
+  }
+  
+  .central-content {
+    padding: 18px;
+  }
+}
+
+/* iPad Pro 12.9" (1024px x 1366px) */
+@media only screen 
+  and (min-device-width: 1024px) 
+  and (max-device-width: 1366px) 
+  and (-webkit-min-device-pixel-ratio: 2) {
+  
+  .dashboard-layout {
+    font-size: 16px;
+  }
+  
+  .left-navigation {
+    max-width: 250px !important;
+  }
+  
+  .central-content {
+    padding: 24px;
+  }
+  
+  .status-card, .university-card {
+    padding: 18px;
+    font-size: 15px;
+  }
+}
+
+/* MacBook Air 13" (1440px x 900px) */
+@media only screen 
+  and (min-device-width: 1440px) 
+  and (max-device-width: 1440px) 
+  and (min-device-height: 900px) 
+  and (max-device-height: 900px) 
+  and (-webkit-min-device-pixel-ratio: 2) {
+  
+  .left-navigation {
+    max-width: 260px !important;
+  }
+  
+  .right-panel {
+    max-width: 360px !important;
+  }
+  
+  .central-content {
+    padding: 24px;
+  }
+}
+
+/* MacBook Pro 14" (1512px x 982px) */
+@media only screen 
+  and (min-device-width: 1512px) 
+  and (max-device-width: 1512px) 
+  and (min-device-height: 982px) 
+  and (max-device-height: 982px) 
+  and (-webkit-min-device-pixel-ratio: 2) {
+  
+  .left-navigation {
+    max-width: 280px !important;
+  }
+  
+  .right-panel {
+    max-width: 380px !important;
+  }
+  
+  .central-content {
+    padding: 28px;
+  }
+}
+
+/* MacBook Pro 16" (1728px x 1117px) */
+@media only screen 
+  and (min-device-width: 1728px) 
+  and (max-device-width: 1728px) 
+  and (min-device-height: 1117px) 
+  and (max-device-height: 1117px) 
+  and (-webkit-min-device-pixel-ratio: 2) {
+  
+  .left-navigation {
+    max-width: 300px !important;
+  }
+  
+  .right-panel {
+    max-width: 400px !important;
+  }
+  
+  .central-content {
+    padding: 32px;
+  }
+}
+
+/* Surface Pro (1368px x 912px) */
+@media only screen 
+  and (min-device-width: 1368px) 
+  and (max-device-width: 1368px) 
+  and (min-device-height: 912px) 
+  and (max-device-height: 912px) {
+  
+  .dashboard-layout {
+    font-size: 15px;
+  }
+  
+  .left-navigation {
+    max-width: 240px !important;
+  }
+  
+  .central-content {
+    padding: 20px;
+  }
+  
+  .touch-optimized {
+    min-height: 48px;
+    padding: 12px;
+  }
+}
+
+/* =============== ADDITIONAL RESPONSIVE UTILITIES =============== */
+
+/* Responsive text sizes */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .responsive-text-sm { font-size: 0.8rem; }
+  .responsive-text-md { font-size: 0.9rem; }
+  .responsive-text-lg { font-size: 1rem; }
+  .responsive-text-xl { font-size: 1.1rem; }
+}
+
+@media (min-width: 1025px) and (max-width: 1366px) {
+  .responsive-text-sm { font-size: 0.85rem; }
+  .responsive-text-md { font-size: 0.95rem; }
+  .responsive-text-lg { font-size: 1.05rem; }
+  .responsive-text-xl { font-size: 1.15rem; }
+}
+
+@media (min-width: 1367px) {
+  .responsive-text-sm { font-size: 0.9rem; }
+  .responsive-text-md { font-size: 1rem; }
+  .responsive-text-lg { font-size: 1.1rem; }
+  .responsive-text-xl { font-size: 1.2rem; }
+}
+
+/* Responsive spacing */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .responsive-spacing-xs { margin: 0.25rem; padding: 0.25rem; }
+  .responsive-spacing-sm { margin: 0.5rem; padding: 0.5rem; }
+  .responsive-spacing-md { margin: 0.75rem; padding: 0.75rem; }
+  .responsive-spacing-lg { margin: 1rem; padding: 1rem; }
+}
+
+@media (min-width: 1025px) and (max-width: 1366px) {
+  .responsive-spacing-xs { margin: 0.375rem; padding: 0.375rem; }
+  .responsive-spacing-sm { margin: 0.625rem; padding: 0.625rem; }
+  .responsive-spacing-md { margin: 0.875rem; padding: 0.875rem; }
+  .responsive-spacing-lg { margin: 1.125rem; padding: 1.125rem; }
+}
+
+@media (min-width: 1367px) {
+  .responsive-spacing-xs { margin: 0.5rem; padding: 0.5rem; }
+  .responsive-spacing-sm { margin: 0.75rem; padding: 0.75rem; }
+  .responsive-spacing-md { margin: 1rem; padding: 1rem; }
+  .responsive-spacing-lg { margin: 1.25rem; padding: 1.25rem; }
+}
+
+/* Responsive grid systems */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .tablet-grid-1 { grid-template-columns: 1fr; }
+  .tablet-grid-2 { grid-template-columns: 1fr 1fr; }
+  .tablet-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .tablet-gap { gap: 12px; }
+}
+
+@media (min-width: 1025px) and (max-width: 1366px) {
+  .laptop-grid-1 { grid-template-columns: 1fr; }
+  .laptop-grid-2 { grid-template-columns: 1fr 1fr; }
+  .laptop-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .laptop-grid-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  .laptop-gap { gap: 16px; }
+}
+
+@media (min-width: 1367px) {
+  .desktop-grid-1 { grid-template-columns: 1fr; }
+  .desktop-grid-2 { grid-template-columns: 1fr 1fr; }
+  .desktop-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .desktop-grid-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  .desktop-grid-5 { grid-template-columns: repeat(5, 1fr); }
+  .desktop-gap { gap: 20px; }
+}
+
+/* =============== PERFORMANCE & ACCESSIBILITY =============== */
+
+/* Optimize scroll performance on all devices */
+.smooth-scroll-optimized {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* Better focus indicators for keyboard navigation */
+.focus-enhanced:focus-visible {
+  outline: 3px solid var(--mantine-color-blue-6);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Ensure adequate tap targets on touch devices */
+@media (pointer: coarse) {
+  .touch-target-enhanced {
+    min-height: 48px;
+    min-width: 48px;
+    padding: 12px;
+    margin: 4px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  .touch-target-enhanced:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+  }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-layout *,
+  .dashboard-layout *::before,
+  .dashboard-layout *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .dashboard-layout {
+    border: 2px solid currentColor;
+  }
+  
+  .left-navigation,
+  .central-content,
+  .right-panel {
+    border: 1px solid currentColor;
+  }
+  
+  .status-card,
+  .university-card {
+    border: 2px solid currentColor;
+    background-color: transparent;
+  }
+}
+
+/* =============== SCROLL FADE EFFECTS =============== */
+
+/* Fade effect at top and bottom of scrollable areas */
+.left-navigation::before,
+.left-navigation::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 20px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.left-navigation::before {
+  top: 0;
+  background: linear-gradient(to bottom, var(--app-color-surface) 0%, transparent 100%);
+}
+
+.left-navigation::after {
+  bottom: 0;
+  background: linear-gradient(to top, var(--app-color-surface) 0%, transparent 100%);
+}
+
+/* Dark mode fade effects */
+[data-mantine-color-scheme="dark"] .left-navigation::before {
+  background: linear-gradient(to bottom, var(--mantine-color-dark-8) 0%, transparent 100%);
+}
+
+[data-mantine-color-scheme="dark"] .left-navigation::after {
+  background: linear-gradient(to top, var(--mantine-color-dark-8) 0%, transparent 100%);
+}
+
+/* =============== KEYBOARD NAVIGATION ENHANCEMENT =============== */
+
+/* Enhance keyboard navigation for left panel */
+.left-navigation:focus-within {
+  outline: 2px solid var(--mantine-color-blue-6);
+  outline-offset: -2px;
+}
+
+/* Navigation item focus enhancement */
+.nav-item:focus-visible,
+.left-navigation .mantine-Button-root:focus-visible {
+  outline: 2px solid var(--mantine-color-blue-6);
+  outline-offset: 2px;
+  border-radius: var(--app-radius-md);
+}
+
+/* =============== SCROLL INDICATORS =============== */
+
+/* Optional scroll indicator (can be enabled if needed) */
+.scroll-indicator {
+  position: absolute;
+  right: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2px;
+  height: 40px;
+  background: var(--mantine-color-blue-3);
+  border-radius: 1px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.left-navigation:hover .scroll-indicator {
+  opacity: 0.6;
+}
+
+.left-navigation.scrolling .scroll-indicator {
+  opacity: 1;
+}

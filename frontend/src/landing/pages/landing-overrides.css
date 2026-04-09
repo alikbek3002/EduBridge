@@ -1,0 +1,9 @@
+.main-header { background:#fff !important; border:1px solid rgba(15,23,42,.06) !important; border-radius:16px !important; box-shadow:0 6px 24px rgba(15,23,42,.06) !important; position:sticky; top:16px; width:calc(100% - 32px); margin:0 auto; max-width:1140px; }
+.main-header .main-header__nav ul li a { color:#0f172a !important; font-size:16px !important; font-weight:700 !important; padding:10px 12px !important; border-radius:10px !important; }
+.main-header .main-header__nav ul li a:hover { background:#f1f5f9 !important; color:#111827 !important; }
+.profile-button, .login-button, .logout-button { background:#16a34a !important; border:1px solid rgba(22,163,74,.3) !important; border-radius:9999px !important; padding:12px 18px !important; font-size:16px !important; box-shadow:0 10px 24px rgba(22,163,74,.25) !important; }
+.logout-button { background:#ef4444 !important; border-color:rgba(239,68,68,.3) !important; box-shadow:0 8px 20px rgba(239,68,68,.25) !important; }
+.dashboard-button { background:#0ea5e9 !important; border-color:rgba(14,165,233,.3) !important; box-shadow:0 10px 24px rgba(14,165,233,.25) !important; }
+.logo_img { box-shadow:none !important; border:0 !important; }
+body { font-size: 17px; }
+@media (max-width: 768px){ .main-header{ max-width:95%; } }

@@ -1,0 +1,261 @@
+.about-company-section {
+  background: linear-gradient(135deg, #f8f4ff 0%, #f0f8ff 100%);
+  color: #2d1b69;
+  padding: 80px 0 60px 0;
+  font-family: 'Montserrat', Arial, sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-company-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+.about-company-content {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto 60px auto;
+  gap: 60px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+.about-company-left {
+  flex: 1;
+  position: relative;
+}
+.about-company-img {
+  width: 350px;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(139, 92, 246, 0.15);
+  border: 3px solid rgba(255, 255, 255, 0.8);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.about-company-img:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 16px 48px rgba(139, 92, 246, 0.25);
+}
+.about-company-years {
+  position: absolute;
+  left: 30px;
+  bottom: 30px;
+  background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+  color: #fff;
+  border-radius: 16px;
+  padding: 16px 28px;
+  font-weight: 900;
+  font-size: 22px;
+  box-shadow: 0 8px 24px rgba(139, 92, 246, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.about-company-years:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 12px 32px rgba(139, 92, 246, 0.4);
+}
+.about-company-years-number {
+  font-size: 36px;
+  font-weight: 900;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.about-company-years-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+.about-company-right {
+  flex: 2;
+}
+.about-company-title {
+  background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 36px;
+  font-weight: 900;
+  margin-bottom: 24px;
+  font-family: "Rubik Mono One", monospace;
+  letter-spacing: 1px;
+}
+.about-company-text {
+  font-size: 18px;
+  margin-bottom: 20px;
+  line-height: 1.7;
+  color: #4a3c6b;
+  font-weight: 400;
+}
+.about-company-note {
+  font-size: 14px;
+  color: #8b7ba8;
+  font-style: italic;
+  background: rgba(139, 92, 246, 0.05);
+  padding: 16px;
+  border-radius: 12px;
+  border-left: 4px solid #8b5cf6;
+  line-height: 1.6;
+}
+.about-company-features {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  position: relative;
+  z-index: 1;
+  padding: 0 20px;
+}
+.about-company-feature {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f4ff 100%);
+  color: #2d1b69;
+  border-radius: 20px;
+  padding: 32px 28px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(139, 92, 246, 0.15);
+  width: 280px;
+  border: 2px solid rgba(139, 92, 246, 0.1);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+.about-company-feature::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #8b5cf6, #a855f7);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.about-company-feature:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 16px 48px rgba(139, 92, 246, 0.25);
+  border-color: rgba(139, 92, 246, 0.3);
+}
+
+.about-company-feature:hover::before {
+  transform: scaleX(1);
+}
+.about-company-feature-icon {
+  font-size: 42px;
+  margin-bottom: 16px;
+  filter: drop-shadow(0 4px 8px rgba(139, 92, 246, 0.2));
+  transition: transform 0.3s ease;
+}
+
+.about-company-feature:hover .about-company-feature-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.about-company-feature-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-family: "Rubik Mono One", monospace;
+  letter-spacing: 0.5px;
+}
+.about-company-feature-desc {
+  font-size: 15px;
+  color: #6b46c1;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+  .about-company-section {
+    padding: 60px 0 40px 0;
+  }
+  
+  .about-company-content {
+    flex-direction: column;
+    gap: 40px;
+    margin: 0 auto 40px auto;
+    padding: 0 20px;
+  }
+  
+  .about-company-img {
+    width: 100%;
+    max-width: 300px;
+    height: 220px;
+  }
+  
+  .about-company-years {
+    left: 20px;
+    bottom: 20px;
+    padding: 12px 20px;
+  }
+  
+  .about-company-title {
+    font-size: 28px;
+    text-align: center;
+  }
+  
+  .about-company-text {
+    font-size: 16px;
+    text-align: center;
+  }
+  
+  .about-company-features {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+  
+  .about-company-feature {
+    width: 100%;
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-company-section {
+    padding: 40px 0 30px 0;
+  }
+  
+  .about-company-content {
+    padding: 0 15px;
+  }
+  
+  .about-company-title {
+    font-size: 24px;
+  }
+  
+  .about-company-text {
+    font-size: 15px;
+  }
+  
+  .about-company-years {
+    padding: 10px 16px;
+  }
+  
+  .about-company-years-number {
+    font-size: 28px;
+  }
+  
+  .about-company-years-label {
+    font-size: 10px;
+  }
+}

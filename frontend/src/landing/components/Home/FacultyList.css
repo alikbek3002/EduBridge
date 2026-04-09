@@ -1,0 +1,47 @@
+.faculty-list-section {
+  background: #111;
+  color: #fff;
+  padding: 48px 0 32px 0;
+  font-family: 'Montserrat', Arial, sans-serif;
+}
+.faculty-list-title {
+  color: #fff;
+  font-size: 32px;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 32px;
+  letter-spacing: 1px;
+}
+.faculty-list-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px;
+}
+.faculty-card {
+  background: #222;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px #00fff733;
+  width: 220px;
+  padding: 32px 18px 24px 18px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+.faculty-card:hover {
+  transform: translateY(-8px) scale(1.03);
+}
+.faculty-card-number {
+  font-size: 32px;
+  font-weight: 900;
+  color: #00fff7;
+  margin-bottom: 10px;
+}
+.faculty-card-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.faculty-card-desc {
+  font-size: 15px;
+  color: #bbb;
+}

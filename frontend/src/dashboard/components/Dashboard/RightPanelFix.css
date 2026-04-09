@@ -1,0 +1,34 @@
+/* RightPanelFix.css */
+@media screen and (max-width: 1200px) {
+  .dashboard-layout {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .right-panel-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 1 !important;
+    border-top: 3px solid red !important;
+  }
+}
+
+.right-panel-container {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.right-panel {
+  background-color: white !important;
+  border: 2px solid blue !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  height: auto !important;
+  min-height: 500px !important;
+  width: 100% !important;
+  overflow-y: auto !important;
+  z-index: 1000 !important;
+  padding: 15px !important;
+}

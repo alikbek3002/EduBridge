@@ -1,0 +1,659 @@
+/* =============== DEVICE DETECTION HELPERS =============== */
+.mobile-only {
+  display: block !important;
+}
+
+.tablet-only,
+.laptop-only,
+.desktop-only {
+  display: none !important;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .mobile-only {
+    display: none !important;
+  }
+  
+  .tablet-only {
+    display: block !important;
+  }
+  
+  .laptop-only,
+  .desktop-only {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1366px) {
+  .mobile-only,
+  .tablet-only {
+    display: none !important;
+  }
+  
+  .laptop-only {
+    display: block !important;
+  }
+  
+  .desktop-only {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1367px) {
+  .mobile-only,
+  .tablet-only,
+  .laptop-only {
+    display: none !important;
+  }
+  
+  .desktop-only {
+    display: block !important;
+  }
+}
+
+/* =============== RESPONSIVE TYPOGRAPHY =============== */
+.responsive-heading-1 {
+  font-size: 1.5rem;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.responsive-heading-2 {
+  font-size: 1.25rem;
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+.responsive-heading-3 {
+  font-size: 1.125rem;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+.responsive-body {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.responsive-caption {
+  font-size: 0.75rem;
+  line-height: 1.3;
+  font-weight: 400;
+  color: var(--mantine-color-gray-6);
+}
+
+/* Tablet Typography */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .responsive-heading-1 {
+    font-size: 1.75rem;
+  }
+  
+  .responsive-heading-2 {
+    font-size: 1.5rem;
+  }
+  
+  .responsive-heading-3 {
+    font-size: 1.25rem;
+  }
+  
+  .responsive-body {
+    font-size: 1rem;
+  }
+  
+  .responsive-caption {
+    font-size: 0.875rem;
+  }
+}
+
+/* Laptop Typography */
+@media (min-width: 1025px) and (max-width: 1366px) {
+  .responsive-heading-1 {
+    font-size: 2rem;
+  }
+  
+  .responsive-heading-2 {
+    font-size: 1.75rem;
+  }
+  
+  .responsive-heading-3 {
+    font-size: 1.5rem;
+  }
+  
+  .responsive-body {
+    font-size: 1rem;
+  }
+  
+  .responsive-caption {
+    font-size: 0.875rem;
+  }
+}
+
+/* Desktop Typography */
+@media (min-width: 1367px) {
+  .responsive-heading-1 {
+    font-size: 2.25rem;
+  }
+  
+  .responsive-heading-2 {
+    font-size: 2rem;
+  }
+  
+  .responsive-heading-3 {
+    font-size: 1.75rem;
+  }
+  
+  .responsive-body {
+    font-size: 1.125rem;
+  }
+  
+  .responsive-caption {
+    font-size: 1rem;
+  }
+}
+
+/* =============== RESPONSIVE SPACING =============== */
+.responsive-margin-xs { margin: 0.25rem; }
+.responsive-margin-sm { margin: 0.5rem; }
+.responsive-margin-md { margin: 0.75rem; }
+.responsive-margin-lg { margin: 1rem; }
+.responsive-margin-xl { margin: 1.5rem; }
+
+.responsive-padding-xs { padding: 0.25rem; }
+.responsive-padding-sm { padding: 0.5rem; }
+.responsive-padding-md { padding: 0.75rem; }
+.responsive-padding-lg { padding: 1rem; }
+.responsive-padding-xl { padding: 1.5rem; }
+
+/* Tablet Spacing */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .responsive-margin-xs { margin: 0.375rem; }
+  .responsive-margin-sm { margin: 0.75rem; }
+  .responsive-margin-md { margin: 1rem; }
+  .responsive-margin-lg { margin: 1.5rem; }
+  .responsive-margin-xl { margin: 2rem; }
+  
+  .responsive-padding-xs { padding: 0.375rem; }
+  .responsive-padding-sm { padding: 0.75rem; }
+  .responsive-padding-md { padding: 1rem; }
+  .responsive-padding-lg { padding: 1.5rem; }
+  .responsive-padding-xl { padding: 2rem; }
+}
+
+/* Laptop Spacing */
+@media (min-width: 1025px) and (max-width: 1366px) {
+  .responsive-margin-xs { margin: 0.5rem; }
+  .responsive-margin-sm { margin: 1rem; }
+  .responsive-margin-md { margin: 1.25rem; }
+  .responsive-margin-lg { margin: 1.75rem; }
+  .responsive-margin-xl { margin: 2.5rem; }
+  
+  .responsive-padding-xs { padding: 0.5rem; }
+  .responsive-padding-sm { padding: 1rem; }
+  .responsive-padding-md { padding: 1.25rem; }
+  .responsive-padding-lg { padding: 1.75rem; }
+  .responsive-padding-xl { padding: 2.5rem; }
+}
+
+/* Desktop Spacing */
+@media (min-width: 1367px) {
+  .responsive-margin-xs { margin: 0.75rem; }
+  .responsive-margin-sm { margin: 1.25rem; }
+  .responsive-margin-md { margin: 1.5rem; }
+  .responsive-margin-lg { margin: 2rem; }
+  .responsive-margin-xl { margin: 3rem; }
+  
+  .responsive-padding-xs { padding: 0.75rem; }
+  .responsive-padding-sm { padding: 1.25rem; }
+  .responsive-padding-md { padding: 1.5rem; }
+  .responsive-padding-lg { padding: 2rem; }
+  .responsive-padding-xl { padding: 3rem; }
+}
+
+/* =============== RESPONSIVE GRIDS =============== */
+.responsive-grid {
+  display: grid;
+  gap: 1rem;
+  width: 100%;
+}
+
+.responsive-grid-auto {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.responsive-grid-1 { grid-template-columns: 1fr; }
+.responsive-grid-2 { grid-template-columns: 1fr 1fr; }
+
+/* Tablet Grids */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .responsive-grid {
+    gap: 1.25rem;
+  }
+  
+  .responsive-grid-auto {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+  
+  .responsive-grid-2 { grid-template-columns: 1fr 1fr; }
+  .responsive-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+}
+
+/* Laptop Grids */
+@media (min-width: 1025px) and (max-width: 1366px) {
+  .responsive-grid {
+    gap: 1.5rem;
+  }
+  
+  .responsive-grid-auto {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+  
+  .responsive-grid-2 { grid-template-columns: 1fr 1fr; }
+  .responsive-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .responsive-grid-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+}
+
+/* Desktop Grids */
+@media (min-width: 1367px) {
+  .responsive-grid {
+    gap: 2rem;
+  }
+  
+  .responsive-grid-auto {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+  
+  .responsive-grid-2 { grid-template-columns: 1fr 1fr; }
+  .responsive-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .responsive-grid-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  .responsive-grid-5 { grid-template-columns: repeat(5, 1fr); }
+  .responsive-grid-6 { grid-template-columns: repeat(6, 1fr); }
+}
+
+/* =============== RESPONSIVE FLEXBOX =============== */
+.responsive-flex {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.responsive-flex-row { flex-direction: row; }
+.responsive-flex-column { flex-direction: column; }
+.responsive-flex-center { justify-content: center; align-items: center; }
+.responsive-flex-between { justify-content: space-between; align-items: center; }
+.responsive-flex-around { justify-content: space-around; align-items: center; }
+.responsive-flex-start { justify-content: flex-start; align-items: flex-start; }
+.responsive-flex-end { justify-content: flex-end; align-items: flex-end; }
+
+/* Tablet Flexbox */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .responsive-flex {
+    gap: 1.25rem;
+  }
+  
+  .responsive-flex-tablet-column {
+    flex-direction: column;
+  }
+  
+  .responsive-flex-tablet-row {
+    flex-direction: row;
+  }
+}
+
+/* Laptop Flexbox */
+@media (min-width: 1025px) and (max-width: 1366px) {
+  .responsive-flex {
+    gap: 1.5rem;
+  }
+  
+  .responsive-flex-laptop-column {
+    flex-direction: column;
+  }
+  
+  .responsive-flex-laptop-row {
+    flex-direction: row;
+  }
+}
+
+/* Desktop Flexbox */
+@media (min-width: 1367px) {
+  .responsive-flex {
+    gap: 2rem;
+  }
+  
+  .responsive-flex-desktop-column {
+    flex-direction: column;
+  }
+  
+  .responsive-flex-desktop-row {
+    flex-direction: row;
+  }
+}
+
+/* =============== RESPONSIVE CARDS =============== */
+.responsive-card {
+  background: var(--app-color-surface);
+  border: 1px solid var(--mantine-color-gray-3);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.responsive-card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Tablet Cards */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .responsive-card {
+    border-radius: 12px;
+    padding: 1.25rem;
+  }
+}
+
+/* Laptop Cards */
+@media (min-width: 1025px) and (max-width: 1366px) {
+  .responsive-card {
+    border-radius: 16px;
+    padding: 1.5rem;
+  }
+}
+
+/* Desktop Cards */
+@media (min-width: 1367px) {
+  .responsive-card {
+    border-radius: 20px;
+    padding: 2rem;
+  }
+}
+
+/* =============== RESPONSIVE BUTTONS =============== */
+.responsive-button {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 36px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.responsive-button-primary {
+  background: var(--mantine-color-blue-6);
+  color: white;
+}
+
+.responsive-button-primary:hover {
+  background: var(--mantine-color-blue-7);
+}
+
+.responsive-button-secondary {
+  background: var(--mantine-color-gray-1);
+  color: var(--mantine-color-gray-7);
+}
+
+.responsive-button-secondary:hover {
+  background: var(--mantine-color-gray-2);
+}
+
+/* Tablet Buttons */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .responsive-button {
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    min-height: 44px;
+  }
+}
+
+/* Laptop Buttons */
+@media (min-width: 1025px) and (max-width: 1366px) {
+  .responsive-button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    min-height: 48px;
+  }
+}
+
+/* Desktop Buttons */
+@media (min-width: 1367px) {
+  .responsive-button {
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-size: 1.125rem;
+    min-height: 52px;
+  }
+}
+
+/* =============== RESPONSIVE INPUTS =============== */
+.responsive-input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--mantine-color-gray-3);
+  border-radius: 6px;
+  font-size: 0.875rem;
+  background: var(--app-color-surface);
+  transition: all 0.2s ease;
+  min-height: 36px;
+}
+
+.responsive-input:focus {
+  outline: none;
+  border-color: var(--mantine-color-blue-5);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+/* Tablet Inputs */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .responsive-input {
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    min-height: 44px;
+  }
+}
+
+/* Laptop Inputs */
+@media (min-width: 1025px) and (max-width: 1366px) {
+  .responsive-input {
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    min-height: 48px;
+  }
+}
+
+/* Desktop Inputs */
+@media (min-width: 1367px) {
+  .responsive-input {
+    padding: 1rem 1.25rem;
+    border-radius: 12px;
+    font-size: 1.125rem;
+    min-height: 52px;
+  }
+}
+
+/* =============== RESPONSIVE SHADOWS =============== */
+.responsive-shadow-sm {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.responsive-shadow-md {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.responsive-shadow-lg {
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Tablet Shadows */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .responsive-shadow-sm {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+  }
+  
+  .responsive-shadow-md {
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.12);
+  }
+  
+  .responsive-shadow-lg {
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.12);
+  }
+}
+
+/* Laptop Shadows */
+@media (min-width: 1025px) and (max-width: 1366px) {
+  .responsive-shadow-sm {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.07);
+  }
+  
+  .responsive-shadow-md {
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+  }
+  
+  .responsive-shadow-lg {
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* Desktop Shadows */
+@media (min-width: 1367px) {
+  .responsive-shadow-sm {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+  }
+  
+  .responsive-shadow-md {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18);
+  }
+  
+  .responsive-shadow-lg {
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.18);
+  }
+}
+
+/* =============== RESPONSIVE ANIMATIONS =============== */
+.responsive-transition {
+  transition: all 0.2s ease;
+}
+
+.responsive-transition-slow {
+  transition: all 0.3s ease;
+}
+
+.responsive-transition-fast {
+  transition: all 0.1s ease;
+}
+
+/* Reduce animations on tablets for better performance */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .responsive-transition {
+    transition: all 0.15s ease;
+  }
+  
+  .responsive-transition-slow {
+    transition: all 0.25s ease;
+  }
+}
+
+/* =============== RESPONSIVE UTILITIES =============== */
+.responsive-hidden { display: none; }
+.responsive-visible { display: block; }
+
+.responsive-text-center { text-align: center; }
+.responsive-text-left { text-align: left; }
+.responsive-text-right { text-align: right; }
+
+.responsive-w-full { width: 100%; }
+.responsive-h-full { height: 100%; }
+
+.responsive-rounded-sm { border-radius: 4px; }
+.responsive-rounded-md { border-radius: 8px; }
+.responsive-rounded-lg { border-radius: 12px; }
+.responsive-rounded-xl { border-radius: 16px; }
+
+/* Tablet Utilities */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .tablet-hidden { display: none; }
+  .tablet-visible { display: block; }
+  
+  .responsive-rounded-sm { border-radius: 6px; }
+  .responsive-rounded-md { border-radius: 10px; }
+  .responsive-rounded-lg { border-radius: 14px; }
+  .responsive-rounded-xl { border-radius: 18px; }
+}
+
+/* Laptop Utilities */
+@media (min-width: 1025px) and (max-width: 1366px) {
+  .laptop-hidden { display: none; }
+  .laptop-visible { display: block; }
+  
+  .responsive-rounded-sm { border-radius: 8px; }
+  .responsive-rounded-md { border-radius: 12px; }
+  .responsive-rounded-lg { border-radius: 16px; }
+  .responsive-rounded-xl { border-radius: 20px; }
+}
+
+/* Desktop Utilities */
+@media (min-width: 1367px) {
+  .desktop-hidden { display: none; }
+  .desktop-visible { display: block; }
+  
+  .responsive-rounded-sm { border-radius: 10px; }
+  .responsive-rounded-md { border-radius: 14px; }
+  .responsive-rounded-lg { border-radius: 18px; }
+  .responsive-rounded-xl { border-radius: 24px; }
+}
+
+/* =============== TOUCH OPTIMIZATIONS =============== */
+@media (pointer: coarse) {
+  .responsive-touch-target {
+    min-height: 44px;
+    min-width: 44px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .responsive-touch-feedback:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+  }
+}
+
+/* =============== ACCESSIBILITY IMPROVEMENTS =============== */
+.responsive-focus:focus-visible {
+  outline: 2px solid var(--mantine-color-blue-6);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .responsive-transition,
+  .responsive-transition-slow,
+  .responsive-transition-fast {
+    transition: none !important;
+  }
+  
+  .responsive-touch-feedback:active {
+    transform: none !important;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .responsive-card {
+    border: 2px solid currentColor;
+  }
+  
+  .responsive-button {
+    border: 2px solid currentColor;
+  }
+  
+  .responsive-input {
+    border: 2px solid currentColor;
+  }
+}

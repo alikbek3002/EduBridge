@@ -1,0 +1,64 @@
+/* Simple, control-less auto-scrolling slider for universities */
+.universities-landing { overflow: hidden; }
+
+.uni-slider { position: relative; overflow: hidden; }
+.uni-slider__viewport { width: 100%; overflow: hidden; }
+
+/* Track: use keyframes for smooth infinite loop */
+.uni-slider__track {
+  display: flex;
+  width: max-content;
+  gap: 16px;
+  animation: uni-scroll 40s linear infinite;
+}
+
+@keyframes uni-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Card */
+.uni-card {
+  background: #fff;
+  border: 1px solid rgba(15,23,42,.06);
+  border-radius: 18px;
+  box-shadow: 0 8px 28px rgba(15,23,42,.06);
+  min-width: 320px;
+  max-width: 320px;
+  overflow: hidden;
+}
+
+.uni-card__media {
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid rgba(15,23,42,.06);
+  background: linear-gradient(180deg,#f8fafc 0%, #eef2ff 100%);
+}
+
+.uni-card__logo { max-height: 80px; max-width: 80%; object-fit: contain; }
+.uni-card__logo--placeholder { width: 80px; height: 80px; border-radius: 12px; background: #e2e8f0; }
+
+.uni-card__body { padding: 16px; }
+.uni-card__title { font-weight: 900; color:#0f172a; font-size: 18px; margin-bottom: 4px; }
+.uni-card__meta { color:#475569; font-size: 13px; margin-bottom: 10px; }
+.uni-card__desc { color:#334155; font-size: 14px; }
+
+.uni-card__stats { display: flex; gap: 12px; margin-top: 12px; flex-wrap: wrap; }
+.uni-stat { display:flex; flex-direction:column; align-items:flex-start; }
+.uni-stat strong { color:#16a34a; font-size: 14px; line-height: 1; }
+.uni-stat span { color:#64748b; font-size: 11px; }
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .uni-slider__track { animation-duration: 28s; }
+  .uni-card { min-width: 260px; max-width: 260px; }
+  .uni-card__media { height: 100px; }
+}
+
+@media (max-width: 480px) {
+  .uni-slider__track { animation-duration: 22s; }
+  .uni-card { min-width: 230px; max-width: 230px; }
+  .uni-card__media { height: 90px; }
+}

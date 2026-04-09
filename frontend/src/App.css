@@ -1,0 +1,245 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rubik+Mono+One&family=Story+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wdth,wght@0,75,100..900;1,75,100..900&display=swap');
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  display: block;
+  color: var(--app-color-text);
+  background: var(--mantine-color-gray-0);
+}
+
+:root[data-mantine-color-scheme='light'] body {
+  background: linear-gradient(135deg, #f3f6ff 0%, #eff6ff 100%);
+}
+
+:root[data-mantine-color-scheme='dark'] body {
+  background: radial-gradient(1200px 800px at 20% -10%, #0b1220 0%, #0a0f15 40%, #0a0d12 100%);
+}
+
+.main-page {
+  background: linear-gradient(135deg, #f8f4ff 0%, #f0f8ff 100%);
+  min-height: 100vh;
+  padding-top: 0;
+}
+
+.main-header {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 244, 255, 0.95) 100%);
+  padding: 0;
+  box-shadow: 0 8px 32px rgba(139, 92, 246, 0.15);
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1050;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(139, 92, 246, 0.1);
+  border-radius: 25px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  width: fit-content;
+  max-width: 100%;
+}
+
+.container{
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.main-header__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 25px;
+  gap: 20px;
+}
+
+.main-header__logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo_img {
+  max-width: 90px;
+  max-height: 50px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2);
+  border: 2px solid rgba(139, 92, 246, 0.1);
+}
+
+.logo_img:hover {
+  transform: scale(1.05) rotate(2deg);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.3);
+  border-color: rgba(139, 92, 246, 0.3);
+}
+
+.main-header__nav {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.main-header__nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 15px;
+}
+
+.main-header__nav ul li { 
+  position: relative;
+}
+
+.main-header__nav ul li a {
+  color: #6b46c1;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 5px 8px;
+  font-style: normal;
+  border-radius: 8px;
+}
+
+.main-header__nav ul li a:hover {
+  color: #8b5cf6;
+  background-color: rgba(139, 92, 246, 0.1);
+  transform: translateY(-1px);
+}
+
+.main-header__nav ul li a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, #8b5cf6, #a855f7);
+  transition: width 0.3s ease;
+  border-radius: 1px;
+}
+
+.main-header__nav ul li a:hover::after {
+  width: 100%;
+}
+
+.profile-button, .login-button, .dashboard-button, .logout-button {
+  background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+  color: #fff;
+  font-weight: 600;
+  font-size: 12px;
+  padding: 6px 16px;
+  border-radius: 18px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-button span, .login-button span, .dashboard-button span, .logout-button span {
+  position: relative;
+  z-index: 2;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.profile-button::before, .login-button::before, .dashboard-button::before, .logout-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.profile-button:hover::before, .login-button:hover::before, .dashboard-button:hover::before, .logout-button:hover::before {
+  left: 100%;
+}
+
+.profile-button svg {
+  margin-right: 0;
+  z-index: 1;
+  position: relative;
+}
+
+.profile-button:hover span, .login-button:hover span, .dashboard-button:hover span, .logout-button:hover span {
+  transform: scale(1.05);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+/* Стили для контейнера кнопок авторизации */
+.auth-buttons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Стили для кнопки личного кабинета */
+.dashboard-button {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+.dashboard-button:hover {
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 992px) {
+  .main-header__nav ul {
+    gap: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-page {
+    padding-top: 80px;
+  }
+  
+  .main-header {
+    top: 15px;
+    max-width: 95%;
+  }
+  
+  .main-header__container {
+    padding: 8px 20px;
+    gap: 15px;
+  }
+  
+  .main-header__nav ul {
+    display: none;
+  }
+  
+  .profile-button, .login-button {
+    padding: 5px 12px;
+    font-size: 11px;
+  }
+  
+  .logo_img {
+    max-width: 40px;
+    max-height: 40px;
+  }
+}
+
+/* Общие стили для аутентификации */
+.auth-container {
+  min-height: 100vh;
+  padding-top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+}

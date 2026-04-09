@@ -1,0 +1,61 @@
+/* ForcedPanel.css */
+.right-panel-container {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+  z-index: 9999 !important;
+}
+
+.right-panel {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  background-color: white !important;
+  color: black !important;
+  min-height: auto !important;
+  border: 2px solid red !important;
+  padding: 15px !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+}
+
+.desktop-panel {
+  position: relative !important;
+  z-index: 9999 !important;
+}
+
+.right-panel * {
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
+}
+
+@media screen and (max-width: 768px) {
+  .desktop-panel {
+    display: none !important;
+  }
+}
+
+/* Override any conflicting styles */
+.mantine-Grid-col[style*="display: none"] {
+  display: block !important;
+}
+
+#right-panel-mobile-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: blue;
+  color: white;
+  padding: 15px;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10000;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}

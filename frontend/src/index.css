@@ -1,0 +1,258 @@
+@import '@mantine/core/styles.css';
+@import '@mantine/notifications/styles.css';
+@import '@mantine/dates/styles.css';
+@import '@mantine/dropzone/styles.css';
+@import '@mantine/carousel/styles.css';
+@import '@mantine/tiptap/styles.css';
+@import '@mantine/nprogress/styles.css';
+
+/* Import responsive utilities */
+@import './dashboard/components/Dashboard/ResponsiveStyles.css';
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: #1f2937;
+  max-width: 100%;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* App design tokens */
+  --app-color-bg: #f8fafc;
+  --app-color-surface: #ffffff;
+  --app-color-text: #1f2937;
+  --app-color-primary: var(--mantine-color-indigo-6);
+  --app-color-primary-contrast: #ffffff;
+
+  --app-radius-sm: 6px;
+  --app-radius-md: 8px;
+  --app-radius-lg: 12px;
+
+  --app-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --app-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.10);
+  --app-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
+
+  --app-spacing-xs: 8px;
+  --app-spacing-sm: 12px;
+  --app-spacing-md: 16px;
+  --app-spacing-lg: 24px;
+  --app-spacing-xl: 32px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-color: var(--mantine-color-gray-0);
+  color: var(--app-color-text);
+}
+
+#root {
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Mantine theme overrides */
+.mantine-Button-root {
+  border-radius: var(--app-radius-md);
+  box-shadow: var(--app-shadow-sm);
+}
+
+.mantine-Button-root:hover {
+  box-shadow: var(--app-shadow-md);
+}
+
+/* Ensure readable text for subtle buttons */
+.mantine-Button-root[data-variant="subtle"] {
+  color: var(--app-color-text);
+}
+
+.mantine-Button-root[data-variant="subtle"][data-color="gray"]:hover {
+  background-color: var(--mantine-color-gray-1);
+}
+
+.mantine-Button-root[data-disabled="true"],
+.mantine-Button-root:disabled {
+  box-shadow: none;
+  filter: saturate(0.7);
+}
+
+.mantine-Paper-root {
+  border-radius: var(--app-radius-lg);
+  box-shadow: var(--app-shadow-sm);
+}
+
+.mantine-Card-root {
+  border-radius: var(--app-radius-lg);
+  box-shadow: var(--app-shadow-sm);
+}
+
+/* Unified input look */
+.mantine-InputWrapper-label {
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.mantine-Input-input,
+.mantine-TextInput-input,
+.mantine-PasswordInput-input,
+.mantine-Textarea-input,
+.mantine-Select-input,
+.mantine-MultiSelect-input,
+.mantine-NumberInput-input,
+.mantine-DateInput-input,
+.mantine-FileInput-input {
+  border-radius: var(--app-radius-md);
+  padding: 12px 14px;
+  font-size: 14px;
+}
+
+.mantine-TextInput-input:focus,
+.mantine-PasswordInput-input:focus,
+.mantine-Textarea-input:focus,
+.mantine-Select-input:focus,
+.mantine-MultiSelect-input:focus,
+.mantine-NumberInput-input:focus,
+.mantine-DateInput-input:focus,
+.mantine-FileInput-input:focus,
+.mantine-Input-input:focus {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--mantine-color-indigo-6), transparent 90%);
+}
+
+/* Fix overlap when using leftSection/rightSection in inputs */
+.mantine-Input-wrapper [data-with-left-section] .mantine-Input-input,
+.mantine-TextInput-root [data-with-left-section] .mantine-TextInput-input,
+.mantine-PasswordInput-root [data-with-left-section] .mantine-PasswordInput-input {
+  padding-left: 42px; /* leave space for icon */
+}
+
+.mantine-Input-wrapper [data-with-right-section] .mantine-Input-input,
+.mantine-TextInput-root [data-with-right-section] .mantine-TextInput-input,
+.mantine-PasswordInput-root [data-with-right-section] .mantine-PasswordInput-input {
+  padding-right: 42px; /* leave space for toggles/icons */
+}
+
+.mantine-Progress-root {
+  border-radius: var(--app-radius-md);
+}
+
+.mantine-Notification-root {
+  border-radius: var(--app-radius-lg);
+}
+
+.mantine-Modal-content {
+  border-radius: var(--app-radius-lg);
+}
+
+.mantine-Stack-root {
+  gap: var(--app-spacing-md);
+}
+
+.mantine-Grid-root {
+  gap: var(--app-spacing-md);
+}
+
+/* Empty state */
+.empty-state {
+  border: 1px dashed var(--mantine-color-gray-4);
+  background: var(--mantine-color-gray-0);
+  border-radius: var(--app-radius-md);
+  padding: var(--app-spacing-lg);
+  text-align: center;
+  color: var(--mantine-color-gray-7);
+}
+
+.separator-soft {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--mantine-color-gray-3), transparent);
+  margin: var(--app-spacing-md) 0;
+}
+
+/* Zebra utility for lists */
+.list-zebra > *:nth-child(odd) {
+  background: var(--mantine-color-gray-0);
+  border-radius: var(--app-radius-sm);
+}
+
+.list-zebra > * {
+  padding: var(--app-spacing-xs);
+}
+
+/* Custom animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Base typography */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 var(--app-spacing-md);
+  color: var(--app-color-text);
+}
+
+p {
+  margin: 0 0 var(--app-spacing-md);
+}
+
+a {
+  color: var(--mantine-color-indigo-7);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Accessible focus styles */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--mantine-color-indigo-6), transparent 20%);
+  outline-offset: 2px;
+  border-radius: var(--app-radius-sm);
+}
+
+/* Dark theme support */
+[data-mantine-color-scheme="dark"] {
+  --mantine-color-gray-0: #1a1b23;
+  --mantine-color-gray-1: #25262b;
+  --mantine-color-gray-2: #2c2e33;
+  --mantine-color-gray-3: #373a40;
+  --mantine-color-gray-4: #42444a;
+  --mantine-color-gray-5: #495057;
+  --mantine-color-gray-6: #6c757d;
+  --mantine-color-gray-7: #868e96;
+  --mantine-color-gray-8: #adb5bd;
+  --mantine-color-gray-9: #ced4da;
+  --app-color-bg: #1a1b23;
+  --app-color-surface: #25262b;
+  --app-color-text: #e5e7eb;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .mantine-Stack-root {
+    gap: 12px;
+  }
+  
+  .mantine-Grid-root {
+    gap: 12px;
+  }
+}

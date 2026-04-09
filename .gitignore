@@ -1,0 +1,95 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media
+
+# Virtual Environment
+venv/
+ENV/
+env/
+.env
+
+# Secrets / local env files
+**/.env
+**/.env.*
+!**/.env.example
+
+# Python environments
+**/venv/
+**/ENV/
+**/env/
+
+# Local databases / runtime artifacts
+**/db.sqlite3
+**/db.sqlite3-journal
+backend/.env.sqlite.backup
+django.log
+.pytest_cache/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Other
+.DS_Store
+*.bak
+*.tmp
+*.temp
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Frontend / backend build artifacts
+**/node_modules/
+**/dist/
+**/dist-ssr/
+**/staticfiles/
+**/media/
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
