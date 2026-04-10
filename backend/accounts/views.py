@@ -32,7 +32,7 @@ User = get_user_model()
 # --------------- Cookie helpers ---------------
 def _set_auth_cookies(response, refresh):
     """Set HttpOnly JWT cookies on a DRF Response."""
-    samesite = os.getenv('COOKIE_SAMESITE', 'None')
+    samesite = getattr(settings, 'SESSION_COOKIE_SAMESITE', 'None')
     secure = not settings.DEBUG
     response.set_cookie(
         'access_token', str(refresh.access_token),
@@ -338,7 +338,7 @@ def refresh_token(request):
             resp.set_cookie(
                 'access_token', access_token,
                 httponly=True, secure=not settings.DEBUG,
-                samesite=os.getenv('COOKIE_SAMESITE', 'None'),
+                samesite=getattr(settings, 'SESSION_COOKIE_SAMESITE', 'None'),
                 max_age=60 * 15,
             )
 
@@ -360,7 +360,7 @@ def refresh_cookie_token(request):
 
         resp = Response({'access': new_access})
         if getattr(settings, 'FEATURE_COOKIE_AUTH', False):
-            samesite = os.getenv('COOKIE_SAMESITE', 'None')
+            samesite = getattr(settings, 'SESSION_COOKIE_SAMESITE', 'None')
             secure = not settings.DEBUG
             resp.set_cookie(
                 'access_token', new_access,

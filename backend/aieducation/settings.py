@@ -11,6 +11,7 @@ load_dotenv(dotenv_path=BASE_DIR / '.env', override=True)
 # SECURITY: secret from env; in production SECRET_KEY is mandatory
 DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
 IS_TEST = 'test' in sys.argv
+FEATURE_COOKIE_AUTH = os.getenv('FEATURE_COOKIE_AUTH', 'True').lower() == 'true'
 
 SECRET_KEY = os.getenv('SECRET_KEY', '')
 if not SECRET_KEY:
@@ -116,6 +117,19 @@ else:
     # In production, only explicit CORS_ALLOWED_ORIGINS are used; no regex fallback
     CORS_ALLOWED_ORIGIN_REGEXES = []
 
+def _normalize_samesite(value: str | None, default: str) -> str:
+    normalized = (value or default).strip().capitalize()
+    return normalized if normalized in {'Lax', 'Strict', 'None'} else default
+
+COOKIE_SAMESITE = _normalize_samesite(os.getenv('COOKIE_SAMESITE'), 'Lax' if DEBUG else 'None')
+CSRF_SAMESITE = _normalize_samesite(os.getenv('CSRF_SAMESITE'), COOKIE_SAMESITE)
+
+if not DEBUG and FEATURE_COOKIE_AUTH:
+    # Railway frontend and backend usually live on different public domains,
+    # so cookie auth must stay cross-site compatible even if a local .env was copied to production.
+    COOKIE_SAMESITE = 'None'
+    CSRF_SAMESITE = 'None'
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -156,15 +170,14 @@ if not DEBUG:
     SESSION_COOKIE_HTTPONLY = True
     CSRF_COOKIE_SECURE = True
     # For SPA on a separate domain: SameSite=None + Secure
-    SESSION_COOKIE_SAMESITE = os.getenv('COOKIE_SAMESITE', 'None')
-    CSRF_COOKIE_SAMESITE = os.getenv('CSRF_SAMESITE', 'None')
+    SESSION_COOKIE_SAMESITE = COOKIE_SAMESITE
+    CSRF_COOKIE_SAMESITE = CSRF_SAMESITE
     # HSTS: enable gradually via env
     SECURE_HSTS_SECONDS = int(os.getenv('SECURE_HSTS_SECONDS', '0'))
     SECURE_HSTS_INCLUDE_SUBDOMAINS = os.getenv('SECURE_HSTS_INCLUDE_SUBDOMAINS', 'False').lower() == 'true'
     SECURE_HSTS_PRELOAD = os.getenv('SECURE_HSTS_PRELOAD', 'False').lower() == 'true'
 
 # Feature flags for gradual rollout
-FEATURE_COOKIE_AUTH = os.getenv('FEATURE_COOKIE_AUTH', 'True').lower() == 'true'
 FEATURE_CASES = os.getenv('FEATURE_CASES', 'True').lower() == 'true'
 FEATURE_RAG = os.getenv('FEATURE_RAG', 'False').lower() == 'true'
 FEATURE_SIGNED_URLS = os.getenv('FEATURE_SIGNED_URLS', 'False').lower() == 'true'

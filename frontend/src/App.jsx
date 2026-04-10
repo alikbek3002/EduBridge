@@ -21,6 +21,8 @@ function App() {
   const dispatch = useDispatch();
   const { isAuthenticated, authResolved, onboardingCompleted } = useAuth();
   const authenticatedRoute = onboardingCompleted ? '/app/dashboard' : '/app/onboarding';
+  const shouldEnableVercelTelemetry =
+    typeof window !== 'undefined' && window.location.hostname.endsWith('.vercel.app');
 
   React.useEffect(() => {
     // В самом начале загрузки приложения запрашиваем CSRF токен
@@ -70,8 +72,8 @@ function App() {
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </ModalsProvider>
-        <Analytics />
-        <SpeedInsights />
+        {shouldEnableVercelTelemetry ? <Analytics /> : null}
+        {shouldEnableVercelTelemetry ? <SpeedInsights /> : null}
       </div>
     </Router>
   );

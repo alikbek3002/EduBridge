@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import './SectionShared.css';
 import './UniversitiesSlider.css';
-import { API_BASE_URL } from '../../../shared/services/api';
+import { getApiRequestUrl } from '../../../shared/services/api';
 
 const getLogoSrc = (u) => {
   // Prefer serializer-provided absolute logo_url; fallback to logo string if absolute
@@ -27,7 +27,7 @@ const UniversitiesSlider = () => {
     const load = async () => {
       try {
         setLoading(true);
-        const url = `${API_BASE_URL}/api/education/universities/?is_active=true&limit=1000`;
+        const url = getApiRequestUrl('/api/education/universities/?is_active=true&limit=1000');
         const res = await fetch(url, { headers: { 'Content-Type': 'application/json' } });
         if (!res.ok) {
           // On 401/403 or any error, don't redirect — just render nothing

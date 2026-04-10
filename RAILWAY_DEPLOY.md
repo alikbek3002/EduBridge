@@ -35,6 +35,8 @@ Set these on the Railway backend service:
 - `DB_SSLMODE=require` when using Supabase/Postgres over SSL
 - `SUPABASE_URL=...`
 - `SUPABASE_SERVICE_ROLE_KEY=...`
+- `COOKIE_SAMESITE=None`
+- `CSRF_SAMESITE=None`
 
 Optional:
 
@@ -55,6 +57,7 @@ Set these on the Railway frontend service:
 - `VITE_API_URL=https://your-backend.up.railway.app`
 
 The frontend image supports runtime replacement of `VITE_API_URL`, so you can change the backend URL without rebuilding local assets.
+If `VITE_API_URL` is missing, the SPA will not call the correct backend and onboarding/profile requests will fail.
 
 ## 4. Deploy order
 

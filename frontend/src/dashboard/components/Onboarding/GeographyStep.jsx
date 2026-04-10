@@ -32,7 +32,7 @@ import {
   IconBook
 } from '@tabler/icons-react';
 import ItalyMap from './ItalyMap';
-import { API_BASE_URL } from '../../../shared/services/api';
+import { getApiRequestUrl } from '../../../shared/services/api';
 import styles from './ItalyMap.module.css';
 
 const GeographyStep = ({ value, onChange, error }) => {
@@ -60,7 +60,7 @@ const GeographyStep = ({ value, onChange, error }) => {
       setLoadingError(null);
       
       try {
-        const res = await fetch(`${API_BASE_URL}/api/education/universities/?is_active=true&limit=1000`);
+        const res = await fetch(getApiRequestUrl('/api/education/universities/?is_active=true&limit=1000'));
 
         if (!res.ok) {
           throw new Error(`Ошибка сети: ${res.status} ${res.statusText}`);

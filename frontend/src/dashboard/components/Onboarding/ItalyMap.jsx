@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Text, Group, Badge, Tooltip, useMantineColorScheme, Portal, Stack } from '@mantine/core';
 import { IconMapPin, IconSchool, IconUsers, IconCalendar, IconStar } from '@tabler/icons-react';
-import { API_BASE_URL } from '../../../shared/services/api';
+import { getApiRequestUrl } from '../../../shared/services/api';
 import styles from './ItalyMap.module.css';
 
 // Реальные географические координаты городов на SVG карте Италии
@@ -145,7 +145,7 @@ const ItalyMap = ({ selectedCity, onSelectCity, universities: propUniversities, 
       setLoading(true);
       try {
          // Получаем все университеты с увеличенным лимитом
-         const res = await fetch(`${API_BASE_URL}/api/education/universities/?is_active=true&limit=1000`);
+         const res = await fetch(getApiRequestUrl('/api/education/universities/?is_active=true&limit=1000'));
          
          if (!res.ok) {
            throw new Error(`HTTP error! status: ${res.status}`);

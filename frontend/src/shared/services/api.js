@@ -3,8 +3,14 @@ import axios from 'axios';
 const LOCAL_HOST_PREFIXES = ['172.', '192.168.', '10.'];
 const SAFE_METHODS = ['GET', 'HEAD', 'OPTIONS', 'TRACE'];
 const RUNTIME_API_URL_PLACEHOLDER = '__VITE_API_URL__';
+const MISSING_API_URL_MESSAGE =
+  'VITE_API_URL is not configured. Set the Railway frontend variable VITE_API_URL to your backend public URL.';
 
 const trimTrailingSlash = (value = '') => value.replace(/\/+$/, '');
+const isLocalHost = (host = '') =>
+  host === 'localhost' ||
+  host === '127.0.0.1' ||
+  LOCAL_HOST_PREFIXES.some((prefix) => host.startsWith(prefix));
 
 const getApiUrl = () => {
   const envUrl = (import.meta.env?.VITE_API_URL || RUNTIME_API_URL_PLACEHOLDER).trim();
@@ -13,22 +19,32 @@ const getApiUrl = () => {
   }
 
   const host = window.location.hostname || '';
-  const isLocalHost =
-    host === 'localhost' ||
-    host === '127.0.0.1' ||
-    LOCAL_HOST_PREFIXES.some((prefix) => host.startsWith(prefix));
-
-  if (isLocalHost) {
+  if (isLocalHost(host)) {
     return `http://${host}:8000`;
   }
 
-  return trimTrailingSlash(window.location.origin);
+  return '';
 };
 
 export const API_BASE_URL = getApiUrl();
+const HAS_API_BASE_URL = Boolean(API_BASE_URL);
+
+if (!HAS_API_BASE_URL && typeof window !== 'undefined' && !isLocalHost(window.location.hostname || '')) {
+  console.error(MISSING_API_URL_MESSAGE);
+}
+
+export const getApiRequestUrl = (path = '') => {
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+
+  if (!HAS_API_BASE_URL) {
+    throw new Error(MISSING_API_URL_MESSAGE);
+  }
+
+  return `${API_BASE_URL}${normalizedPath}`;
+};
 
 const api = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: API_BASE_URL || undefined,
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
@@ -68,6 +84,12 @@ function getCookie(name) {
 
 api.interceptors.request.use(
   (config) => {
+    if (!HAS_API_BASE_URL) {
+      const error = new Error(MISSING_API_URL_MESSAGE);
+      error.code = 'API_URL_MISSING';
+      return Promise.reject(error);
+    }
+
     const method = (config.method || '').toUpperCase();
     if (!SAFE_METHODS.includes(method)) {
       const csrfToken = getCookie('csrftoken');
@@ -110,6 +132,10 @@ api.interceptors.response.use(
 );
 
 const handleApiError = (error) => {
+  if (error?.code === 'API_URL_MISSING') {
+    return MISSING_API_URL_MESSAGE;
+  }
+
   if (error.response) {
     const { status, data } = error.response;
 
