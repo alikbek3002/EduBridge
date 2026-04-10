@@ -198,6 +198,7 @@ def _env(name: str, default: str | None = None) -> str | None:
 
 USE_SQLITE = (_env('USE_SQLITE', 'False').lower() == 'true') or False
 
+_db_url = _env('DATABASE_URL')
 pg_name = _env('PGDATABASE', _env('dbname'))
 pg_user = _env('PGUSER', _env('user'))
 pg_password = _env('PGPASSWORD', _env('password'))
@@ -206,8 +207,44 @@ pg_port = _env('PGPORT', _env('port', '5432'))
 
 DATABASES = {}
 
-if USE_SQLITE or not (pg_name and pg_user and pg_host):
+if USE_SQLITE:
     # Local development default when env is incomplete or forced
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+elif _db_url:
+    try:
+        import dj_database_url  # type: ignore
+        parsed = dj_database_url.parse(_db_url, conn_max_age=600, ssl_require=True)
+        parsed.setdefault('OPTIONS', {})
+
+        parsed_host = str(parsed.get('HOST', '') or '').strip().lower()
+        is_local_host = parsed_host in ('localhost', '127.0.0.1', '') or parsed_host.endswith('.local')
+        sslmode = _env('DB_SSLMODE') or _env('PGSSLMODE') or (None if is_local_host else 'require')
+        if sslmode:
+            parsed['OPTIONS'] = {**parsed.get('OPTIONS', {}), 'sslmode': sslmode}
+
+        DATABASES['default'] = parsed
+    except Exception as e:
+        logging.getLogger(__name__).warning(f"DATABASE_URL parse failed: {e}")
+        if pg_name and pg_user and pg_host:
+            DATABASES['default'] = {
+                'ENGINE': 'django.db.backends.postgresql',
+                'NAME': pg_name or 'postgres',
+                'USER': pg_user or 'postgres',
+                'PASSWORD': pg_password or '',
+                'HOST': pg_host or 'localhost',
+                'PORT': pg_port or '5432',
+                'OPTIONS': {},
+            }
+        else:
+            DATABASES['default'] = {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': BASE_DIR / 'db.sqlite3',
+            }
+elif not (pg_name and pg_user and pg_host):
+    # Local development default when env is incomplete
     DATABASES['default'] = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
@@ -230,22 +267,6 @@ else:
     sslmode = _env('DB_SSLMODE') or (_env('PGSSLMODE')) or (None if is_local_host else 'require')
     if sslmode:
         DATABASES['default']['OPTIONS']['sslmode'] = sslmode
-
-    # Prefer DATABASE_URL if provided (e.g., from Railway/Supabase console)
-    _db_url = _env('DATABASE_URL')
-    if _db_url:
-        try:
-            import dj_database_url  # type: ignore
-            parsed = dj_database_url.parse(_db_url, conn_max_age=600, ssl_require=True)
-            # Keep explicit OPTIONS.sslmode if already set, otherwise use parsed
-            existing_opts = DATABASES['default'].get('OPTIONS', {})
-            parsed_opts = parsed.get('OPTIONS', {})
-            merged_opts = {**parsed_opts, **existing_opts}
-            parsed['OPTIONS'] = merged_opts
-            DATABASES['default'] = parsed
-        except Exception as e:
-            # Don't crash on bad URLs; fall back to explicit settings
-            logging.getLogger(__name__).warning(f"DATABASE_URL parse failed: {e}")
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [

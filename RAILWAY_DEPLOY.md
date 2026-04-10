@@ -25,6 +25,7 @@ Set these on the Railway backend service:
 
 - `DEBUG=False`
 - `SECRET_KEY=your-long-random-secret`
+- `HEALTHCHECK_STRICT_DATABASE=False`
 - `FRONTEND_URL=https://your-frontend.up.railway.app`
 - `CORS_ALLOWED_ORIGINS=https://your-frontend.up.railway.app`
 - `CSRF_TRUSTED_ORIGINS=https://your-frontend.up.railway.app`
@@ -43,6 +44,8 @@ Optional:
 - `LOG_TO_FILE=False`
 
 The backend healthcheck is available at `/health/`.
+By default it is deployment-friendly and returns `200` even if the database is temporarily unavailable, with `"status": "degraded"`.
+Set `HEALTHCHECK_STRICT_DATABASE=True` if you want Railway to fail healthchecks on DB connectivity errors.
 Migrations run automatically from `preDeployCommand`.
 
 ## 3. Frontend variables
