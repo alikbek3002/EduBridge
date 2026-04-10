@@ -42,7 +42,7 @@ env_hosts = []
 if _raw_hosts:
     env_hosts = [x for x in (_normalize_host(h) for h in _raw_hosts.split(',')) if x]
 
-base_hosts = ['.up.railway.app', 'localhost', '127.0.0.1', '0.0.0.0']
+base_hosts = ['.up.railway.app', 'healthcheck.railway.app', 'localhost', '127.0.0.1', '0.0.0.0']
 
 # Merge env + base (preserve order, remove duplicates)
 ALLOWED_HOSTS = list(dict.fromkeys([*env_hosts, *base_hosts])) or ['localhost', '127.0.0.1']
