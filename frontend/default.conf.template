@@ -4,10 +4,9 @@ server {
 
     root /usr/share/nginx/html;
     index index.html;
+${API_PROXY_LOCATION}
 
     location / {
         try_files $uri $uri/ /index.html;
     }
-
-    # Do NOT proxy /api/ to a container name — use the external backend URL via VITE_API_URL in the client
 }

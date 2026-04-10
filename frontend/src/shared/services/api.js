@@ -28,19 +28,27 @@ const getApiUrl = () => {
 
 export const API_BASE_URL = getApiUrl();
 const HAS_API_BASE_URL = Boolean(API_BASE_URL);
+const CAN_USE_SAME_ORIGIN_API =
+  typeof window !== 'undefined' && !isLocalHost(window.location.hostname || '');
 
-if (!HAS_API_BASE_URL && typeof window !== 'undefined' && !isLocalHost(window.location.hostname || '')) {
+if (!HAS_API_BASE_URL && !CAN_USE_SAME_ORIGIN_API) {
   console.error(MISSING_API_URL_MESSAGE);
 }
 
 export const getApiRequestUrl = (path = '') => {
   const normalizedPath = path.startsWith('/') ? path : `/${path}`;
 
+  if (HAS_API_BASE_URL) {
+    return `${API_BASE_URL}${normalizedPath}`;
+  }
+
+  if (CAN_USE_SAME_ORIGIN_API) {
+    return normalizedPath;
+  }
+
   if (!HAS_API_BASE_URL) {
     throw new Error(MISSING_API_URL_MESSAGE);
   }
-
-  return `${API_BASE_URL}${normalizedPath}`;
 };
 
 const api = axios.create({
@@ -84,7 +92,7 @@ function getCookie(name) {
 
 api.interceptors.request.use(
   (config) => {
-    if (!HAS_API_BASE_URL) {
+    if (!HAS_API_BASE_URL && !CAN_USE_SAME_ORIGIN_API) {
       const error = new Error(MISSING_API_URL_MESSAGE);
       error.code = 'API_URL_MISSING';
       return Promise.reject(error);

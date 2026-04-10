@@ -1,8 +1,28 @@
 #!/bin/sh
 set -e
 : ${PORT:=80}
+: ${VITE_API_URL:=}
+
+if [ -n "${VITE_API_URL}" ]; then
+	API_PROXY_LOCATION=$(cat <<EOF
+    location /api/ {
+        proxy_pass ${VITE_API_URL};
+        proxy_http_version 1.1;
+        proxy_set_header Host \$proxy_host;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto \$scheme;
+        proxy_ssl_server_name on;
+    }
+EOF
+)
+else
+	API_PROXY_LOCATION=''
+fi
+export API_PROXY_LOCATION
+
 # Replace nginx template
-envsubst '$PORT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf
+envsubst '$PORT $API_PROXY_LOCATION' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf
 
 # At runtime, if VITE_API_URL is provided, patch built JS files to point to the correct backend
 if [ -n "${VITE_API_URL}" ]; then
