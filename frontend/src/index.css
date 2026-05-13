@@ -268,8 +268,35 @@ textarea:focus-visible {
   .mantine-Stack-root {
     gap: 12px;
   }
-  
+
   .mantine-Grid-root {
     gap: 12px;
   }
+}
+
+/* === Force minimal white theme inside dashboard === */
+/* Override inline pastel backgrounds on cards/papers in sections */
+[class*="sections"] .mantine-Card-root[style*="background"],
+[class*="sections"] .mantine-Paper-root[style*="background"],
+.mantine-Card-root[style*="mantine-color-green-0"],
+.mantine-Card-root[style*="mantine-color-blue-0"],
+.mantine-Card-root[style*="mantine-color-orange-0"],
+.mantine-Card-root[style*="mantine-color-purple-0"],
+.mantine-Card-root[style*="mantine-color-yellow-0"],
+.mantine-Paper-root[style*="mantine-color-green-0"],
+.mantine-Paper-root[style*="mantine-color-blue-0"],
+.mantine-Paper-root[style*="mantine-color-orange-0"],
+.mantine-Paper-root[style*="mantine-color-yellow-0"] {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  border: 1px solid #e5e7eb !important;
+}
+
+/* Headings inside dashboard — flat dark color, no gradients */
+.mantine-Text-root[style*="linear-gradient"],
+.mantine-Title-root[style*="linear-gradient"] {
+  background: none !important;
+  color: #111827 !important;
+  -webkit-text-fill-color: #111827 !important;
+  -webkit-background-clip: unset !important;
 }

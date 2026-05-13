@@ -349,7 +349,8 @@ const UniversitiesSection = () => {
                         style={{
                           position: 'relative',
                           height: 140,
-                          backgroundImage: src ? `url(${src})` : 'linear-gradient(135deg, #1e3a8a 0%, #0ea5e9 50%, #14b8a6 100%)',
+                          backgroundImage: src ? `url(${src})` : 'none',
+                          backgroundColor: src ? 'transparent' : '#f3f4f6',
                           backgroundSize: 'cover',
                           backgroundPosition: 'center',
                           borderTopLeftRadius: 'var(--app-radius-lg)',
@@ -357,7 +358,7 @@ const UniversitiesSection = () => {
                           overflow: 'hidden'
                         }}
                       >
-                        <Box style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.45) 100%)' }} />
+                        <Box style={{ position: 'absolute', inset: 0, background: src ? 'rgba(0,0,0,0.35)' : 'transparent' }} />
                         <Group justify="space-between" style={{ position: 'absolute', left: 12, right: 12, bottom: 10 }}>
                           <Group gap="sm" align="center" style={{ flex: 1, minWidth: 0 }}>
                             <Text fw={800} size="lg" style={{ color: '#fff', textShadow: '0 1px 2px rgba(0,0,0,0.5)', whiteSpace: 'normal', wordBreak: 'break-word' }}>

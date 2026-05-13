@@ -90,25 +90,13 @@ const IELTSSection = ({ progress }) => {
     updateProgress('ielts', ieltsProgress);
   }, [ieltsProgress, updateProgress]);
 
-  // Цветовая схема (для замены светлых градиентов на surface в dark)
+  // Минималистичная белая тема — все карточки одинаковые
   const isDark = typeof document !== 'undefined' && document.documentElement.getAttribute('data-mantine-color-scheme') === 'dark';
-  const surfaceStyle = { background: 'var(--app-color-surface)' };
-  const greenCardStyle = {
-    backgroundColor: isDark ? 'color-mix(in srgb, var(--mantine-color-green-6), transparent 85%)' : 'var(--mantine-color-green-0)',
-    border: `1px solid ${isDark ? 'color-mix(in srgb, var(--mantine-color-green-6), transparent 60%)' : 'var(--mantine-color-green-2)'}`
-  };
-  const blueCardStyle = {
-    backgroundColor: isDark ? 'color-mix(in srgb, var(--mantine-color-blue-6), transparent 85%)' : 'var(--mantine-color-blue-0)',
-    border: `1px solid ${isDark ? 'color-mix(in srgb, var(--mantine-color-blue-6), transparent 60%)' : 'var(--mantine-color-blue-2)'}`
-  };
-  const orangeCardStyle = {
-    backgroundColor: isDark ? 'color-mix(in srgb, var(--mantine-color-orange-6), transparent 85%)' : 'var(--mantine-color-orange-0)',
-    border: `1px solid ${isDark ? 'color-mix(in srgb, var(--mantine-color-orange-6), transparent 60%)' : 'var(--mantine-color-orange-2)'}`
-  };
-  const purpleCardStyle = {
-    backgroundColor: isDark ? 'color-mix(in srgb, var(--mantine-color-violet-6, #7c3aed), transparent 85%)' : 'var(--mantine-color-purple-0)',
-    border: `1px solid ${isDark ? 'color-mix(in srgb, var(--mantine-color-violet-6, #7c3aed), transparent 60%)' : 'var(--mantine-color-violet-2, #e9d8fd)'}`
-  };
+  const surfaceStyle = { background: '#ffffff', border: '1px solid #e5e7eb' };
+  const greenCardStyle = surfaceStyle;
+  const blueCardStyle = surfaceStyle;
+  const orangeCardStyle = surfaceStyle;
+  const purpleCardStyle = surfaceStyle;
 
   // Дата экзамена из БД
   const examDateStr = user?.profile?.ielts_exam_date || null;

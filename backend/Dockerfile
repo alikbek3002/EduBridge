@@ -23,4 +23,4 @@ RUN set -e; \
         cd /app/backend && python manage.py collectstatic --noinput || true; \
     fi
 
-CMD ["sh", "-c", "if [ -f /app/manage.py ]; then exec gunicorn aieducation.wsgi:application --chdir /app --bind 0.0.0.0:${PORT:-8000} --workers 2 --timeout 60; else exec gunicorn aieducation.wsgi:application --chdir /app/backend --bind 0.0.0.0:${PORT:-8000} --workers 2 --timeout 60; fi"]
+CMD ["sh", "-c", "if [ -f /app/manage.py ]; then exec gunicorn aieducation.wsgi:application --chdir /app --bind 0.0.0.0:${PORT:-8000} --workers 2 --timeout 120 --limit-request-line 8190; else exec gunicorn aieducation.wsgi:application --chdir /app/backend --bind 0.0.0.0:${PORT:-8000} --workers 2 --timeout 120 --limit-request-line 8190; fi"]

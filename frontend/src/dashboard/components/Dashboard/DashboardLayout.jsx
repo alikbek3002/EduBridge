@@ -44,7 +44,7 @@ const DashboardLayout = () => {
         width: '100%',
         overflow: 'hidden',
         position: 'relative',
-        background: 'linear-gradient(180deg, var(--app-color-bg) 0%, var(--app-color-surface) 40%, var(--app-color-bg) 100%)',
+        background: '#ffffff',
         paddingBottom: 0,
       }}
     >

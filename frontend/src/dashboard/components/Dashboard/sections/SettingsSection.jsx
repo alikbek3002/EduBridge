@@ -320,7 +320,7 @@ const SettingsSection = () => {
       shadow="sm"
       radius="lg"
       p="xl"
-      style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: 'white' }}
+      style={{ background: '#ffffff', color: '#111827', border: '1px solid #e5e7eb' }}
     >
       <Group align="flex-start" gap="xl">
         <Stack align="center" gap="md">

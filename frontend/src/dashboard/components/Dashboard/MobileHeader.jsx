@@ -58,16 +58,7 @@ const MobileHeader = ({
             size="sm"
             color={theme.colors.gray[6]}
           />
-          <Text 
-            size="lg" 
-            weight={600}
-            style={{ 
-              background: 'linear-gradient(45deg, var(--mantine-color-blue-6), var(--mantine-color-purple-6))',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text'
-            }}
-          >
+          <Text size="lg" fw={600} c="dark.9">
             EduBridge
           </Text>
         </Group>

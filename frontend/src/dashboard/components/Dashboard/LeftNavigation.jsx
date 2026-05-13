@@ -184,18 +184,7 @@ const LeftNavigation = ({ activeSection, onSectionChange, user, isMobile = false
           backgroundColor: 'var(--app-color-surface)'
         }}>
           <Group justify="space-between" align="center">
-            <Text 
-              size="lg" 
-              weight={600}
-              style={{ 
-                background: 'linear-gradient(45deg, var(--mantine-color-blue-6), var(--mantine-color-purple-6))',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text'
-              }}
-            >
-              Навигация
-            </Text>
+            <Text size="lg" fw={600} c="dark.9">Навигация</Text>
             <ActionIcon 
               variant="subtle" 
               color="gray" 

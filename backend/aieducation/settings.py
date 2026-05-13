@@ -314,8 +314,9 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # Optionally serve MEDIA via Django in production (for small deployments)
 SERVE_MEDIA = os.getenv('SERVE_MEDIA', 'False').lower() == 'true'
 
-# File Upload Settings
-FILE_UPLOAD_MAX_MEMORY_SIZE = 10485760  # 10MB
+# File Upload Settings — accept up to 50MB documents (PDFs, scans, etc.)
+FILE_UPLOAD_MAX_MEMORY_SIZE = 52428800  # 50MB
+DATA_UPLOAD_MAX_MEMORY_SIZE = 52428800  # 50MB (default 2.5MB rejects bigger payloads as 413)
 FILE_UPLOAD_PERMISSIONS = 0o644
 FILE_UPLOAD_DIRECTORY_PERMISSIONS = 0o755
 
