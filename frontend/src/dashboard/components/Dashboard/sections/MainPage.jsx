@@ -17,13 +17,31 @@ import {
   Textarea,
   Skeleton,
   Alert,
+  Paper,
+  Progress,
+  ThemeIcon,
 } from '@mantine/core';
 import { useMantineTheme } from '@mantine/core';
 import { Calendar, DateInput } from '@mantine/dates';
-import { IconClock, IconTrash } from '@tabler/icons-react';
+import { IconClock, IconTrash, IconFlame, IconTarget, IconTrophy, IconLanguage } from '@tabler/icons-react';
 import PullToRefresh from '../../../../shared/components/Mobile/PullToRefresh.jsx';
- 
+
 import CircularProgress from '../../../../shared/components/Animations/CircularProgress';
+
+const VOCAB_ITEMS = [
+  { word: 'Immatricolazione', translation: 'Зачисление в университет', context: 'La immatricolazione è il primo passo.' },
+  { word: 'Tassa universitaria', translation: 'Университетский взнос', context: 'La tassa si paga ogni anno.' },
+  { word: 'Laurea triennale', translation: 'Степень бакалавра (3 года)', context: 'Ho conseguito la laurea triennale.' },
+  { word: 'Laurea magistrale', translation: 'Степень магистра', context: 'Studio per la laurea magistrale.' },
+  { word: 'Modulo di domanda', translation: 'Форма заявки', context: 'Compila il modulo di domanda online.' },
+  { word: 'Borsa di studio', translation: 'Стипендия', context: 'Ho vinto una borsa di studio.' },
+  { word: 'Dichiarazione di Valore', translation: 'Декларация о ценности диплома', context: 'La DOV è richiesta per l\'iscrizione.' },
+  { word: 'Piano di studi', translation: 'Учебный план', context: 'Il piano di studi è approvato.' },
+  { word: 'Libretto universitario', translation: 'Зачётная книжка', context: 'Il libretto registra gli esami.' },
+  { word: 'Crediti formativi', translation: 'Кредиты / Зачётные единицы', context: 'Ogni esame vale dei crediti formativi.' },
+  { word: 'Propedeutico', translation: 'Вводный / подготовительный курс', context: 'Il corso propedeutico è obbligatorio.' },
+  { word: 'Ateneo', translation: 'Университет', context: 'L\'ateneo è molto rinomato.' },
+];
 
 const MainPage = ({ isMobile = false, isTablet = false }) => {
   const theme = useMantineTheme();
@@ -33,7 +51,7 @@ const MainPage = ({ isMobile = false, isTablet = false }) => {
   const _mainPageRef = useRef(null);
   
   // Redux state
-  const { loading, error } = useSelector((state) => state.education);
+  const { loading, error, dashboardStats } = useSelector((state) => state.education);
   const [deadlines, _setDeadlines] = useState([]);
   const [_deadlinesLoading, _setDeadlinesLoading] = useState(false);
   const [_deadlinesError, _setDeadlinesError] = useState(null);
@@ -255,6 +273,81 @@ const MainPage = ({ isMobile = false, isTablet = false }) => {
           Добро пожаловать, {user?.first_name || 'Пользователь'}!
         </Text>
       </Group>
+
+      {/* Learning Overview */}
+      <Grid mb={getResponsiveValue('sm', 'md', 'md')} gutter="sm">
+        <Grid.Col span={{ base: 12, xs: 4 }}>
+          <Paper withBorder radius="md" p="md" style={{ background: isDark ? '#1e293b' : '#fff7ed' }}>
+            <Group gap="sm" align="center">
+              <ThemeIcon size={40} radius="md" color="orange" variant="light">
+                <IconFlame size={22} />
+              </ThemeIcon>
+              <Box>
+                <Text size="xl" fw={800} style={{ color: isDark ? '#fdba74' : '#ea580c' }}>
+                  {dashboardStats?.current_streak ?? 0}
+                </Text>
+                <Text size="xs" c="dimmed">дней подряд</Text>
+              </Box>
+            </Group>
+            <Text size="xs" c="dimmed" mt={6}>Учебная серия</Text>
+          </Paper>
+        </Grid.Col>
+        <Grid.Col span={{ base: 12, xs: 4 }}>
+          <Paper withBorder radius="md" p="md" style={{ background: isDark ? '#1e293b' : '#eff6ff' }}>
+            <Group gap="sm" align="center">
+              <ThemeIcon size={40} radius="md" color="blue" variant="light">
+                <IconTarget size={22} />
+              </ThemeIcon>
+              <Box style={{ flex: 1 }}>
+                <Text size="xl" fw={800} style={{ color: isDark ? '#93c5fd' : '#2563eb' }}>
+                  {dashboardStats?.weekly_progress ?? 0}
+                  <Text span size="sm" fw={400} c="dimmed"> / {dashboardStats?.weekly_goal ?? 20}</Text>
+                </Text>
+                <Text size="xs" c="dimmed">задач на неделе</Text>
+              </Box>
+            </Group>
+            <Progress
+              value={Math.round(((dashboardStats?.weekly_progress ?? 0) / (dashboardStats?.weekly_goal ?? 20)) * 100)}
+              color="blue" size="xs" mt={8} radius="xl"
+            />
+          </Paper>
+        </Grid.Col>
+        <Grid.Col span={{ base: 12, xs: 4 }}>
+          <Paper withBorder radius="md" p="md" style={{ background: isDark ? '#1e293b' : '#fefce8' }}>
+            <Group gap="sm" align="center">
+              <ThemeIcon size={40} radius="md" color="yellow" variant="light">
+                <IconTrophy size={22} />
+              </ThemeIcon>
+              <Box>
+                <Text size="xl" fw={800} style={{ color: isDark ? '#fde047' : '#ca8a04' }}>
+                  {dashboardStats?.achievements_unlocked ?? 0}
+                </Text>
+                <Text size="xs" c="dimmed">достижений</Text>
+              </Box>
+            </Group>
+            <Text size="xs" c="dimmed" mt={6}>Получено наград</Text>
+          </Paper>
+        </Grid.Col>
+      </Grid>
+
+      {/* Vocabulary of the Day */}
+      {(() => {
+        const vocab = VOCAB_ITEMS[new Date().getDate() % VOCAB_ITEMS.length];
+        return (
+          <Card withBorder radius="md" p="md" mb={getResponsiveValue('sm', 'md', 'md')}
+            style={{ background: isDark ? '#0f172a' : '#f0fdf4', borderColor: isDark ? 'rgba(255,255,255,0.08)' : '#86efac' }}>
+            <Group gap="sm" mb={8}>
+              <ThemeIcon size={32} radius="md" color="green" variant="light">
+                <IconLanguage size={18} />
+              </ThemeIcon>
+              <Text size="sm" fw={600} c="green">Слово дня</Text>
+            </Group>
+            <Text size="xl" fw={800} mb={4} style={{ color: isDark ? '#86efac' : '#15803d' }}>{vocab.word}</Text>
+            <Text size="md" fw={500} mb={2}>{vocab.translation}</Text>
+            <Text size="sm" c="dimmed" fs="italic">{vocab.context}</Text>
+          </Card>
+        );
+      })()}
 
       {/* Calendar Card */}
       <Card 

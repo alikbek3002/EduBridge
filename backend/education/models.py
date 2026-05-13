@@ -390,3 +390,56 @@ class KnowledgeChunk(models.Model):
 
     def __str__(self):
         return f"Chunk {self.chunk_index} of {self.source.title}"
+
+
+# --------------- IELTS Mock Tests ---------------
+
+class IELTSTest(models.Model):
+    SECTION_CHOICES = [
+        ('listening', 'Listening'),
+        ('reading', 'Reading'),
+        ('writing', 'Writing'),
+        ('speaking', 'Speaking'),
+    ]
+    title = models.CharField(max_length=200)
+    section = models.CharField(max_length=20, choices=SECTION_CHOICES, unique=True)
+    description = models.TextField(blank=True)
+    duration_minutes = models.IntegerField(default=30)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['section']
+
+    def __str__(self):
+        return f"{self.title} ({self.section})"
+
+
+class IELTSQuestion(models.Model):
+    test = models.ForeignKey(IELTSTest, on_delete=models.CASCADE, related_name='questions')
+    order = models.IntegerField(default=0)
+    text = models.TextField()
+    options = models.JSONField(default=list)  # [{"key": "A", "label": "..."}, ...]
+    correct_answer = models.CharField(max_length=10)  # "A"
+
+    class Meta:
+        ordering = ['order', 'id']
+
+    def __str__(self):
+        return f"Q{self.order} ({self.test.section})"
+
+
+class IELTSAttempt(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='ielts_attempts')
+    test = models.ForeignKey(IELTSTest, on_delete=models.CASCADE, related_name='attempts')
+    score = models.IntegerField(default=0)
+    total = models.IntegerField(default=0)
+    band_score = models.FloatField(default=0)
+    answers = models.JSONField(default=dict)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"Attempt {self.id} {self.user_id} {self.test.section} {self.band_score}"

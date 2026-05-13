@@ -244,6 +244,15 @@ textarea:focus-visible {
   --app-color-bg: #1a1b23;
   --app-color-surface: #25262b;
   --app-color-text: #e5e7eb;
+  color: #e5e7eb;
+  background-color: #1a1b23;
+}
+
+/* Dark mode: fix hardcoded light backgrounds in utility components */
+[data-mantine-color-scheme="dark"] .mantine-Paper-root[style*="background-color: var(--mantine-color-yellow-0)"],
+[data-mantine-color-scheme="dark"] .mantine-Paper-root[style*="background-color: var(--mantine-color-blue-0)"],
+[data-mantine-color-scheme="dark"] .mantine-Paper-root[style*="background-color: var(--mantine-color-gray-0)"] {
+  background-color: var(--mantine-color-dark-6) !important;
 }
 
 /* Responsive design */

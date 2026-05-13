@@ -182,6 +182,7 @@ const handleApiError = (error) => {
 };
 
 export const authAPI = {
+  register: (data) => api.post('/api/auth/register/', data),
   login: (credentials) => api.post('/api/auth/login/', credentials),
   logout: () => api.post('/api/auth/logout/'),
   refreshToken: () => api.post('/api/auth/token/refresh-cookie/'),
@@ -247,6 +248,10 @@ export const profileAPI = {
 
 export const paymentAPI = {
   create: (paymentData) => api.post('/api/payments/create-payment/', paymentData),
+  listPlans: () => api.get('/api/payments/plans/'),
+  currentSubscription: () => api.get('/api/payments/current-subscription/'),
+  listPayments: () => api.get('/api/payments/payments/'),
+  listInvoices: () => api.get('/api/payments/invoices/'),
 };
 
 export const adminAPI = {};
@@ -273,6 +278,11 @@ export const educationAPI = {
   listEvents: () => api.get('/api/education/events/'),
   createEvent: (data) => api.post('/api/education/events/', data),
   deleteEvent: (id) => api.delete(`/api/education/events/${id}/`),
+  // IELTS mock tests
+  listIELTSTests: () => api.get('/api/education/ielts/tests/'),
+  getIELTSTest: (id) => api.get(`/api/education/ielts/tests/${id}/`),
+  submitIELTSAttempt: (id, answers) => api.post(`/api/education/ielts/tests/${id}/submit/`, { answers }),
+  listIELTSAttempts: () => api.get('/api/education/ielts/attempts/'),
 };
 
 export const apiHelpers = {

@@ -6,6 +6,7 @@ Pillow
 django-filter
 django-extensions
 openai
+anthropic
 pandas
 numpy
 psycopg2-binary

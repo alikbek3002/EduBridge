@@ -11,4 +11,5 @@ urlpatterns = [
     path('invoices/<int:pk>/', views.InvoiceDetailView.as_view(), name='invoice-detail'),
     path('create-payment/', views.create_payment, name='create-payment'),
     path('current-subscription/', views.current_subscription, name='current-subscription'),
+    path('payments/<int:pk>/cancel/', views.cancel_payment, name='cancel-payment'),
 ]

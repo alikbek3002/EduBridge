@@ -16,6 +16,7 @@ const AIMentorSection = React.lazy(() => import('./sections/AIMentorSection.jsx'
 const SettingsSection = React.lazy(() => import('./sections/SettingsSection.jsx'));
 const HelpSection = React.lazy(() => import('./sections/HelpSection.jsx'));
 const NotificationsSection = React.lazy(() => import('./sections/NotificationsSection.jsx'));
+const PaymentsSection = React.lazy(() => import('./sections/PaymentsSection.jsx'));
 
 const CentralContent = ({ activeSection, overallProgress, currentProgress, isMobile = false, isTablet = false }) => {
   const getSectionComponent = () => {
@@ -44,7 +45,7 @@ const CentralContent = ({ activeSection, overallProgress, currentProgress, isMob
       case 'visa':
         return <VisaSection progress={progress} {...deviceProps} />;
       case 'payments':
-        return <div>Раздел платежей (в разработке)</div>;
+        return <PaymentsSection {...deviceProps} />;
       case 'aimentor':
         return <AIMentorSection {...deviceProps} />;
       case 'settings':

@@ -55,6 +55,12 @@ urlpatterns = [
     path('events/<int:pk>/', views.UserEventDetailView.as_view(), name='user-event-detail'),
     path('ai/chat/', ai_views.chat, name='ai-chat'),
 
+    # IELTS mock tests
+    path('ielts/tests/', views.IELTSTestListView.as_view(), name='ielts-test-list'),
+    path('ielts/tests/<int:pk>/', views.IELTSTestDetailView.as_view(), name='ielts-test-detail'),
+    path('ielts/tests/<int:pk>/submit/', views.submit_ielts_attempt, name='ielts-test-submit'),
+    path('ielts/attempts/', views.IELTSAttemptListView.as_view(), name='ielts-attempt-list'),
+
     # Router-based (Cases, Appointments)
     path('', include(router.urls)),
 ]

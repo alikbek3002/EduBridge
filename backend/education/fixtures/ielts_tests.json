@@ -1,0 +1,374 @@
+[
+  {
+    "model": "education.ieltstest",
+    "pk": 1,
+    "fields": {
+      "title": "IELTS Listening Practice",
+      "section": "listening",
+      "description": "Short listening comprehension test. Read the transcript and choose the best answer.",
+      "duration_minutes": 30,
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z"
+    }
+  },
+  {
+    "model": "education.ieltstest",
+    "pk": 2,
+    "fields": {
+      "title": "IELTS Reading Practice",
+      "section": "reading",
+      "description": "Read the passage and answer the questions below.",
+      "duration_minutes": 60,
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z"
+    }
+  },
+  {
+    "model": "education.ieltstest",
+    "pk": 3,
+    "fields": {
+      "title": "IELTS Writing Practice",
+      "section": "writing",
+      "description": "Multiple-choice questions about academic writing structure and grammar.",
+      "duration_minutes": 60,
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z"
+    }
+  },
+  {
+    "model": "education.ieltstest",
+    "pk": 4,
+    "fields": {
+      "title": "IELTS Speaking Practice",
+      "section": "speaking",
+      "description": "Choose the most natural and grammatically correct response.",
+      "duration_minutes": 15,
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z"
+    }
+  },
+
+  {
+    "model": "education.ieltsquestion",
+    "pk": 101,
+    "fields": {
+      "test": 1,
+      "order": 1,
+      "text": "Transcript: 'The lecture starts at half past nine in lecture hall B.' — When does the lecture start?",
+      "options": [
+        {"key": "A", "label": "9:00"},
+        {"key": "B", "label": "9:30"},
+        {"key": "C", "label": "10:00"},
+        {"key": "D", "label": "10:30"}
+      ],
+      "correct_answer": "B"
+    }
+  },
+  {
+    "model": "education.ieltsquestion",
+    "pk": 102,
+    "fields": {
+      "test": 1,
+      "order": 2,
+      "text": "Transcript: 'You can borrow up to six books, but reference materials must stay in the library.' — How many books can a student take home?",
+      "options": [
+        {"key": "A", "label": "Two"},
+        {"key": "B", "label": "Four"},
+        {"key": "C", "label": "Six"},
+        {"key": "D", "label": "Reference books only"}
+      ],
+      "correct_answer": "C"
+    }
+  },
+  {
+    "model": "education.ieltsquestion",
+    "pk": 103,
+    "fields": {
+      "test": 1,
+      "order": 3,
+      "text": "Transcript: 'The campus tour leaves from the main entrance every Monday at 2 p.m.' — Where does the campus tour begin?",
+      "options": [
+        {"key": "A", "label": "The library"},
+        {"key": "B", "label": "The main entrance"},
+        {"key": "C", "label": "The cafeteria"},
+        {"key": "D", "label": "The student union"}
+      ],
+      "correct_answer": "B"
+    }
+  },
+  {
+    "model": "education.ieltsquestion",
+    "pk": 104,
+    "fields": {
+      "test": 1,
+      "order": 4,
+      "text": "Transcript: 'Please bring a passport-sized photograph and proof of address when you register.' — Which two items are required at registration?",
+      "options": [
+        {"key": "A", "label": "Passport photo and proof of address"},
+        {"key": "B", "label": "Passport and bank statement"},
+        {"key": "C", "label": "ID card and rental contract"},
+        {"key": "D", "label": "Birth certificate and photo"}
+      ],
+      "correct_answer": "A"
+    }
+  },
+  {
+    "model": "education.ieltsquestion",
+    "pk": 105,
+    "fields": {
+      "test": 1,
+      "order": 5,
+      "text": "Transcript: 'Coffee is available all day, but the kitchen closes at seven.' — What closes at seven?",
+      "options": [
+        {"key": "A", "label": "The cafeteria"},
+        {"key": "B", "label": "The kitchen"},
+        {"key": "C", "label": "The coffee bar"},
+        {"key": "D", "label": "The whole building"}
+      ],
+      "correct_answer": "B"
+    }
+  },
+
+  {
+    "model": "education.ieltsquestion",
+    "pk": 201,
+    "fields": {
+      "test": 2,
+      "order": 1,
+      "text": "Passage: 'Bologna is widely regarded as the oldest university in continuous operation in the Western world, founded in 1088.' — According to the passage, what is Bologna known for?",
+      "options": [
+        {"key": "A", "label": "Being the largest university in Europe"},
+        {"key": "B", "label": "Being the oldest university in continuous operation"},
+        {"key": "C", "label": "Hosting the most international students"},
+        {"key": "D", "label": "Specialising in technology"}
+      ],
+      "correct_answer": "B"
+    }
+  },
+  {
+    "model": "education.ieltsquestion",
+    "pk": 202,
+    "fields": {
+      "test": 2,
+      "order": 2,
+      "text": "Passage: 'Most Italian master's programmes require an IELTS score of 6.0 or higher, with some competitive courses asking for 6.5.' — What is the typical minimum IELTS requirement?",
+      "options": [
+        {"key": "A", "label": "5.5"},
+        {"key": "B", "label": "6.0"},
+        {"key": "C", "label": "6.5"},
+        {"key": "D", "label": "7.0"}
+      ],
+      "correct_answer": "B"
+    }
+  },
+  {
+    "model": "education.ieltsquestion",
+    "pk": 203,
+    "fields": {
+      "test": 2,
+      "order": 3,
+      "text": "Passage: 'The Universitaly portal is the official platform used by non-EU students to pre-enrol in Italian universities.' — Who uses the Universitaly portal for pre-enrolment?",
+      "options": [
+        {"key": "A", "label": "EU citizens only"},
+        {"key": "B", "label": "Italian residents only"},
+        {"key": "C", "label": "Non-EU students"},
+        {"key": "D", "label": "Exchange professors"}
+      ],
+      "correct_answer": "C"
+    }
+  },
+  {
+    "model": "education.ieltsquestion",
+    "pk": 204,
+    "fields": {
+      "test": 2,
+      "order": 4,
+      "text": "Passage: 'A Declaration of Value (DOV) is issued by the Italian consulate in the country where the diploma was obtained.' — Where is a Declaration of Value issued?",
+      "options": [
+        {"key": "A", "label": "At any Italian embassy"},
+        {"key": "B", "label": "At the consulate where the diploma was obtained"},
+        {"key": "C", "label": "Online via Universitaly"},
+        {"key": "D", "label": "By the chosen university"}
+      ],
+      "correct_answer": "B"
+    }
+  },
+  {
+    "model": "education.ieltsquestion",
+    "pk": 205,
+    "fields": {
+      "test": 2,
+      "order": 5,
+      "text": "Passage: 'After receiving an acceptance letter, students must apply for a type-D study visa at least sixty days before departure.' — How early should students apply for the visa?",
+      "options": [
+        {"key": "A", "label": "Two weeks"},
+        {"key": "B", "label": "Thirty days"},
+        {"key": "C", "label": "Sixty days"},
+        {"key": "D", "label": "Six months"}
+      ],
+      "correct_answer": "C"
+    }
+  },
+
+  {
+    "model": "education.ieltsquestion",
+    "pk": 301,
+    "fields": {
+      "test": 3,
+      "order": 1,
+      "text": "Choose the most formal opening for an academic essay introduction.",
+      "options": [
+        {"key": "A", "label": "I'm going to talk about..."},
+        {"key": "B", "label": "This essay will examine..."},
+        {"key": "C", "label": "Let me tell you about..."},
+        {"key": "D", "label": "So basically..."}
+      ],
+      "correct_answer": "B"
+    }
+  },
+  {
+    "model": "education.ieltsquestion",
+    "pk": 302,
+    "fields": {
+      "test": 3,
+      "order": 2,
+      "text": "Which sentence uses the correct linking word for contrast?",
+      "options": [
+        {"key": "A", "label": "It rained heavily, therefore the match was cancelled."},
+        {"key": "B", "label": "It rained heavily; however, the match continued as planned."},
+        {"key": "C", "label": "It rained heavily, because the match was cancelled."},
+        {"key": "D", "label": "It rained heavily, so the match was cancelled."}
+      ],
+      "correct_answer": "B"
+    }
+  },
+  {
+    "model": "education.ieltsquestion",
+    "pk": 303,
+    "fields": {
+      "test": 3,
+      "order": 3,
+      "text": "Pick the sentence with correct subject–verb agreement.",
+      "options": [
+        {"key": "A", "label": "The list of items are on the desk."},
+        {"key": "B", "label": "The list of items is on the desk."},
+        {"key": "C", "label": "The list of items were on the desk."},
+        {"key": "D", "label": "The list of items be on the desk."}
+      ],
+      "correct_answer": "B"
+    }
+  },
+  {
+    "model": "education.ieltsquestion",
+    "pk": 304,
+    "fields": {
+      "test": 3,
+      "order": 4,
+      "text": "Which option best paraphrases: 'The number of international students has risen significantly over the past decade.'",
+      "options": [
+        {"key": "A", "label": "More foreign students have arrived in the last ten years."},
+        {"key": "B", "label": "Over the previous ten years, the international student population has grown considerably."},
+        {"key": "C", "label": "International students don't come anymore."},
+        {"key": "D", "label": "Some students went abroad recently."}
+      ],
+      "correct_answer": "B"
+    }
+  },
+  {
+    "model": "education.ieltsquestion",
+    "pk": 305,
+    "fields": {
+      "test": 3,
+      "order": 5,
+      "text": "Which sentence is the strongest thesis statement for an opinion essay?",
+      "options": [
+        {"key": "A", "label": "Online learning is something many people use."},
+        {"key": "B", "label": "Although online learning offers flexibility, it cannot fully replace in-person instruction."},
+        {"key": "C", "label": "I will write about online learning."},
+        {"key": "D", "label": "Online learning exists today."}
+      ],
+      "correct_answer": "B"
+    }
+  },
+
+  {
+    "model": "education.ieltsquestion",
+    "pk": 401,
+    "fields": {
+      "test": 4,
+      "order": 1,
+      "text": "Examiner: 'Can you describe the place where you grew up?' Choose the most natural opening.",
+      "options": [
+        {"key": "A", "label": "Yes."},
+        {"key": "B", "label": "Sure. I grew up in a small coastal town in the south of my country."},
+        {"key": "C", "label": "I don't know really."},
+        {"key": "D", "label": "Place where grow up me is small."}
+      ],
+      "correct_answer": "B"
+    }
+  },
+  {
+    "model": "education.ieltsquestion",
+    "pk": 402,
+    "fields": {
+      "test": 4,
+      "order": 2,
+      "text": "Examiner: 'Do you prefer to study alone or in a group? Why?' Choose the best answer.",
+      "options": [
+        {"key": "A", "label": "Alone, because group annoying."},
+        {"key": "B", "label": "I prefer studying alone since I can concentrate better, although group sessions are useful before exams."},
+        {"key": "C", "label": "Group, group, group."},
+        {"key": "D", "label": "Maybe."}
+      ],
+      "correct_answer": "B"
+    }
+  },
+  {
+    "model": "education.ieltsquestion",
+    "pk": 403,
+    "fields": {
+      "test": 4,
+      "order": 3,
+      "text": "Which phrase is most appropriate to politely disagree?",
+      "options": [
+        {"key": "A", "label": "You're wrong."},
+        {"key": "B", "label": "I see your point, but I'd argue that..."},
+        {"key": "C", "label": "No way, ever."},
+        {"key": "D", "label": "Whatever you say."}
+      ],
+      "correct_answer": "B"
+    }
+  },
+  {
+    "model": "education.ieltsquestion",
+    "pk": 404,
+    "fields": {
+      "test": 4,
+      "order": 4,
+      "text": "Choose the sentence that best uses a linking phrase to extend an answer.",
+      "options": [
+        {"key": "A", "label": "I like reading. End."},
+        {"key": "B", "label": "I like reading. In addition, it helps me unwind after a long day."},
+        {"key": "C", "label": "I like reading because reading."},
+        {"key": "D", "label": "Reading is reading."}
+      ],
+      "correct_answer": "B"
+    }
+  },
+  {
+    "model": "education.ieltsquestion",
+    "pk": 405,
+    "fields": {
+      "test": 4,
+      "order": 5,
+      "text": "Examiner: 'How has technology changed the way young people communicate?' Pick the best response.",
+      "options": [
+        {"key": "A", "label": "Technology no problem."},
+        {"key": "B", "label": "Young people now rely heavily on instant messaging and social media, which makes communication faster but often more superficial."},
+        {"key": "C", "label": "I think yes."},
+        {"key": "D", "label": "Phone phone phone."}
+      ],
+      "correct_answer": "B"
+    }
+  }
+]

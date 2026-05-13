@@ -50,6 +50,18 @@ export const fetchAchievements = createAsyncThunk(
   }
 );
 
+export const fetchUserAchievements = createAsyncThunk(
+  'education/fetchUserAchievements',
+  async (_, { rejectWithValue }) => {
+    try {
+      const data = await educationApi.getUserAchievements();
+      return data.results || data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 export const fetchAIRecommendations = createAsyncThunk(
   'education/fetchAIRecommendations',
   async (_, { rejectWithValue }) => {
@@ -67,12 +79,14 @@ const initialState = {
   universities: [],
   courses: [],
   achievements: [],
+  userAchievements: [],
   aiRecommendations: [],
   dashboardStats: null,
   loading: {
     universities: false,
     courses: false,
     achievements: false,
+    userAchievements: false,
     aiRecommendations: false,
     dashboardStats: false,
   },
@@ -137,7 +151,7 @@ const educationSlice = createSlice({
         state.error = action.payload;
       });
 
-    // Achievements
+    // Achievements (all available achievements)
     builder
       .addCase(fetchAchievements.pending, (state) => {
         state.loading.achievements = true;
@@ -145,35 +159,24 @@ const educationSlice = createSlice({
       })
       .addCase(fetchAchievements.fulfilled, (state, action) => {
         state.loading.achievements = false;
-        // If we got data from the API, use it; otherwise, use mock data
-        if (action.payload && action.payload.length > 0) {
-          state.achievements = action.payload;
-        } else {
-          // Mock data for achievements if API returns empty
-          state.achievements = [
-            {
-              id: 1,
-              name: 'Первые шаги',
-              description: 'Пройдите первый урок в системе',
-              points: 50
-            },
-            {
-              id: 2,
-              name: 'Неделя знаний',
-              description: 'Занимайтесь 7 дней подряд',
-              points: 100
-            },
-            {
-              id: 3,
-              name: 'Мастер теории',
-              description: 'Пройдите все теоретические материалы курса',
-              points: 150
-            }
-          ];
-        }
+        state.achievements = action.payload || [];
       })
       .addCase(fetchAchievements.rejected, (state, action) => {
         state.loading.achievements = false;
+        state.error = action.payload;
+      });
+
+    // User Achievements (earned by the current user)
+    builder
+      .addCase(fetchUserAchievements.pending, (state) => {
+        state.loading.userAchievements = true;
+      })
+      .addCase(fetchUserAchievements.fulfilled, (state, action) => {
+        state.loading.userAchievements = false;
+        state.userAchievements = action.payload || [];
+      })
+      .addCase(fetchUserAchievements.rejected, (state, action) => {
+        state.loading.userAchievements = false;
         state.error = action.payload;
       });
 

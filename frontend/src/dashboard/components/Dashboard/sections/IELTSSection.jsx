@@ -1,15 +1,14 @@
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useDashboardStore } from '../../../../store/dashboardStore';
-import { 
-  Box, 
-  Stack, 
-  Text, 
-  Paper, 
-  Group, 
-  Card, 
-  Progress, 
+import {
+  Box,
+  Stack,
+  Text,
+  Paper,
+  Group,
+  Card,
+  Progress,
   Button,
   Grid,
   Badge,
@@ -18,22 +17,31 @@ import {
   ActionIcon,
   Modal,
   TextInput,
-  NumberInput
+  NumberInput,
+  ThemeIcon,
+  SimpleGrid,
+  Tooltip,
 } from '@mantine/core';
-import { DateInput } from '@mantine/dates';
-import { 
-  IconPlayerPlay,   
-  IconEye, 
-  IconBook, 
-  IconTarget, 
+import {
+  IconHeadphones,
+  IconBook,
+  IconPencil,
+  IconMicrophone2,
+  IconBulb,
+  IconPlayerPlay,
+  IconEye,
+  IconTarget,
   IconClock,
   IconTrophy,
   IconArrowRight,
   IconCheck,
-  IconX
+  IconX,
+  IconLock,
 } from '@tabler/icons-react';
+import { DateInput } from '@mantine/dates';
 import { updateProfileComplete, fetchProfile } from '../../../../store/authSlice';
 import { educationAPI } from '../../../../shared/services/api';
+import IELTSTestRunner from '../components/IELTSTestRunner';
 
 const IELTSSection = ({ progress }) => {
   const dispatch = useDispatch();
@@ -102,38 +110,6 @@ const IELTSSection = ({ progress }) => {
     border: `1px solid ${isDark ? 'color-mix(in srgb, var(--mantine-color-violet-6, #7c3aed), transparent 60%)' : 'var(--mantine-color-violet-2, #e9d8fd)'}`
   };
 
-  // Генерируем тесты на основе данных пользователя
-  const userTests = user?.profile ? [
-    {
-      id: 1,
-      title: 'IELTS Academic Test 1',
-      duration: '2 часа 45 минут',
-      difficulty: 'Средний',
-      score: user.profile.ielts_current_score || null,
-      status: user.profile.ielts_current_score ? 'completed' : 'available'
-    },
-    {
-      id: 2,
-      title: 'IELTS Academic Test 2',
-      duration: '2 часа 45 минут',
-      difficulty: 'Сложный',
-      score: null,
-      status: 'locked'
-    },
-    {
-      id: 3,
-      title: 'IELTS Academic Test 3',
-      duration: '2 часа 45 минут',
-      difficulty: 'Сложный',
-      score: null,
-      status: 'locked'
-    }
-  ] : [];
-
-  const completedTests = userTests.filter(test => test.status === 'completed').length;
-  const totalTests = userTests.length;
-  const testProgress = Math.round((completedTests / totalTests) * 100);
-
   // Дата экзамена из БД
   const examDateStr = user?.profile?.ielts_exam_date || null;
   const examDate = examDateStr ? new Date(examDateStr) : null;
@@ -144,6 +120,54 @@ const IELTSSection = ({ progress }) => {
     : null;
   const [examModal, setExamModal] = useState(false);
   const [examInput, setExamInput] = useState(examDate || null);
+
+  // IELTS mock tests from backend
+  const [tests, setTests] = useState([]);
+  const [attempts, setAttempts] = useState([]);
+  const [testsLoading, setTestsLoading] = useState(false);
+  const [runnerTestId, setRunnerTestId] = useState(null);
+
+  const loadTestsAndAttempts = async () => {
+    try {
+      setTestsLoading(true);
+      const [testsRes, attemptsRes] = await Promise.all([
+        educationAPI.listIELTSTests().catch(() => ({ data: [] })),
+        educationAPI.listIELTSAttempts().catch(() => ({ data: [] })),
+      ]);
+      const testsData = Array.isArray(testsRes?.data) ? testsRes.data : testsRes?.data?.results || [];
+      const attemptsData = Array.isArray(attemptsRes?.data) ? attemptsRes.data : attemptsRes?.data?.results || [];
+      setTests(testsData);
+      setAttempts(attemptsData);
+    } finally {
+      setTestsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (!user) return;
+    loadTestsAndAttempts();
+  }, [user]);
+
+  // Best attempt by section (highest band score)
+  const bestAttemptByTest = useMemo(() => {
+    const map = {};
+    attempts.forEach((a) => {
+      const prev = map[a.test];
+      if (!prev || a.band_score > prev.band_score) map[a.test] = a;
+    });
+    return map;
+  }, [attempts]);
+
+  const sectionMeta = {
+    listening: { label: 'Listening', icon: IconHeadphones, color: 'blue' },
+    reading: { label: 'Reading', icon: IconBook, color: 'green' },
+    writing: { label: 'Writing', icon: IconPencil, color: 'orange' },
+    speaking: { label: 'Speaking', icon: IconMicrophone2, color: 'violet' },
+  };
+
+  const completedTests = Object.keys(bestAttemptByTest).length;
+  const totalTests = tests.length;
+  const testProgress = totalTests > 0 ? Math.round((completedTests / totalTests) * 100) : 0;
 
   // Подтягиваем документы пользователя и ищем языковой сертификат
   useEffect(() => {
@@ -363,70 +387,78 @@ const IELTSSection = ({ progress }) => {
             <Text size="lg" fw={600}>
               Доступные тесты
             </Text>
-            <Stack gap="sm">
-              {userTests.map((test) => (
-                <Paper
-                  key={test.id}
-                  p="md"
-                  withBorder
-                  radius="md"
-                  shadow="xs"
-                  style={{
-                    backgroundColor: test.status === 'completed' 
-                      ? (isDark ? 'color-mix(in srgb, var(--mantine-color-green-6), transparent 85%)' : 'var(--mantine-color-green-0)') 
-                      : test.status === 'locked'
-                      ? (isDark ? 'var(--mantine-color-dark-6)' : 'var(--mantine-color-gray-1)')
-                      : (isDark ? 'var(--mantine-color-dark-5)' : 'var(--mantine-color-gray-0)')
-                  }}
-                >
-                  <Group justify="space-between">
-                    <Box style={{ flex: 1 }}>
-                      <Text fw={600} mb="xs">
-                        {test.title}
-                      </Text>
-                      <Group gap="md" mb="sm">
-                        <Badge color="blue" variant="light" radius="sm">
-                          {test.duration}
-                        </Badge>
-                        <Badge 
-                          color={test.difficulty === 'Сложный' ? 'red' : 'yellow'} 
-                          variant="light"
-                          radius="sm"
-                        >
-                          {test.difficulty}
-                        </Badge>
-                        {test.score && (
-                          <Badge color="green" variant="light" radius="sm">
-                            {test.score} баллов
-                          </Badge>
-                        )}
-                      </Group>
-                    </Box>
-                    <Group gap="sm">
-                      {test.status === 'completed' ? (
-                        <Badge color="green" variant="light" radius="sm">
-                          Завершено
-                        </Badge>
-                      ) : test.status === 'locked' ? (
-                        <Badge color="gray" variant="light" radius="sm">
-                          Заблокировано
-                        </Badge>
-                      ) : (
+            {testsLoading && tests.length === 0 ? (
+              <Text size="sm" c="dimmed">Загружаем тесты…</Text>
+            ) : tests.length === 0 ? (
+              <Text size="sm" c="dimmed">
+                Тесты пока недоступны. Загрузите фикстуры на бэкенде:
+                <br />
+                <code>python manage.py loaddata ielts_tests</code>
+              </Text>
+            ) : (
+              <Stack gap="sm">
+                {tests.map((test) => {
+                  const meta = sectionMeta[test.section] || { label: test.section, icon: IconBook, color: 'gray' };
+                  const SectionIcon = meta.icon;
+                  const best = bestAttemptByTest[test.id];
+                  const completed = Boolean(best);
+                  return (
+                    <Paper
+                      key={test.id}
+                      p="md"
+                      withBorder
+                      radius="md"
+                      shadow="xs"
+                      style={{
+                        backgroundColor: completed
+                          ? (isDark ? 'color-mix(in srgb, var(--mantine-color-green-6), transparent 85%)' : 'var(--mantine-color-green-0)')
+                          : (isDark ? 'var(--mantine-color-dark-5)' : 'var(--mantine-color-gray-0)'),
+                      }}
+                    >
+                      <Group justify="space-between" wrap="nowrap">
+                        <Group gap="sm" wrap="nowrap" style={{ flex: 1 }}>
+                          <ThemeIcon size={40} radius="md" color={meta.color} variant="light">
+                            <SectionIcon size={22} />
+                          </ThemeIcon>
+                          <Box style={{ flex: 1 }}>
+                            <Text fw={600} mb={4}>{test.title}</Text>
+                            <Group gap="xs">
+                              <Badge color={meta.color} variant="light" radius="sm">{meta.label}</Badge>
+                              <Badge color="blue" variant="light" radius="sm">{test.duration_minutes} мин</Badge>
+                              <Badge color="gray" variant="light" radius="sm">{test.questions_count} вопросов</Badge>
+                              {completed && (
+                                <Badge color="green" variant="filled" radius="sm">
+                                  Band {best.band_score.toFixed(1)} ({best.score}/{best.total})
+                                </Badge>
+                              )}
+                            </Group>
+                          </Box>
+                        </Group>
                         <Button
                           size="sm"
                           leftSection={<IconPlayerPlay size={16} />}
                           radius="md"
+                          onClick={() => setRunnerTestId(test.id)}
                         >
-                          Начать
+                          {completed ? 'Пройти ещё раз' : 'Начать'}
                         </Button>
-                      )}
-                    </Group>
-                  </Group>
-                </Paper>
-              ))}
-            </Stack>
+                      </Group>
+                    </Paper>
+                  );
+                })}
+              </Stack>
+            )}
           </Stack>
         </Card>
+
+        <IELTSTestRunner
+          testId={runnerTestId}
+          opened={Boolean(runnerTestId)}
+          onClose={() => setRunnerTestId(null)}
+          onCompleted={() => {
+            loadTestsAndAttempts();
+          }}
+        />
 
         {/* Модальное окно изменения уровня */}
         <Modal
@@ -481,6 +513,79 @@ const IELTSSection = ({ progress }) => {
             </Group>
           </Stack>
         </Modal>
+
+        {/* Study Modules — coming soon */}
+        {(() => {
+          const modules = [
+            { id: 'listening', title: 'Listening', icon: IconHeadphones, color: 'blue', lessons: 12, description: 'Академические и General Training задания на аудирование' },
+            { id: 'reading', title: 'Reading', icon: IconBook, color: 'green', lessons: 15, description: 'True/False, matching headings, gap filling' },
+            { id: 'writing', title: 'Writing', icon: IconPencil, color: 'orange', lessons: 10, description: 'Task 1 (графики/диаграммы) и Task 2 (эссе)' },
+            { id: 'speaking', title: 'Speaking', icon: IconMicrophone2, color: 'violet', lessons: 8, description: 'Parts 1, 2 и 3: интервью и монолог' },
+          ];
+          return (
+            <Box>
+              <Group justify="space-between" mb="sm">
+                <Text size="lg" fw={700}>Учебные модули</Text>
+                <Badge color="gray" variant="light" radius="sm">Скоро</Badge>
+              </Group>
+              <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="sm">
+                {modules.map((mod) => {
+                  const Icon = mod.icon;
+                  return (
+                    <Paper key={mod.id} withBorder radius="md" p="md"
+                      style={{ background: isDark ? 'var(--mantine-color-dark-6)' : '#fff', opacity: 0.75 }}>
+                      <Group gap="sm" mb={8}>
+                        <ThemeIcon size={36} radius="md" color={mod.color} variant="light">
+                          <Icon size={20} />
+                        </ThemeIcon>
+                        <Box style={{ flex: 1 }}>
+                          <Text fw={600} size="sm">{mod.title}</Text>
+                          <Text size="xs" c="dimmed">{mod.lessons} уроков</Text>
+                        </Box>
+                        <Badge color="gray" size="sm" variant="light" leftSection={<IconLock size={10} />}>Скоро</Badge>
+                      </Group>
+                      <Text size="xs" c="dimmed" mb={10}>{mod.description}</Text>
+                      <Tooltip label="Этот модуль скоро будет доступен. Используйте практические тесты выше.">
+                        <Button size="xs" variant="light" color="gray" fullWidth radius="md" disabled>
+                          Скоро будет доступно
+                        </Button>
+                      </Tooltip>
+                    </Paper>
+                  );
+                })}
+              </SimpleGrid>
+            </Box>
+          );
+        })()}
+
+        {/* Study Tips */}
+        {(() => {
+          const TIPS = [
+            'Слушайте подкасты на английском 20 минут каждый день — это улучшает Listening.',
+            'Практикуйте пересказ академических текстов в 2-3 предложениях для Writing Task 1.',
+            'Запишите себя на диктофон и прослушайте — это ключ к прогрессу в Speaking.',
+            'Читайте статьи из BBC, The Guardian или Nature для подготовки к Reading.',
+            'Учите коннекторы: furthermore, nevertheless, in contrast — они нужны для Writing Task 2.',
+            'В Speaking Part 2 используйте «время на подготовку» — набросайте 3-4 ключевых слова.',
+            'Для Listening тренируйте предсказание ответа до прослушивания по контексту вопроса.',
+            'Разбирайте свои ошибки в mock-тестах — это эффективнее, чем просто делать новые тесты.',
+            'Изучите 200 наиболее частых слов академического словаря Oxford AWL.',
+            'Делайте хотя бы один полный mock-тест в условиях реального экзамена каждую неделю.',
+          ];
+          const tip = TIPS[new Date().getDate() % TIPS.length];
+          return (
+            <Paper withBorder radius="md" p="md"
+              style={{ background: isDark ? 'color-mix(in srgb, var(--mantine-color-yellow-6), transparent 85%)' : 'var(--mantine-color-yellow-0)', borderColor: isDark ? 'transparent' : 'var(--mantine-color-yellow-2)' }}>
+              <Group gap="sm" mb={6}>
+                <ThemeIcon size={28} radius="md" color="yellow" variant="light">
+                  <IconBulb size={16} />
+                </ThemeIcon>
+                <Text size="sm" fw={600} c="yellow.7">Совет дня</Text>
+              </Group>
+              <Text size="sm">{tip}</Text>
+            </Paper>
+          );
+        })()}
 
         {/* Модальное окно добавления сертификата */}
         <Modal

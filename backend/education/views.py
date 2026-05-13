@@ -4,21 +4,27 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from django.db.models import Q, Count, Sum, F
 from django.utils import timezone
-from datetime import timedelta
+from datetime import timedelta, date as _date
 from django.db.models.functions import Coalesce
+
+from accounts.models import UserDevice
 
 from .models import (
     University, Major, Course, Enrollment, Application, Achievement,
     UserAchievement, AIRecommendation, StudyPlan, StudyPlanItem, Document,
-    StudentProgress, UserEvent
+    StudentProgress, UserEvent,
+    IELTSTest, IELTSQuestion, IELTSAttempt
 )
+
+logger = logging.getLogger(__name__)
 from .utils_storage import upload_document_to_supabase, get_signed_url
 from .serializers import (
     UniversitySerializer, MajorSerializer, CourseSerializer, EnrollmentSerializer,
     ApplicationSerializer, ApplicationCreateSerializer, AchievementSerializer,
     UserAchievementSerializer, AIRecommendationSerializer, StudyPlanSerializer,
     StudyPlanItemSerializer, DocumentSerializer, DashboardStatsSerializer,
-    UserEventSerializer
+    UserEventSerializer,
+    IELTSTestListSerializer, IELTSTestDetailSerializer, IELTSAttemptSerializer
 )
 
 
@@ -220,13 +226,34 @@ def dashboard_stats(request):
     # Achievements
     achievements_unlocked = UserAchievement.objects.filter(user=user).count()
     
-    # Current streak
-    current_streak = 7  # Mock value
-    
-    # Study time statistics (mock values for now)
-    total_study_time = 45
+    # Current streak: count consecutive calendar days with UserDevice records
+    today = timezone.now().date()
+    active_dates = set(
+        UserDevice.objects.filter(user=user)
+        .values_list('created_at__date', flat=True)
+        .distinct()
+    )
+    current_streak = 0
+    check_date = today
+    while check_date in active_dates:
+        current_streak += 1
+        check_date -= timedelta(days=1)
+
+    # Study time: sum enrollment progress scaled to 0-300 min per course
+    enrollments_qs = Enrollment.objects.filter(user=user)
+    total_study_time = sum(
+        int((e.progress_percentage / 100) * 300)
+        for e in enrollments_qs
+    )
+
+    # Weekly progress: study plan items completed this week
+    week_start = today - timedelta(days=today.weekday())
+    weekly_progress = StudyPlanItem.objects.filter(
+        study_plan__user=user,
+        is_completed=True,
+        completed_at__date__gte=week_start,
+    ).count()
     weekly_goal = 20
-    weekly_progress = 12
     
     # Get recommended courses
     recommended_courses = Course.objects.filter(is_active=True)[:3]
@@ -361,8 +388,6 @@ from .models import Case, Appointment
 from .serializers import CaseSerializer, AppointmentSerializer
 from .permissions import IsOwnerStudent, IsAssignedConsultant
 
-logger = logging.getLogger(__name__)
-
 
 class CaseViewSet(viewsets.ModelViewSet):
     """CRUD for consulting cases. Students see their own; consultants see assigned."""
@@ -484,7 +509,89 @@ class DocumentSignedUrlView(generics.GenericAPIView):
             request_context = self.request
             url = request_context.build_absolute_uri(document.file.url)
             return Response({'signed_url': url})
-            
+
         return Response({'error': 'Document file not found'}, status=status.HTTP_404_NOT_FOUND)
+
+
+# --------------- IELTS Mock Tests ---------------
+
+class IELTSTestListView(generics.ListAPIView):
+    """List of IELTS mock tests (one per section)."""
+    queryset = IELTSTest.objects.filter(is_active=True).order_by('section')
+    serializer_class = IELTSTestListSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    pagination_class = None
+
+
+class IELTSTestDetailView(generics.RetrieveAPIView):
+    """Single test with questions (without correct answers)."""
+    queryset = IELTSTest.objects.filter(is_active=True).prefetch_related('questions')
+    serializer_class = IELTSTestDetailSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class IELTSAttemptListView(generics.ListAPIView):
+    """List of attempts for the current user (used to render section status)."""
+    serializer_class = IELTSAttemptSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    pagination_class = None
+
+    def get_queryset(self):
+        return IELTSAttempt.objects.filter(user=self.request.user).order_by('-created_at')
+
+
+@api_view(['POST'])
+@permission_classes([permissions.IsAuthenticated])
+def submit_ielts_attempt(request, pk):
+    """
+    Submit answers for an IELTS test.
+    Body: { "answers": { "<question_id>": "A", ... } }
+    Returns: { score, total, band_score, correct: { "<id>": "A" }, attempt_id }
+    """
+    try:
+        test = IELTSTest.objects.prefetch_related('questions').get(pk=pk, is_active=True)
+    except IELTSTest.DoesNotExist:
+        return Response({'error': 'Test not found'}, status=status.HTTP_404_NOT_FOUND)
+
+    answers_raw = (request.data or {}).get('answers') or {}
+    if not isinstance(answers_raw, dict):
+        return Response({'error': 'answers must be an object'}, status=status.HTTP_400_BAD_REQUEST)
+
+    # Normalize: keys may arrive as strings; values to upper-case
+    user_answers = {str(k): str(v).strip().upper() for k, v in answers_raw.items() if v is not None}
+
+    questions = list(test.questions.all())
+    total = len(questions)
+    score = 0
+    correct_map = {}
+    for q in questions:
+        correct = (q.correct_answer or '').strip().upper()
+        correct_map[str(q.id)] = correct
+        if user_answers.get(str(q.id)) == correct:
+            score += 1
+
+    if total > 0:
+        # IELTS-style band: 0..9, rounded to nearest 0.5
+        ratio = score / total
+        band_score = round(ratio * 9 * 2) / 2
+    else:
+        band_score = 0.0
+
+    attempt = IELTSAttempt.objects.create(
+        user=request.user,
+        test=test,
+        score=score,
+        total=total,
+        band_score=band_score,
+        answers=user_answers,
+    )
+
+    return Response({
+        'attempt_id': attempt.id,
+        'score': score,
+        'total': total,
+        'band_score': band_score,
+        'correct': correct_map,
+    }, status=status.HTTP_201_CREATED)
 
 

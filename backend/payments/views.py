@@ -90,7 +90,7 @@ def create_payment(request):
         end_date=end_date
     )
     
-    # Создаем платеж
+    # Создаем платеж (начинаем в pending, завершаем после имитации обработки)
     transaction_id = str(uuid.uuid4())
     payment = Payment.objects.create(
         user=request.user,
@@ -99,8 +99,12 @@ def create_payment(request):
         currency=plan.currency,
         payment_method=payment_method,
         transaction_id=transaction_id,
-        status='completed'  # В реальном приложении здесь будет интеграция с платежной системой
+        status='pending'
     )
+    # Stub: в продакшне здесь вызов платёжного шлюза и обработка webhook.
+    # Сейчас имитируем мгновенное успешное завершение.
+    payment.status = 'completed'
+    payment.save(update_fields=['status'])
     
     # Создаем счет
     invoice_number = f"INV-{timezone.now().strftime('%Y%m%d')}-{payment.id}"
@@ -118,6 +122,23 @@ def create_payment(request):
         'subscription': UserSubscriptionSerializer(subscription).data,
         'invoice': InvoiceSerializer(invoice).data
     }, status=status.HTTP_201_CREATED)
+
+
+@api_view(['POST'])
+@permission_classes([permissions.IsAuthenticated])
+def cancel_payment(request, pk):
+    try:
+        payment = Payment.objects.get(pk=pk, user=request.user)
+    except Payment.DoesNotExist:
+        return Response({'error': 'Платеж не найден'}, status=status.HTTP_404_NOT_FOUND)
+    if payment.status != 'pending':
+        return Response(
+            {'error': 'Отменить можно только платёж в статусе pending'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+    payment.status = 'cancelled'
+    payment.save(update_fields=['status'])
+    return Response(PaymentSerializer(payment).data)
 
 
 @api_view(['GET'])

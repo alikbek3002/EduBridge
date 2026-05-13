@@ -2,7 +2,8 @@ from rest_framework import serializers
 from .models import (
     University, Major, UniversityMajor, Course, Enrollment, Application,
     Achievement, UserAchievement, AIRecommendation, StudyPlan, StudyPlanItem,
-    Document, UserEvent, Case, Appointment
+    Document, UserEvent, Case, Appointment,
+    IELTSTest, IELTSQuestion, IELTSAttempt
 )
 
 
@@ -194,3 +195,38 @@ class AppointmentSerializer(serializers.ModelSerializer):
         model = Appointment
         fields = '__all__'
         read_only_fields = ('id', 'created_at')
+
+
+# --------------- IELTS Mock Tests Serializers ---------------
+
+class IELTSQuestionSerializer(serializers.ModelSerializer):
+    """Public version — does not expose the correct answer."""
+    class Meta:
+        model = IELTSQuestion
+        fields = ('id', 'order', 'text', 'options')
+
+
+class IELTSTestListSerializer(serializers.ModelSerializer):
+    questions_count = serializers.IntegerField(source='questions.count', read_only=True)
+
+    class Meta:
+        model = IELTSTest
+        fields = ('id', 'title', 'section', 'description', 'duration_minutes', 'questions_count')
+
+
+class IELTSTestDetailSerializer(serializers.ModelSerializer):
+    questions = IELTSQuestionSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = IELTSTest
+        fields = ('id', 'title', 'section', 'description', 'duration_minutes', 'questions')
+
+
+class IELTSAttemptSerializer(serializers.ModelSerializer):
+    section = serializers.CharField(source='test.section', read_only=True)
+    title = serializers.CharField(source='test.title', read_only=True)
+
+    class Meta:
+        model = IELTSAttempt
+        fields = ('id', 'test', 'section', 'title', 'score', 'total', 'band_score', 'answers', 'created_at')
+        read_only_fields = ('id', 'score', 'total', 'band_score', 'created_at')

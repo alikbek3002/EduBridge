@@ -1,3 +1,4 @@
+import logging
 import os
 import secrets
 import uuid
@@ -5,6 +6,8 @@ from datetime import datetime
 
 import pyotp
 import base64
+
+logger = logging.getLogger(__name__)
 
 from django.contrib.auth import get_user_model
 from django.utils import timezone
@@ -21,7 +24,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from .models import UserProfile, EmailVerification, PasswordResetToken, UserDevice, Consent
 from .serializers import (
-    UserLoginSerializer, UserSerializer,
+    UserLoginSerializer, UserRegistrationSerializer, UserSerializer,
     UserProfileSerializer, PasswordChangeSerializer, PasswordResetRequestSerializer,
     PasswordResetConfirmSerializer, EmailVerificationSerializer, ConsentSerializer
 )
@@ -94,8 +97,8 @@ def login(request):
                 ip_address=(ip.split(',')[0].strip() if isinstance(ip, str) else str(ip)),
                 refresh_jti=str(jti or '')
             )
-        except Exception:
-            pass
+        except Exception as e:
+            logger.warning("Failed to create UserDevice for user_id=%s: %s", user.id, e)
         
         resp = Response({
             'user': UserSerializer(user).data,
@@ -114,6 +117,46 @@ def login(request):
 
 
 @api_view(['POST'])
+@permission_classes([permissions.AllowAny])
+def register(request):
+    serializer = UserRegistrationSerializer(data=request.data)
+    if not serializer.is_valid():
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    user = serializer.save()
+
+    try:
+        token = secrets.token_urlsafe(32)
+        expires_at = timezone.now() + timezone.timedelta(hours=24)
+        EmailVerification.objects.create(user=user, token=token, expires_at=expires_at)
+        verification_url = f"{settings.FRONTEND_URL}/verify-email?token={token}"
+        send_mail(
+            'Подтверждение email',
+            f'Перейдите по ссылке для подтверждения: {verification_url}',
+            settings.EMAIL_HOST_USER,
+            [user.email],
+            fail_silently=True,
+        )
+    except Exception as e:
+        logger.warning("Failed to send verification email to %s: %s", user.email, e)
+
+    refresh = RefreshToken.for_user(user)
+    resp = Response({
+        'message': 'Регистрация прошла успешно',
+        'user': UserSerializer(user).data,
+        'tokens': {
+            'access': str(refresh.access_token),
+            'refresh': str(refresh)
+        }
+    }, status=status.HTTP_201_CREATED)
+
+    if getattr(settings, 'FEATURE_COOKIE_AUTH', False):
+        _set_auth_cookies(resp, refresh)
+
+    return resp
+
+
+@api_view(['POST'])
 @permission_classes([permissions.IsAuthenticated])
 def logout(request):
     try:
@@ -127,8 +170,8 @@ def logout(request):
                 jti = token.get('jti')
                 if jti:
                     UserDevice.objects.filter(user=request.user, refresh_jti=str(jti)).delete()
-            except Exception:
-                pass
+            except Exception as e:
+                logger.warning("Failed to clean up UserDevice on logout: %s", e)
 
         resp = Response({'message': 'Успешный выход'})
         if getattr(settings, 'FEATURE_COOKIE_AUTH', False):
@@ -491,8 +534,8 @@ def update_user_profile(request):
                         profile_data['tolc_exam_date'] = tdt.isoformat()
                     except Exception:
                         pass
-        except Exception:
-            pass
+        except Exception as e:
+            logger.warning("Failed to parse exams payload for user_id=%s: %s", user.id, e)
         
         # Обновляем пользователя
         if user_data:
@@ -529,8 +572,8 @@ def update_user_profile(request):
                     if required_ok and not updated_profile.onboarding_completed:
                         updated_profile.onboarding_completed = True
                         updated_profile.save(update_fields=['onboarding_completed'])
-                except Exception:
-                    pass
+                except Exception as e:
+                    logger.warning("Onboarding completion check failed for user_id=%s: %s", user.id, e)
             else:
                 return Response(profile_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
@@ -622,15 +665,8 @@ def revoke_device(request, device_id: str):
     except UserDevice.DoesNotExist:
         return Response({'error': 'Устройство не найдено'}, status=status.HTTP_404_NOT_FOUND)
 
-    # Удаляем устройство и, если есть jti, также пытаемся добавить в blacklist
-    try:
-        if device.refresh_jti:
-            # simplejwt не предоставляет прямой API для blacklist по jti без токена,
-            # поэтому просто удаляем запись устройства. Новый refresh по jti не выпустится.
-            pass
-    except Exception:
-        pass
-
+    # simplejwt не предоставляет прямой API для blacklist по jti без токена,
+    # поэтому просто удаляем запись устройства. Новый refresh по jti не выпустится.
     device.delete()
     return Response({'message': 'Сессия завершена'})
 
@@ -686,8 +722,8 @@ def delete_account(request):
         if refresh_raw:
             token = RefreshToken(refresh_raw)
             token.blacklist()
-    except Exception:
-        pass
+    except Exception as e:
+        logger.warning("Failed to blacklist refresh token on account delete: %s", e)
 
     # django CASCADE will delete: profile, devices, consents, applications, documents, etc.
     user.delete()

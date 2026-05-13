@@ -4,32 +4,28 @@ import time
 
 from django.conf import settings
 from django.utils import timezone
-from openai import OpenAI
 from rest_framework import permissions, status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 
 from .models import AIUsage
-from .rag import build_rag_prompt, retrieve_chunks
 
 logger = logging.getLogger(__name__)
 
-ALLOWED_MODELS = getattr(settings, "AI_ALLOWED_MODELS", ["gpt-4o-mini"])
+ALLOWED_MODELS = getattr(settings, "AI_ALLOWED_MODELS", ["claude-haiku-4-5-20251001"])
+DEFAULT_MODEL = ALLOWED_MODELS[0] if ALLOWED_MODELS else "claude-haiku-4-5-20251001"
 DAILY_BUDGET = getattr(settings, "AI_DAILY_TOKEN_BUDGET", 50000)
 MAX_MESSAGE_LENGTH = 4000
 MAX_HISTORY = 20
-MAX_TOKENS_CAP = 600
+MAX_TOKENS_CAP = 1024
 
-
-def _normalize_request_id(completion):
-    request_id = getattr(completion, "id", "")
-    if isinstance(request_id, (str, int, float)):
-        return str(request_id)
-    return ""
+SYSTEM_PROMPT = (
+    "Ты дружелюбный ассистент для подготовки к поступлению в итальянские "
+    "университеты и сдаче IELTS. Отвечай кратко и по делу на русском языке."
+)
 
 
 def _get_tokens_today(user):
-    """Return today's token usage values for a user."""
     today_start = timezone.now().replace(hour=0, minute=0, second=0, microsecond=0)
     return AIUsage.objects.filter(
         user=user, created_at__gte=today_start
@@ -57,7 +53,7 @@ def _validate_request_payload(data):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-    model = data.get("model", "gpt-4o-mini")
+    model = data.get("model", DEFAULT_MODEL)
     if model not in ALLOWED_MODELS:
         return None, Response(
             {"error": f'Model not allowed. Choose from: {", ".join(ALLOWED_MODELS)}'},
@@ -71,9 +67,9 @@ def _validate_request_payload(data):
 @permission_classes([permissions.IsAuthenticated])
 def chat(request):
     """
-    Secure AI chat proxy.
-    Expects JSON: { messages: [{role, content}], model?, temperature?, max_tokens? }
-    Returns: { role: 'assistant', content: string }
+    Простой проксі к Anthropic Claude.
+    Принимает: { messages: [{role, content}], model?, temperature?, max_tokens? }
+    Возвращает: { role: 'assistant', content: string }
     """
     user = request.user
     data = request.data or {}
@@ -83,9 +79,8 @@ def chat(request):
 
     messages = validated["messages"]
     model = validated["model"]
-    api_key = os.getenv("OPENAI_API_KEY") or os.getenv("OPENAI_API_KEY_SECRET") or settings.OPENAI_API_KEY
+    api_key = os.getenv("ANTHROPIC_API_KEY") or getattr(settings, "ANTHROPIC_API_KEY", "")
 
-    # Keep request validation identical in demo and live modes.
     if not api_key:
         last_user = ""
         for message in reversed(messages):
@@ -93,8 +88,8 @@ def chat(request):
                 last_user = message.get("content", "")
                 break
         demo = (
-            f"DEMO: I received your message: '{last_user[:100]}'. "
-            "Configure OPENAI_API_KEY in .env to enable live responses."
+            f"DEMO: получено сообщение «{last_user[:100]}». "
+            "Установите ANTHROPIC_API_KEY в .env для реальных ответов."
         )
         return Response({"role": "assistant", "content": demo})
 
@@ -110,52 +105,58 @@ def chat(request):
         msgs = messages[-max_messages:]
 
         formatted = []
-        last_user_msg = ""
         for message in msgs:
             role = message.get("role", "user")
-            if role not in ("user", "assistant", "system"):
-                role = "user"
+            if role not in ("user", "assistant"):
+                continue
             content = message.get("content", "")
-            if role == "user":
-                last_user_msg = str(content)
-            formatted.append({"role": role, "content": content})
+            if not content:
+                continue
+            formatted.append({"role": role, "content": str(content)})
 
-        use_rag = str(data.get("use_rag", "true")).lower() in ("true", "1", "yes")
-        if use_rag and last_user_msg:
-            chunks = retrieve_chunks(last_user_msg, top_k=3)
-            system_prompt = build_rag_prompt(chunks)
-        else:
-            from .prompts import SYSTEM_BASE
+        if not formatted:
+            return Response(
+                {"error": "No valid user/assistant messages provided"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
 
-            system_prompt = SYSTEM_BASE
+        temperature = float(data.get("temperature", 0.7))
+        max_tokens = min(int(data.get("max_tokens", 600)), MAX_TOKENS_CAP)
 
-        formatted = [message for message in formatted if message["role"] != "system"]
-        formatted.insert(0, {"role": "system", "content": system_prompt})
-
-        temperature = float(data.get("temperature", 0.6))
-        max_tokens = min(int(data.get("max_tokens", 300)), MAX_TOKENS_CAP)
-
-        client = OpenAI(api_key=api_key)
+        import anthropic
+        client = anthropic.Anthropic(api_key=api_key)
         t0 = time.time()
-        completion = client.chat.completions.create(
+        completion = client.messages.create(
             model=model,
+            system=SYSTEM_PROMPT,
             messages=formatted,
             temperature=temperature,
             max_tokens=max_tokens,
         )
 
         latency_ms = int((time.time() - t0) * 1000)
-        content = completion.choices[0].message.content
+
+        # Anthropic returns content as a list of blocks
+        content_parts = []
+        for block in getattr(completion, "content", []):
+            text = getattr(block, "text", None)
+            if text:
+                content_parts.append(text)
+        content = "".join(content_parts) or "Не удалось получить ответ."
 
         usage = getattr(completion, "usage", None)
+        prompt_tokens = getattr(usage, "input_tokens", 0) if usage else 0
+        completion_tokens = getattr(usage, "output_tokens", 0) if usage else 0
+        total_tokens = prompt_tokens + completion_tokens
+
         try:
             AIUsage.objects.create(
                 user=user,
                 model=model,
-                prompt_tokens=getattr(usage, "prompt_tokens", 0) if usage else 0,
-                completion_tokens=getattr(usage, "completion_tokens", 0) if usage else 0,
-                total_tokens=getattr(usage, "total_tokens", 0) if usage else 0,
-                request_id=_normalize_request_id(completion),
+                prompt_tokens=prompt_tokens,
+                completion_tokens=completion_tokens,
+                total_tokens=total_tokens,
+                request_id=str(getattr(completion, "id", "") or ""),
                 latency_ms=latency_ms,
             )
         except Exception as log_err:
@@ -165,7 +166,7 @@ def chat(request):
             "ai_chat user_id=%s model=%s tokens=%s latency_ms=%s",
             user.id,
             model,
-            getattr(usage, "total_tokens", "?") if usage else "?",
+            total_tokens,
             latency_ms,
         )
 

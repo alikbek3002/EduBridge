@@ -353,7 +353,8 @@ TEST_RUNNER = 'aieducation.test_runner.ProjectDiscoverRunner'
 
 # AI settings
 AI_DAILY_TOKEN_BUDGET = int(os.getenv('AI_DAILY_TOKEN_BUDGET', '50000'))
-AI_ALLOWED_MODELS = os.getenv('AI_ALLOWED_MODELS', 'gpt-4o-mini').split(',')
+AI_ALLOWED_MODELS = os.getenv('AI_ALLOWED_MODELS', 'claude-haiku-4-5-20251001').split(',')
+ANTHROPIC_API_KEY = os.getenv('ANTHROPIC_API_KEY', '')
 
 # JWT Settings
 from datetime import timedelta
