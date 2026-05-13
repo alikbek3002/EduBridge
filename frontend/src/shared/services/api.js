@@ -257,10 +257,10 @@ export const paymentAPI = {
 export const adminAPI = {};
 
 export const educationAPI = {
-  uploadDocument: ({ file, name = 'IELTS Certificate', description = '' }) => {
+  uploadDocument: ({ file, name = 'Document', description = '', document_type = 'language_certificate' }) => {
     const formData = new FormData();
     formData.append('name', name);
-    formData.append('document_type', 'language_certificate');
+    formData.append('document_type', document_type);
     formData.append('file', file);
     if (description) {
       formData.append('description', description);

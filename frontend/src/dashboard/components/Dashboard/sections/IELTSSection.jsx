@@ -127,6 +127,8 @@ const IELTSSection = ({ progress }) => {
   const [testsLoading, setTestsLoading] = useState(false);
   const [runnerTestId, setRunnerTestId] = useState(null);
 
+  const IELTS_SECTIONS = ['listening', 'reading', 'writing', 'speaking'];
+
   const loadTestsAndAttempts = async () => {
     try {
       setTestsLoading(true);
@@ -136,7 +138,8 @@ const IELTSSection = ({ progress }) => {
       ]);
       const testsData = Array.isArray(testsRes?.data) ? testsRes.data : testsRes?.data?.results || [];
       const attemptsData = Array.isArray(attemptsRes?.data) ? attemptsRes.data : attemptsRes?.data?.results || [];
-      setTests(testsData);
+      // Show only IELTS sections in this view
+      setTests(testsData.filter((t) => IELTS_SECTIONS.includes(t.section)));
       setAttempts(attemptsData);
     } finally {
       setTestsLoading(false);
@@ -194,11 +197,7 @@ const IELTSSection = ({ progress }) => {
         {/* Заголовок секции */}
         <Group justify="space-between">
           <Box>
-            <Text size="xl" fw={800} style={{
-              background: 'linear-gradient(90deg, #1e3a8a 0%, #0ea5e9 50%, #14b8a6 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent'
-            }}>IELTS Подготовка</Text>
+            <Text size="xl" fw={700} c="dark.9">IELTS Подготовка</Text>
             <Text size="sm" c="dimmed">
               Подготовка к международному экзамену
             </Text>

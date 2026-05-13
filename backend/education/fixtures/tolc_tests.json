@@ -1,0 +1,374 @@
+[
+  {
+    "model": "education.ieltstest",
+    "pk": 5,
+    "fields": {
+      "title": "TOLC-I Mathematics",
+      "section": "tolc_math",
+      "description": "Базовые математические задачи: алгебра, геометрия, тригонометрия.",
+      "duration_minutes": 50,
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z"
+    }
+  },
+  {
+    "model": "education.ieltstest",
+    "pk": 6,
+    "fields": {
+      "title": "TOLC-I Logic",
+      "section": "tolc_logic",
+      "description": "Логические задачи и анализ последовательностей.",
+      "duration_minutes": 30,
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z"
+    }
+  },
+  {
+    "model": "education.ieltstest",
+    "pk": 7,
+    "fields": {
+      "title": "TOLC-I Verbal Comprehension",
+      "section": "tolc_verbal",
+      "description": "Понимание академических текстов на итальянском/английском.",
+      "duration_minutes": 30,
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z"
+    }
+  },
+  {
+    "model": "education.ieltstest",
+    "pk": 8,
+    "fields": {
+      "title": "TOLC-I Science",
+      "section": "tolc_science",
+      "description": "Базовые знания по физике, химии и биологии.",
+      "duration_minutes": 40,
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z"
+    }
+  },
+
+  {
+    "model": "education.ieltsquestion",
+    "pk": 501,
+    "fields": {
+      "test": 5,
+      "order": 1,
+      "text": "Чему равно значение выражения 3² + 4²?",
+      "options": [
+        {"key": "A", "label": "12"},
+        {"key": "B", "label": "25"},
+        {"key": "C", "label": "49"},
+        {"key": "D", "label": "7"}
+      ],
+      "correct_answer": "B"
+    }
+  },
+  {
+    "model": "education.ieltsquestion",
+    "pk": 502,
+    "fields": {
+      "test": 5,
+      "order": 2,
+      "text": "Решите уравнение: 2x + 5 = 17. Чему равно x?",
+      "options": [
+        {"key": "A", "label": "4"},
+        {"key": "B", "label": "5"},
+        {"key": "C", "label": "6"},
+        {"key": "D", "label": "11"}
+      ],
+      "correct_answer": "C"
+    }
+  },
+  {
+    "model": "education.ieltsquestion",
+    "pk": 503,
+    "fields": {
+      "test": 5,
+      "order": 3,
+      "text": "Найдите площадь прямоугольника со сторонами 6 и 8 см.",
+      "options": [
+        {"key": "A", "label": "14 см²"},
+        {"key": "B", "label": "28 см²"},
+        {"key": "C", "label": "48 см²"},
+        {"key": "D", "label": "56 см²"}
+      ],
+      "correct_answer": "C"
+    }
+  },
+  {
+    "model": "education.ieltsquestion",
+    "pk": 504,
+    "fields": {
+      "test": 5,
+      "order": 4,
+      "text": "Чему равен sin(30°)?",
+      "options": [
+        {"key": "A", "label": "0"},
+        {"key": "B", "label": "0.5"},
+        {"key": "C", "label": "√3/2"},
+        {"key": "D", "label": "1"}
+      ],
+      "correct_answer": "B"
+    }
+  },
+  {
+    "model": "education.ieltsquestion",
+    "pk": 505,
+    "fields": {
+      "test": 5,
+      "order": 5,
+      "text": "Производная функции f(x) = x³ равна:",
+      "options": [
+        {"key": "A", "label": "x²"},
+        {"key": "B", "label": "3x²"},
+        {"key": "C", "label": "3x"},
+        {"key": "D", "label": "x³/3"}
+      ],
+      "correct_answer": "B"
+    }
+  },
+
+  {
+    "model": "education.ieltsquestion",
+    "pk": 601,
+    "fields": {
+      "test": 6,
+      "order": 1,
+      "text": "Все цветы — растения. Розы — цветы. Следовательно:",
+      "options": [
+        {"key": "A", "label": "Все растения — розы"},
+        {"key": "B", "label": "Розы — растения"},
+        {"key": "C", "label": "Некоторые растения — не цветы"},
+        {"key": "D", "label": "Розы не растения"}
+      ],
+      "correct_answer": "B"
+    }
+  },
+  {
+    "model": "education.ieltsquestion",
+    "pk": 602,
+    "fields": {
+      "test": 6,
+      "order": 2,
+      "text": "Продолжите последовательность: 2, 4, 8, 16, ?",
+      "options": [
+        {"key": "A", "label": "20"},
+        {"key": "B", "label": "24"},
+        {"key": "C", "label": "32"},
+        {"key": "D", "label": "18"}
+      ],
+      "correct_answer": "C"
+    }
+  },
+  {
+    "model": "education.ieltsquestion",
+    "pk": 603,
+    "fields": {
+      "test": 6,
+      "order": 3,
+      "text": "Если A > B и B > C, то:",
+      "options": [
+        {"key": "A", "label": "C > A"},
+        {"key": "B", "label": "A > C"},
+        {"key": "C", "label": "A = C"},
+        {"key": "D", "label": "Ничего нельзя сказать"}
+      ],
+      "correct_answer": "B"
+    }
+  },
+  {
+    "model": "education.ieltsquestion",
+    "pk": 604,
+    "fields": {
+      "test": 6,
+      "order": 4,
+      "text": "Какое слово лишнее: яблоко, груша, морковь, слива?",
+      "options": [
+        {"key": "A", "label": "Яблоко"},
+        {"key": "B", "label": "Груша"},
+        {"key": "C", "label": "Морковь"},
+        {"key": "D", "label": "Слива"}
+      ],
+      "correct_answer": "C"
+    }
+  },
+  {
+    "model": "education.ieltsquestion",
+    "pk": 605,
+    "fields": {
+      "test": 6,
+      "order": 5,
+      "text": "Если все студенты сдают экзамены, а Марко — студент, то:",
+      "options": [
+        {"key": "A", "label": "Марко не сдаёт экзамены"},
+        {"key": "B", "label": "Марко сдаёт экзамены"},
+        {"key": "C", "label": "Только некоторые студенты сдают"},
+        {"key": "D", "label": "Марко — преподаватель"}
+      ],
+      "correct_answer": "B"
+    }
+  },
+
+  {
+    "model": "education.ieltsquestion",
+    "pk": 701,
+    "fields": {
+      "test": 7,
+      "order": 1,
+      "text": "Текст: «Bocconi считается одним из ведущих университетов Европы в области экономики». Какая основная мысль?",
+      "options": [
+        {"key": "A", "label": "Bocconi — лучший вуз мира"},
+        {"key": "B", "label": "Bocconi известен экономикой в Европе"},
+        {"key": "C", "label": "Bocconi обучает только итальянцев"},
+        {"key": "D", "label": "Bocconi не обучает экономике"}
+      ],
+      "correct_answer": "B"
+    }
+  },
+  {
+    "model": "education.ieltsquestion",
+    "pk": 702,
+    "fields": {
+      "test": 7,
+      "order": 2,
+      "text": "Синоним слова «комплексный»:",
+      "options": [
+        {"key": "A", "label": "Простой"},
+        {"key": "B", "label": "Многосторонний"},
+        {"key": "C", "label": "Маленький"},
+        {"key": "D", "label": "Быстрый"}
+      ],
+      "correct_answer": "B"
+    }
+  },
+  {
+    "model": "education.ieltsquestion",
+    "pk": 703,
+    "fields": {
+      "test": 7,
+      "order": 3,
+      "text": "Антоним слова «увеличить»:",
+      "options": [
+        {"key": "A", "label": "Расширить"},
+        {"key": "B", "label": "Уменьшить"},
+        {"key": "C", "label": "Удвоить"},
+        {"key": "D", "label": "Изменить"}
+      ],
+      "correct_answer": "B"
+    }
+  },
+  {
+    "model": "education.ieltsquestion",
+    "pk": 704,
+    "fields": {
+      "test": 7,
+      "order": 4,
+      "text": "Текст: «Несмотря на дождь, лекция состоялась». Что произошло?",
+      "options": [
+        {"key": "A", "label": "Лекция отменилась из-за дождя"},
+        {"key": "B", "label": "Дождь не помешал лекции"},
+        {"key": "C", "label": "Дождя не было"},
+        {"key": "D", "label": "Лекция прошла под дождём на улице"}
+      ],
+      "correct_answer": "B"
+    }
+  },
+  {
+    "model": "education.ieltsquestion",
+    "pk": 705,
+    "fields": {
+      "test": 7,
+      "order": 5,
+      "text": "Выберите правильный порядок предложения: «университет / поступил / в / он / прошлом / году»",
+      "options": [
+        {"key": "A", "label": "Он поступил в университет в прошлом году"},
+        {"key": "B", "label": "В прошлом году в он университет поступил"},
+        {"key": "C", "label": "Университет он поступил в прошлом году в"},
+        {"key": "D", "label": "В университет прошлом году он поступил"}
+      ],
+      "correct_answer": "A"
+    }
+  },
+
+  {
+    "model": "education.ieltsquestion",
+    "pk": 801,
+    "fields": {
+      "test": 8,
+      "order": 1,
+      "text": "Какая единица измерения силы в СИ?",
+      "options": [
+        {"key": "A", "label": "Джоуль"},
+        {"key": "B", "label": "Ньютон"},
+        {"key": "C", "label": "Ватт"},
+        {"key": "D", "label": "Паскаль"}
+      ],
+      "correct_answer": "B"
+    }
+  },
+  {
+    "model": "education.ieltsquestion",
+    "pk": 802,
+    "fields": {
+      "test": 8,
+      "order": 2,
+      "text": "Химическая формула воды:",
+      "options": [
+        {"key": "A", "label": "CO₂"},
+        {"key": "B", "label": "H₂O"},
+        {"key": "C", "label": "O₂"},
+        {"key": "D", "label": "H₂"}
+      ],
+      "correct_answer": "B"
+    }
+  },
+  {
+    "model": "education.ieltsquestion",
+    "pk": 803,
+    "fields": {
+      "test": 8,
+      "order": 3,
+      "text": "Молекула ДНК имеет структуру:",
+      "options": [
+        {"key": "A", "label": "Одинарная цепь"},
+        {"key": "B", "label": "Двойная спираль"},
+        {"key": "C", "label": "Тройная спираль"},
+        {"key": "D", "label": "Сферическая"}
+      ],
+      "correct_answer": "B"
+    }
+  },
+  {
+    "model": "education.ieltsquestion",
+    "pk": 804,
+    "fields": {
+      "test": 8,
+      "order": 4,
+      "text": "Скорость света в вакууме примерно равна:",
+      "options": [
+        {"key": "A", "label": "300 км/с"},
+        {"key": "B", "label": "3 000 км/с"},
+        {"key": "C", "label": "300 000 км/с"},
+        {"key": "D", "label": "30 000 000 км/с"}
+      ],
+      "correct_answer": "C"
+    }
+  },
+  {
+    "model": "education.ieltsquestion",
+    "pk": 805,
+    "fields": {
+      "test": 8,
+      "order": 5,
+      "text": "Какой процесс превращает гусеницу в бабочку?",
+      "options": [
+        {"key": "A", "label": "Метаморфоз"},
+        {"key": "B", "label": "Митоз"},
+        {"key": "C", "label": "Фотосинтез"},
+        {"key": "D", "label": "Эволюция"}
+      ],
+      "correct_answer": "A"
+    }
+  }
+]

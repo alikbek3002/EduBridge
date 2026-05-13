@@ -21,6 +21,7 @@ import {
 } from '@mantine/core';
 import { useEffect } from 'react';
 import { useDashboardStore } from '../../../../store/dashboardStore';
+import { educationAPI } from '../../../../shared/services/api';
 import { 
   IconFileText, 
   IconPlayerPlay, 
@@ -39,6 +40,29 @@ const DOVSection = ({ progress }) => {
   const _overallProgress = progress?.overallProgress || 0;
   const [opened, setOpened] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState(null);
+
+  const handleUpload = async () => {
+    if (!selectedFile) return;
+    setUploadError(null);
+    setUploading(true);
+    try {
+      await educationAPI.uploadDocument({
+        file: selectedFile,
+        name: selectedFile.name || 'DOV документ',
+        document_type: 'diploma',
+        description: 'Документ для Dichiarazione di Valore',
+      });
+      setSelectedFile(null);
+      setOpened(false);
+    } catch (e) {
+      console.error('Upload failed', e);
+      setUploadError('Не удалось загрузить файл. Попробуйте ещё раз.');
+    } finally {
+      setUploading(false);
+    }
+  };
 
   const steps = [
     {
@@ -430,8 +454,11 @@ const DOVSection = ({ progress }) => {
           <Text size="sm" c="dimmed">
             Поддерживаемые форматы: PDF, DOC, DOCX, JPG, PNG
           </Text>
+          {uploadError && (
+            <Alert icon={<IconAlertCircle size={16} />} color="red" radius="md">{uploadError}</Alert>
+          )}
           <Group>
-            <Button onClick={() => setOpened(false)}>
+            <Button onClick={handleUpload} disabled={!selectedFile || uploading} loading={uploading}>
               Загрузить
             </Button>
             <Button variant="outline" onClick={() => setOpened(false)}>

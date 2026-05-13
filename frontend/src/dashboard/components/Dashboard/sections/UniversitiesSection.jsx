@@ -246,9 +246,7 @@ const UniversitiesSection = () => {
         fw={800}
         mb="sm"
         style={{
-          background: 'linear-gradient(90deg, #1e3a8a 0%, #0ea5e9 50%, #14b8a6 100%)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
+          color: '#111827',
           letterSpacing: '0.2px'
         }}
       >

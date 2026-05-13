@@ -396,10 +396,14 @@ class KnowledgeChunk(models.Model):
 
 class IELTSTest(models.Model):
     SECTION_CHOICES = [
-        ('listening', 'Listening'),
-        ('reading', 'Reading'),
-        ('writing', 'Writing'),
-        ('speaking', 'Speaking'),
+        ('listening', 'IELTS Listening'),
+        ('reading', 'IELTS Reading'),
+        ('writing', 'IELTS Writing'),
+        ('speaking', 'IELTS Speaking'),
+        ('tolc_math', 'TOLC Mathematics'),
+        ('tolc_logic', 'TOLC Logic'),
+        ('tolc_verbal', 'TOLC Verbal Comprehension'),
+        ('tolc_science', 'TOLC Science'),
     ]
     title = models.CharField(max_length=200)
     section = models.CharField(max_length=20, choices=SECTION_CHOICES, unique=True)

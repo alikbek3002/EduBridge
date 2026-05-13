@@ -262,10 +262,7 @@ const MainPage = ({ isMobile = false, isTablet = false }) => {
           size={getResponsiveValue('lg', 'xl', 'xl')} 
           fw={800} 
           style={{
-            background: 'linear-gradient(90deg, #3b82f6 0%, #0ea5e9 50%, #14b8a6 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            color: 'transparent',
+            color: '#111827',
             fontSize: getResponsiveValue('20px', '24px', '28px'),
             lineHeight: getResponsiveValue(1.3, 1.4, 1.5)
           }}

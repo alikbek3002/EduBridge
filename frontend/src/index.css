@@ -10,32 +10,34 @@
 @import './dashboard/components/Dashboard/ResponsiveStyles.css';
 
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: #1f2937;
+  color-scheme: light;
+  color: #111827;
   max-width: 100%;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  /* App design tokens */
-  --app-color-bg: #f8fafc;
+  /* App design tokens — clean white theme */
+  --app-color-bg: #ffffff;
   --app-color-surface: #ffffff;
-  --app-color-text: #1f2937;
-  --app-color-primary: var(--mantine-color-indigo-6);
+  --app-color-text: #111827;
+  --app-color-text-muted: #6b7280;
+  --app-color-border: #e5e7eb;
+  --app-color-primary: #2563eb;
   --app-color-primary-contrast: #ffffff;
 
-  --app-radius-sm: 6px;
-  --app-radius-md: 8px;
-  --app-radius-lg: 12px;
+  --app-radius-sm: 4px;
+  --app-radius-md: 6px;
+  --app-radius-lg: 8px;
 
-  --app-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
-  --app-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.10);
-  --app-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
+  --app-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --app-shadow-md: 0 2px 6px rgba(0, 0, 0, 0.06);
+  --app-shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.08);
 
   --app-spacing-xs: 8px;
   --app-spacing-sm: 12px;
@@ -48,8 +50,9 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  background-color: var(--mantine-color-gray-0);
+  background-color: #ffffff;
   color: var(--app-color-text);
+  font-family: inherit;
 }
 
 #root {
@@ -57,14 +60,15 @@ body {
   width: 100%;
 }
 
-/* Mantine theme overrides */
+/* Mantine theme overrides — minimal, flat */
 .mantine-Button-root {
   border-radius: var(--app-radius-md);
-  box-shadow: var(--app-shadow-sm);
+  box-shadow: none;
+  font-weight: 500;
 }
 
 .mantine-Button-root:hover {
-  box-shadow: var(--app-shadow-md);
+  box-shadow: none;
 }
 
 /* Ensure readable text for subtle buttons */
@@ -84,12 +88,16 @@ body {
 
 .mantine-Paper-root {
   border-radius: var(--app-radius-lg);
-  box-shadow: var(--app-shadow-sm);
+  box-shadow: none;
+  border: 1px solid var(--app-color-border);
+  background-color: #ffffff;
 }
 
 .mantine-Card-root {
   border-radius: var(--app-radius-lg);
-  box-shadow: var(--app-shadow-sm);
+  box-shadow: none;
+  border: 1px solid var(--app-color-border);
+  background-color: #ffffff;
 }
 
 /* Unified input look */

@@ -16,10 +16,12 @@ import {
   Checkbox,
   Modal,
   TextInput,
-  FileInput
+  FileInput,
+  Alert
 } from '@mantine/core';
 import { useEffect } from 'react';
 import { useDashboardStore } from '../../../../store/dashboardStore';
+import { educationAPI } from '../../../../shared/services/api';
 import { 
   IconFileText, 
   IconPlayerPlay, 
@@ -36,6 +38,29 @@ const UniversitalySection = ({ progress }) => {
   const { user } = useSelector((state) => state.auth);
   const [opened, setOpened] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState(null);
+
+  const handleUpload = async () => {
+    if (!selectedFile) return;
+    setUploadError(null);
+    setUploading(true);
+    try {
+      await educationAPI.uploadDocument({
+        file: selectedFile,
+        name: selectedFile.name || 'Universitaly документ',
+        document_type: 'other',
+        description: 'Документ для Universitaly',
+      });
+      setSelectedFile(null);
+      setOpened(false);
+    } catch (e) {
+      console.error('Upload failed', e);
+      setUploadError('Не удалось загрузить файл. Попробуйте ещё раз.');
+    } finally {
+      setUploading(false);
+    }
+  };
 
   // Извлекаем значения из объекта progress
   const _overallProgress = progress?.overallProgress || 0;
@@ -99,11 +124,7 @@ const UniversitalySection = ({ progress }) => {
         {/* Заголовок секции */}
         <Group justify="space-between">
           <Box>
-            <Text size="xl" fw={800} style={{
-              background: 'linear-gradient(90deg, #1e3a8a 0%, #0ea5e9 50%, #14b8a6 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent'
-            }}>Universitaly</Text>
+            <Text size="xl" fw={700} c="dark.9">Universitaly</Text>
             <Text size="sm" c="dimmed">
               Регистрация и подача документов
             </Text>
@@ -312,21 +333,18 @@ const UniversitalySection = ({ progress }) => {
               onChange={setSelectedFile}
               accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
             />
-      <Group justify="flex-end" gap="sm">
-              <Button
-                variant="light"
-                onClick={() => setOpened(false)}
-        radius="md"
-              >
+            {uploadError && (
+              <Alert icon={<IconAlertCircle size={16} />} color="red" radius="md">{uploadError}</Alert>
+            )}
+            <Group justify="flex-end" gap="sm">
+              <Button variant="light" onClick={() => setOpened(false)} radius="md">
                 Отмена
               </Button>
               <Button
-                onClick={() => {
-                  setOpened(false);
-                  setSelectedFile(null);
-                }}
-                disabled={!selectedFile}
-        radius="md"
+                onClick={handleUpload}
+                disabled={!selectedFile || uploading}
+                loading={uploading}
+                radius="md"
               >
                 Загрузить
               </Button>

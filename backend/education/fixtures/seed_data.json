@@ -1,0 +1,320 @@
+[
+  {
+    "model": "education.university",
+    "pk": 1,
+    "fields": {
+      "name": "Università Bocconi",
+      "country": "Italy",
+      "city": "Milan",
+      "description": "Один из ведущих частных университетов Европы, специализирующийся на экономике, менеджменте, финансах и праве.",
+      "website": "https://www.unibocconi.it/",
+      "level": "Top",
+      "student_count": 14000,
+      "deadline": "2026-04-15",
+      "latitude": 45.4408,
+      "longitude": 9.1858,
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z",
+      "updated_at": "2026-05-13T00:00:00Z"
+    }
+  },
+  {
+    "model": "education.university",
+    "pk": 2,
+    "fields": {
+      "name": "Politecnico di Milano",
+      "country": "Italy",
+      "city": "Milan",
+      "description": "Крупнейший технический университет Италии — инженерия, архитектура, дизайн.",
+      "website": "https://www.polimi.it/",
+      "level": "Top",
+      "student_count": 47000,
+      "deadline": "2026-04-30",
+      "latitude": 45.4781,
+      "longitude": 9.2272,
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z",
+      "updated_at": "2026-05-13T00:00:00Z"
+    }
+  },
+  {
+    "model": "education.university",
+    "pk": 3,
+    "fields": {
+      "name": "Università di Bologna",
+      "country": "Italy",
+      "city": "Bologna",
+      "description": "Старейший университет в мире, основан в 1088 году. Полный спектр гуманитарных и научных направлений.",
+      "website": "https://www.unibo.it/",
+      "level": "Top",
+      "student_count": 87000,
+      "deadline": "2026-05-31",
+      "latitude": 44.4934,
+      "longitude": 11.3426,
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z",
+      "updated_at": "2026-05-13T00:00:00Z"
+    }
+  },
+  {
+    "model": "education.university",
+    "pk": 4,
+    "fields": {
+      "name": "Sapienza Università di Roma",
+      "country": "Italy",
+      "city": "Rome",
+      "description": "Один из крупнейших европейских университетов, более 700 лет истории. Сильные программы по медицине и архитектуре.",
+      "website": "https://www.uniroma1.it/",
+      "level": "High",
+      "student_count": 113000,
+      "deadline": "2026-07-15",
+      "latitude": 41.9028,
+      "longitude": 12.4964,
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z",
+      "updated_at": "2026-05-13T00:00:00Z"
+    }
+  },
+  {
+    "model": "education.university",
+    "pk": 5,
+    "fields": {
+      "name": "Politecnico di Torino",
+      "country": "Italy",
+      "city": "Turin",
+      "description": "Один из старейших технических университетов Италии. Сильные программы по автомобильной и аэрокосмической инженерии.",
+      "website": "https://www.polito.it/",
+      "level": "High",
+      "student_count": 35000,
+      "deadline": "2026-06-30",
+      "latitude": 45.0628,
+      "longitude": 7.6622,
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z",
+      "updated_at": "2026-05-13T00:00:00Z"
+    }
+  },
+  {
+    "model": "education.university",
+    "pk": 6,
+    "fields": {
+      "name": "Università degli Studi di Padova",
+      "country": "Italy",
+      "city": "Padova",
+      "description": "Исторический университет с 1222 года. Сильна медицина, право и инженерия.",
+      "website": "https://www.unipd.it/",
+      "level": "High",
+      "student_count": 60000,
+      "deadline": "2026-07-31",
+      "latitude": 45.4064,
+      "longitude": 11.8768,
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z",
+      "updated_at": "2026-05-13T00:00:00Z"
+    }
+  },
+
+  {
+    "model": "education.major",
+    "pk": 1,
+    "fields": {
+      "name": "Computer Science",
+      "description": "Информатика и компьютерные науки.",
+      "category": "STEM",
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z"
+    }
+  },
+  {
+    "model": "education.major",
+    "pk": 2,
+    "fields": {
+      "name": "Economics",
+      "description": "Экономика и финансы.",
+      "category": "Business",
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z"
+    }
+  },
+  {
+    "model": "education.major",
+    "pk": 3,
+    "fields": {
+      "name": "Mechanical Engineering",
+      "description": "Машиностроение.",
+      "category": "Engineering",
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z"
+    }
+  },
+  {
+    "model": "education.major",
+    "pk": 4,
+    "fields": {
+      "name": "Architecture",
+      "description": "Архитектура и градостроительство.",
+      "category": "Design",
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z"
+    }
+  },
+  {
+    "model": "education.major",
+    "pk": 5,
+    "fields": {
+      "name": "Medicine",
+      "description": "Медицина и хирургия.",
+      "category": "Health",
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z"
+    }
+  },
+
+  {
+    "model": "education.achievement",
+    "pk": 1,
+    "fields": {
+      "name": "Первые шаги",
+      "description": "Зарегистрировались в EduBridge",
+      "icon": "🚀",
+      "points": 10,
+      "category": "progress",
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z"
+    }
+  },
+  {
+    "model": "education.achievement",
+    "pk": 2,
+    "fields": {
+      "name": "Профиль готов",
+      "description": "Полностью заполнили свой профиль",
+      "icon": "👤",
+      "points": 25,
+      "category": "progress",
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z"
+    }
+  },
+  {
+    "model": "education.achievement",
+    "pk": 3,
+    "fields": {
+      "name": "Первый тест",
+      "description": "Прошли первый mock-тест IELTS",
+      "icon": "📝",
+      "points": 50,
+      "category": "learning",
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z"
+    }
+  },
+  {
+    "model": "education.achievement",
+    "pk": 4,
+    "fields": {
+      "name": "Все секции IELTS",
+      "description": "Прошли тесты во всех 4 секциях IELTS",
+      "icon": "🎯",
+      "points": 150,
+      "category": "learning",
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z"
+    }
+  },
+  {
+    "model": "education.achievement",
+    "pk": 5,
+    "fields": {
+      "name": "Band 6.5+",
+      "description": "Достигли band 6.5 или выше в любом тесте",
+      "icon": "⭐",
+      "points": 200,
+      "category": "learning",
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z"
+    }
+  },
+  {
+    "model": "education.achievement",
+    "pk": 6,
+    "fields": {
+      "name": "Неделя подряд",
+      "description": "Заходили в систему 7 дней подряд",
+      "icon": "🔥",
+      "points": 75,
+      "category": "streak",
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z"
+    }
+  },
+  {
+    "model": "education.achievement",
+    "pk": 7,
+    "fields": {
+      "name": "Сертификат загружен",
+      "description": "Загрузили сертификат IELTS",
+      "icon": "📜",
+      "points": 100,
+      "category": "progress",
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z"
+    }
+  },
+  {
+    "model": "education.achievement",
+    "pk": 8,
+    "fields": {
+      "name": "Подписка активна",
+      "description": "Оформили платную подписку",
+      "icon": "💎",
+      "points": 50,
+      "category": "other",
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z"
+    }
+  },
+
+  {
+    "model": "payments.subscriptionplan",
+    "pk": 1,
+    "fields": {
+      "name": "Базовый",
+      "description": "Доступ к базовым материалам и тестам IELTS.",
+      "price": "9.99",
+      "currency": "EUR",
+      "duration_days": 30,
+      "features": ["Mock-тесты IELTS (4 секции)", "AI Mentor чат", "Загрузка документов"],
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z"
+    }
+  },
+  {
+    "model": "payments.subscriptionplan",
+    "pk": 2,
+    "fields": {
+      "name": "Профессиональный",
+      "description": "Полный доступ ко всем материалам и расширенному консультированию.",
+      "price": "19.99",
+      "currency": "EUR",
+      "duration_days": 90,
+      "features": ["Всё из Базового", "Mock-тесты TOLC", "Приоритетный чат с AI", "Персональные рекомендации"],
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z"
+    }
+  },
+  {
+    "model": "payments.subscriptionplan",
+    "pk": 3,
+    "fields": {
+      "name": "Премиум",
+      "description": "Максимальный доступ + поддержка консультанта по поступлению.",
+      "price": "49.99",
+      "currency": "EUR",
+      "duration_days": 180,
+      "features": ["Всё из Профессионального", "Персональный консультант", "Помощь с DOV и визой", "Сопровождение до зачисления"],
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z"
+    }
+  }
+]
