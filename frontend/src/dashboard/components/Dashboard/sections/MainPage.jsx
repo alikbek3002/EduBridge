@@ -63,24 +63,24 @@ const MainPage = ({ isMobile = false, isTablet = false }) => {
     return desktop;
   };
   
-  // Theme aware design tokens
+  // Strict B&W design tokens
   const colors = {
-    page: isDark ? '#0b1220' : '#f8fafc',
-    surface: isDark ? '#0f172a' : theme.white,
-    surfaceAlt: isDark ? '#1f2937' : '#f1f5f9',
-    surfaceMuted: isDark ? '#1e293b' : '#eef2f6',
-    textPrimary: isDark ? theme.white : '#1f2937',
-    textSecondary: isDark ? '#cbd5e1' : '#475569',
-    textDimmed: isDark ? '#94a3b8' : '#64748b',
-    divider: isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.08)',
-    cardBorder: isDark ? '1px solid rgba(255,255,255,0.08)' : '1px solid rgba(0,0,0,0.06)',
-    timeCardBg: isDark ? '#1e293b' : '#ffffff',
-    timeCardNumber: isDark ? theme.white : '#1f2937',
-    deadlineDot: isDark ? theme.colors.red[6] : theme.colors.red[5],
-    eventCardBg: isDark ? '#1e293b' : '#ffffff',
-    eventCardTitle: isDark ? theme.white : '#111827',
-    eventCardDate: isDark ? '#94a3b8' : '#64748b',
-    progressCardBg: isDark ? '#0f172a' : '#ffffff'
+    page: '#ffffff',
+    surface: '#ffffff',
+    surfaceAlt: '#f5f5f5',
+    surfaceMuted: '#f9fafb',
+    textPrimary: '#111111',
+    textSecondary: '#374151',
+    textDimmed: '#6b7280',
+    divider: 'rgba(0,0,0,0.08)',
+    cardBorder: '1px solid #e5e7eb',
+    timeCardBg: '#ffffff',
+    timeCardNumber: '#111111',
+    deadlineDot: '#111111',
+    eventCardBg: '#ffffff',
+    eventCardTitle: '#111111',
+    eventCardDate: '#6b7280',
+    progressCardBg: '#ffffff'
   };
 
   const calculateStatusText = (progress) => {
@@ -274,13 +274,13 @@ const MainPage = ({ isMobile = false, isTablet = false }) => {
       {/* Learning Overview */}
       <Grid mb={getResponsiveValue('sm', 'md', 'md')} gutter="sm">
         <Grid.Col span={{ base: 12, xs: 4 }}>
-          <Paper withBorder radius="md" p="md" style={{ background: isDark ? '#1e293b' : '#fff7ed' }}>
+          <Paper withBorder radius="md" p="md" style={{ background: '#ffffff' }}>
             <Group gap="sm" align="center">
-              <ThemeIcon size={40} radius="md" color="orange" variant="light">
-                <IconFlame size={22} />
+              <ThemeIcon size={40} radius="md" color="gray" variant="light">
+                <IconFlame size={22} stroke={1.5} />
               </ThemeIcon>
               <Box>
-                <Text size="xl" fw={800} style={{ color: isDark ? '#fdba74' : '#ea580c' }}>
+                <Text size="xl" fw={800} style={{ color: '#111111' }}>
                   {dashboardStats?.current_streak ?? 0}
                 </Text>
                 <Text size="xs" c="dimmed">дней подряд</Text>
@@ -290,13 +290,13 @@ const MainPage = ({ isMobile = false, isTablet = false }) => {
           </Paper>
         </Grid.Col>
         <Grid.Col span={{ base: 12, xs: 4 }}>
-          <Paper withBorder radius="md" p="md" style={{ background: isDark ? '#1e293b' : '#eff6ff' }}>
+          <Paper withBorder radius="md" p="md" style={{ background: '#ffffff' }}>
             <Group gap="sm" align="center">
-              <ThemeIcon size={40} radius="md" color="blue" variant="light">
-                <IconTarget size={22} />
+              <ThemeIcon size={40} radius="md" color="gray" variant="light">
+                <IconTarget size={22} stroke={1.5} />
               </ThemeIcon>
               <Box style={{ flex: 1 }}>
-                <Text size="xl" fw={800} style={{ color: isDark ? '#93c5fd' : '#2563eb' }}>
+                <Text size="xl" fw={800} style={{ color: '#111111' }}>
                   {dashboardStats?.weekly_progress ?? 0}
                   <Text span size="sm" fw={400} c="dimmed"> / {dashboardStats?.weekly_goal ?? 20}</Text>
                 </Text>
@@ -305,18 +305,18 @@ const MainPage = ({ isMobile = false, isTablet = false }) => {
             </Group>
             <Progress
               value={Math.round(((dashboardStats?.weekly_progress ?? 0) / (dashboardStats?.weekly_goal ?? 20)) * 100)}
-              color="blue" size="xs" mt={8} radius="xl"
+              color="dark" size="xs" mt={8} radius="xl"
             />
           </Paper>
         </Grid.Col>
         <Grid.Col span={{ base: 12, xs: 4 }}>
-          <Paper withBorder radius="md" p="md" style={{ background: isDark ? '#1e293b' : '#fefce8' }}>
+          <Paper withBorder radius="md" p="md" style={{ background: '#ffffff' }}>
             <Group gap="sm" align="center">
-              <ThemeIcon size={40} radius="md" color="yellow" variant="light">
-                <IconTrophy size={22} />
+              <ThemeIcon size={40} radius="md" color="gray" variant="light">
+                <IconTrophy size={22} stroke={1.5} />
               </ThemeIcon>
               <Box>
-                <Text size="xl" fw={800} style={{ color: isDark ? '#fde047' : '#ca8a04' }}>
+                <Text size="xl" fw={800} style={{ color: '#111111' }}>
                   {dashboardStats?.achievements_unlocked ?? 0}
                 </Text>
                 <Text size="xs" c="dimmed">достижений</Text>
@@ -332,14 +332,14 @@ const MainPage = ({ isMobile = false, isTablet = false }) => {
         const vocab = VOCAB_ITEMS[new Date().getDate() % VOCAB_ITEMS.length];
         return (
           <Card withBorder radius="md" p="md" mb={getResponsiveValue('sm', 'md', 'md')}
-            style={{ background: isDark ? '#0f172a' : '#f0fdf4', borderColor: isDark ? 'rgba(255,255,255,0.08)' : '#86efac' }}>
+            style={{ background: '#ffffff', borderColor: '#e5e7eb' }}>
             <Group gap="sm" mb={8}>
-              <ThemeIcon size={32} radius="md" color="green" variant="light">
-                <IconLanguage size={18} />
+              <ThemeIcon size={32} radius="md" color="gray" variant="light">
+                <IconLanguage size={18} stroke={1.5} />
               </ThemeIcon>
-              <Text size="sm" fw={600} c="green">Слово дня</Text>
+              <Text size="sm" fw={600} c="dark">Слово дня</Text>
             </Group>
-            <Text size="xl" fw={800} mb={4} style={{ color: isDark ? '#86efac' : '#15803d' }}>{vocab.word}</Text>
+            <Text size="xl" fw={800} mb={4} style={{ color: '#111111' }}>{vocab.word}</Text>
             <Text size="md" fw={500} mb={2}>{vocab.translation}</Text>
             <Text size="sm" c="dimmed" fs="italic">{vocab.context}</Text>
           </Card>
@@ -485,12 +485,12 @@ const MainPage = ({ isMobile = false, isTablet = false }) => {
           flexDirection: isMobile ? 'column' : 'row',
           gap: isMobile ? '16px' : undefined
         }}>
-          <CircularProgress 
-            value={overallProgress} 
-            size={getResponsiveValue(140, 180, 220)} 
-            strokeWidth={getResponsiveValue(10, 12, 14)} 
-            color="#37B34A" 
-            textColor={isDark ? '#ffffff' : '#000000'} 
+          <CircularProgress
+            value={overallProgress}
+            size={getResponsiveValue(140, 180, 220)}
+            strokeWidth={getResponsiveValue(10, 12, 14)}
+            color="#111111"
+            textColor="#111111"
           />
           <Stack spacing={6} style={{ 
             minWidth: isMobile ? '100%' : getResponsiveValue(180, 200, 220),

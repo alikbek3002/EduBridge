@@ -15,21 +15,26 @@
   font-weight: 400;
 
   color-scheme: light;
-  color: #111827;
+  color: #111111;
   max-width: 100%;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  /* App design tokens — clean white theme */
+  /* App design tokens — strict B&W */
   --app-color-bg: #ffffff;
   --app-color-surface: #ffffff;
-  --app-color-text: #111827;
+  --app-color-surface-alt: #f5f5f5;
+  --app-color-surface-muted: #f9fafb;
+  --app-color-text: #111111;
   --app-color-text-muted: #6b7280;
+  --app-color-text-dimmed: #9ca3af;
   --app-color-border: #e5e7eb;
-  --app-color-primary: #2563eb;
+  --app-color-border-strong: #d1d5db;
+  --app-color-primary: #111111;
   --app-color-primary-contrast: #ffffff;
+  --app-color-hover: #f5f5f5;
 
   --app-radius-sm: 4px;
   --app-radius-md: 6px;
@@ -71,13 +76,12 @@ body {
   box-shadow: none;
 }
 
-/* Ensure readable text for subtle buttons */
 .mantine-Button-root[data-variant="subtle"] {
   color: var(--app-color-text);
 }
 
-.mantine-Button-root[data-variant="subtle"][data-color="gray"]:hover {
-  background-color: var(--mantine-color-gray-1);
+.mantine-Button-root[data-variant="subtle"]:hover {
+  background-color: var(--app-color-hover);
 }
 
 .mantine-Button-root[data-disabled="true"],
@@ -118,6 +122,9 @@ body {
   border-radius: var(--app-radius-md);
   padding: 12px 14px;
   font-size: 14px;
+  background-color: #ffffff;
+  border: 1px solid var(--app-color-border);
+  color: var(--app-color-text);
 }
 
 .mantine-TextInput-input:focus,
@@ -129,20 +136,21 @@ body {
 .mantine-DateInput-input:focus,
 .mantine-FileInput-input:focus,
 .mantine-Input-input:focus {
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--mantine-color-indigo-6), transparent 90%);
+  border-color: #111111;
+  box-shadow: 0 0 0 3px rgba(17, 17, 17, 0.08);
 }
 
 /* Fix overlap when using leftSection/rightSection in inputs */
 .mantine-Input-wrapper [data-with-left-section] .mantine-Input-input,
 .mantine-TextInput-root [data-with-left-section] .mantine-TextInput-input,
 .mantine-PasswordInput-root [data-with-left-section] .mantine-PasswordInput-input {
-  padding-left: 42px; /* leave space for icon */
+  padding-left: 42px;
 }
 
 .mantine-Input-wrapper [data-with-right-section] .mantine-Input-input,
 .mantine-TextInput-root [data-with-right-section] .mantine-TextInput-input,
 .mantine-PasswordInput-root [data-with-right-section] .mantine-PasswordInput-input {
-  padding-right: 42px; /* leave space for toggles/icons */
+  padding-right: 42px;
 }
 
 .mantine-Progress-root {
@@ -167,23 +175,23 @@ body {
 
 /* Empty state */
 .empty-state {
-  border: 1px dashed var(--mantine-color-gray-4);
-  background: var(--mantine-color-gray-0);
+  border: 1px dashed var(--app-color-border-strong);
+  background: var(--app-color-surface-muted);
   border-radius: var(--app-radius-md);
   padding: var(--app-spacing-lg);
   text-align: center;
-  color: var(--mantine-color-gray-7);
+  color: var(--app-color-text-muted);
 }
 
 .separator-soft {
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--mantine-color-gray-3), transparent);
+  background: var(--app-color-border);
   margin: var(--app-spacing-md) 0;
 }
 
 /* Zebra utility for lists */
 .list-zebra > *:nth-child(odd) {
-  background: var(--mantine-color-gray-0);
+  background: var(--app-color-surface-muted);
   border-radius: var(--app-radius-sm);
 }
 
@@ -218,7 +226,7 @@ p {
 }
 
 a {
-  color: var(--mantine-color-indigo-7);
+  color: var(--app-color-text);
   text-decoration: none;
 }
 
@@ -232,35 +240,9 @@ a:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--mantine-color-indigo-6), transparent 20%);
+  outline: 2px solid #111111;
   outline-offset: 2px;
   border-radius: var(--app-radius-sm);
-}
-
-/* Dark theme support */
-[data-mantine-color-scheme="dark"] {
-  --mantine-color-gray-0: #1a1b23;
-  --mantine-color-gray-1: #25262b;
-  --mantine-color-gray-2: #2c2e33;
-  --mantine-color-gray-3: #373a40;
-  --mantine-color-gray-4: #42444a;
-  --mantine-color-gray-5: #495057;
-  --mantine-color-gray-6: #6c757d;
-  --mantine-color-gray-7: #868e96;
-  --mantine-color-gray-8: #adb5bd;
-  --mantine-color-gray-9: #ced4da;
-  --app-color-bg: #1a1b23;
-  --app-color-surface: #25262b;
-  --app-color-text: #e5e7eb;
-  color: #e5e7eb;
-  background-color: #1a1b23;
-}
-
-/* Dark mode: fix hardcoded light backgrounds in utility components */
-[data-mantine-color-scheme="dark"] .mantine-Paper-root[style*="background-color: var(--mantine-color-yellow-0)"],
-[data-mantine-color-scheme="dark"] .mantine-Paper-root[style*="background-color: var(--mantine-color-blue-0)"],
-[data-mantine-color-scheme="dark"] .mantine-Paper-root[style*="background-color: var(--mantine-color-gray-0)"] {
-  background-color: var(--mantine-color-dark-6) !important;
 }
 
 /* Responsive design */
@@ -274,29 +256,355 @@ textarea:focus-visible {
   }
 }
 
-/* === Force minimal white theme inside dashboard === */
-/* Override inline pastel backgrounds on cards/papers in sections */
-[class*="sections"] .mantine-Card-root[style*="background"],
-[class*="sections"] .mantine-Paper-root[style*="background"],
-.mantine-Card-root[style*="mantine-color-green-0"],
-.mantine-Card-root[style*="mantine-color-blue-0"],
-.mantine-Card-root[style*="mantine-color-orange-0"],
-.mantine-Card-root[style*="mantine-color-purple-0"],
-.mantine-Card-root[style*="mantine-color-yellow-0"],
-.mantine-Paper-root[style*="mantine-color-green-0"],
-.mantine-Paper-root[style*="mantine-color-blue-0"],
-.mantine-Paper-root[style*="mantine-color-orange-0"],
-.mantine-Paper-root[style*="mantine-color-yellow-0"] {
+/* ============================================================ */
+/* === DASHBOARD: FORCE MONOCHROME (B&W) THEME              === */
+/* ============================================================ */
+
+/* Remap all Mantine color scales to grayscale via CSS vars.
+   Even if components hardcode color="blue|green|...", they
+   resolve to grayscale automatically. */
+:root,
+[data-mantine-color-scheme="light"] {
+  /* Gray scale (canonical) */
+  --mantine-color-gray-0: #f9fafb;
+  --mantine-color-gray-1: #f3f4f6;
+  --mantine-color-gray-2: #e5e7eb;
+  --mantine-color-gray-3: #d1d5db;
+  --mantine-color-gray-4: #9ca3af;
+  --mantine-color-gray-5: #6b7280;
+  --mantine-color-gray-6: #374151;
+  --mantine-color-gray-7: #1f2937;
+  --mantine-color-gray-8: #111827;
+  --mantine-color-gray-9: #030712;
+
+  /* Dark = same scale */
+  --mantine-color-dark-0: #f9fafb;
+  --mantine-color-dark-1: #f3f4f6;
+  --mantine-color-dark-2: #e5e7eb;
+  --mantine-color-dark-3: #d1d5db;
+  --mantine-color-dark-4: #9ca3af;
+  --mantine-color-dark-5: #6b7280;
+  --mantine-color-dark-6: #374151;
+  --mantine-color-dark-7: #1f2937;
+  --mantine-color-dark-8: #111827;
+  --mantine-color-dark-9: #030712;
+
+  /* All colored palettes → grayscale */
+  --mantine-color-blue-0: #f9fafb;   --mantine-color-blue-1: #f3f4f6;
+  --mantine-color-blue-2: #e5e7eb;   --mantine-color-blue-3: #d1d5db;
+  --mantine-color-blue-4: #9ca3af;   --mantine-color-blue-5: #6b7280;
+  --mantine-color-blue-6: #374151;   --mantine-color-blue-7: #1f2937;
+  --mantine-color-blue-8: #111827;   --mantine-color-blue-9: #030712;
+  --mantine-color-blue-filled: #111111;
+  --mantine-color-blue-filled-hover: #1f2937;
+  --mantine-color-blue-light: #f3f4f6;
+  --mantine-color-blue-light-hover: #e5e7eb;
+  --mantine-color-blue-light-color: #111111;
+  --mantine-color-blue-outline: #111111;
+  --mantine-color-blue-outline-hover: #f3f4f6;
+  --mantine-color-blue-text: #111111;
+
+  --mantine-color-green-0: #f9fafb;  --mantine-color-green-1: #f3f4f6;
+  --mantine-color-green-2: #e5e7eb;  --mantine-color-green-3: #d1d5db;
+  --mantine-color-green-4: #9ca3af;  --mantine-color-green-5: #6b7280;
+  --mantine-color-green-6: #374151;  --mantine-color-green-7: #1f2937;
+  --mantine-color-green-8: #111827;  --mantine-color-green-9: #030712;
+  --mantine-color-green-filled: #111111;
+  --mantine-color-green-filled-hover: #1f2937;
+  --mantine-color-green-light: #f3f4f6;
+  --mantine-color-green-light-hover: #e5e7eb;
+  --mantine-color-green-light-color: #111111;
+  --mantine-color-green-outline: #111111;
+  --mantine-color-green-text: #111111;
+
+  --mantine-color-orange-0: #f9fafb; --mantine-color-orange-1: #f3f4f6;
+  --mantine-color-orange-2: #e5e7eb; --mantine-color-orange-3: #d1d5db;
+  --mantine-color-orange-4: #9ca3af; --mantine-color-orange-5: #6b7280;
+  --mantine-color-orange-6: #374151; --mantine-color-orange-7: #1f2937;
+  --mantine-color-orange-8: #111827; --mantine-color-orange-9: #030712;
+  --mantine-color-orange-filled: #111111;
+  --mantine-color-orange-filled-hover: #1f2937;
+  --mantine-color-orange-light: #f3f4f6;
+  --mantine-color-orange-light-hover: #e5e7eb;
+  --mantine-color-orange-light-color: #111111;
+  --mantine-color-orange-text: #111111;
+
+  --mantine-color-purple-0: #f9fafb; --mantine-color-purple-1: #f3f4f6;
+  --mantine-color-purple-2: #e5e7eb; --mantine-color-purple-3: #d1d5db;
+  --mantine-color-purple-4: #9ca3af; --mantine-color-purple-5: #6b7280;
+  --mantine-color-purple-6: #374151; --mantine-color-purple-7: #1f2937;
+  --mantine-color-purple-8: #111827; --mantine-color-purple-9: #030712;
+  --mantine-color-purple-filled: #111111;
+  --mantine-color-purple-light: #f3f4f6;
+  --mantine-color-purple-light-color: #111111;
+  --mantine-color-purple-text: #111111;
+
+  --mantine-color-cyan-0: #f9fafb;   --mantine-color-cyan-1: #f3f4f6;
+  --mantine-color-cyan-2: #e5e7eb;   --mantine-color-cyan-3: #d1d5db;
+  --mantine-color-cyan-4: #9ca3af;   --mantine-color-cyan-5: #6b7280;
+  --mantine-color-cyan-6: #374151;   --mantine-color-cyan-7: #1f2937;
+  --mantine-color-cyan-8: #111827;   --mantine-color-cyan-9: #030712;
+  --mantine-color-cyan-filled: #111111;
+  --mantine-color-cyan-light: #f3f4f6;
+  --mantine-color-cyan-light-color: #111111;
+  --mantine-color-cyan-text: #111111;
+
+  --mantine-color-teal-0: #f9fafb;   --mantine-color-teal-1: #f3f4f6;
+  --mantine-color-teal-2: #e5e7eb;   --mantine-color-teal-3: #d1d5db;
+  --mantine-color-teal-4: #9ca3af;   --mantine-color-teal-5: #6b7280;
+  --mantine-color-teal-6: #374151;   --mantine-color-teal-7: #1f2937;
+  --mantine-color-teal-8: #111827;   --mantine-color-teal-9: #030712;
+  --mantine-color-teal-filled: #111111;
+  --mantine-color-teal-light: #f3f4f6;
+  --mantine-color-teal-light-color: #111111;
+  --mantine-color-teal-text: #111111;
+
+  --mantine-color-indigo-0: #f9fafb; --mantine-color-indigo-1: #f3f4f6;
+  --mantine-color-indigo-2: #e5e7eb; --mantine-color-indigo-3: #d1d5db;
+  --mantine-color-indigo-4: #9ca3af; --mantine-color-indigo-5: #6b7280;
+  --mantine-color-indigo-6: #374151; --mantine-color-indigo-7: #1f2937;
+  --mantine-color-indigo-8: #111827; --mantine-color-indigo-9: #030712;
+  --mantine-color-indigo-filled: #111111;
+  --mantine-color-indigo-light: #f3f4f6;
+  --mantine-color-indigo-light-color: #111111;
+  --mantine-color-indigo-text: #111111;
+
+  --mantine-color-pink-0: #f9fafb;   --mantine-color-pink-1: #f3f4f6;
+  --mantine-color-pink-2: #e5e7eb;   --mantine-color-pink-3: #d1d5db;
+  --mantine-color-pink-4: #9ca3af;   --mantine-color-pink-5: #6b7280;
+  --mantine-color-pink-6: #374151;   --mantine-color-pink-7: #1f2937;
+  --mantine-color-pink-8: #111827;   --mantine-color-pink-9: #030712;
+  --mantine-color-pink-filled: #111111;
+  --mantine-color-pink-light: #f3f4f6;
+  --mantine-color-pink-light-color: #111111;
+  --mantine-color-pink-text: #111111;
+
+  --mantine-color-yellow-0: #f9fafb; --mantine-color-yellow-1: #f3f4f6;
+  --mantine-color-yellow-2: #e5e7eb; --mantine-color-yellow-3: #d1d5db;
+  --mantine-color-yellow-4: #9ca3af; --mantine-color-yellow-5: #6b7280;
+  --mantine-color-yellow-6: #374151; --mantine-color-yellow-7: #1f2937;
+  --mantine-color-yellow-8: #111827; --mantine-color-yellow-9: #030712;
+  --mantine-color-yellow-filled: #111111;
+  --mantine-color-yellow-light: #f3f4f6;
+  --mantine-color-yellow-light-color: #111111;
+  --mantine-color-yellow-text: #111111;
+
+  --mantine-color-red-0: #f9fafb;    --mantine-color-red-1: #f3f4f6;
+  --mantine-color-red-2: #e5e7eb;    --mantine-color-red-3: #d1d5db;
+  --mantine-color-red-4: #9ca3af;    --mantine-color-red-5: #6b7280;
+  --mantine-color-red-6: #374151;    --mantine-color-red-7: #1f2937;
+  --mantine-color-red-8: #111827;    --mantine-color-red-9: #030712;
+  --mantine-color-red-filled: #111111;
+  --mantine-color-red-light: #f3f4f6;
+  --mantine-color-red-light-color: #111111;
+  --mantine-color-red-text: #111111;
+
+  --mantine-color-grape-0: #f9fafb;  --mantine-color-grape-1: #f3f4f6;
+  --mantine-color-grape-2: #e5e7eb;  --mantine-color-grape-3: #d1d5db;
+  --mantine-color-grape-4: #9ca3af;  --mantine-color-grape-5: #6b7280;
+  --mantine-color-grape-6: #374151;  --mantine-color-grape-7: #1f2937;
+  --mantine-color-grape-8: #111827;  --mantine-color-grape-9: #030712;
+  --mantine-color-grape-filled: #111111;
+  --mantine-color-grape-light: #f3f4f6;
+  --mantine-color-grape-light-color: #111111;
+  --mantine-color-grape-text: #111111;
+
+  --mantine-color-violet-0: #f9fafb; --mantine-color-violet-1: #f3f4f6;
+  --mantine-color-violet-2: #e5e7eb; --mantine-color-violet-3: #d1d5db;
+  --mantine-color-violet-4: #9ca3af; --mantine-color-violet-5: #6b7280;
+  --mantine-color-violet-6: #374151; --mantine-color-violet-7: #1f2937;
+  --mantine-color-violet-8: #111827; --mantine-color-violet-9: #030712;
+  --mantine-color-violet-filled: #111111;
+  --mantine-color-violet-light: #f3f4f6;
+  --mantine-color-violet-light-color: #111111;
+  --mantine-color-violet-text: #111111;
+
+  --mantine-color-lime-0: #f9fafb;   --mantine-color-lime-1: #f3f4f6;
+  --mantine-color-lime-2: #e5e7eb;   --mantine-color-lime-3: #d1d5db;
+  --mantine-color-lime-4: #9ca3af;   --mantine-color-lime-5: #6b7280;
+  --mantine-color-lime-6: #374151;   --mantine-color-lime-7: #1f2937;
+  --mantine-color-lime-8: #111827;   --mantine-color-lime-9: #030712;
+  --mantine-color-lime-filled: #111111;
+  --mantine-color-lime-light: #f3f4f6;
+  --mantine-color-lime-light-color: #111111;
+  --mantine-color-lime-text: #111111;
+
+  /* Primary alias */
+  --mantine-primary-color-filled: #111111;
+  --mantine-primary-color-filled-hover: #1f2937;
+  --mantine-primary-color-light: #f3f4f6;
+  --mantine-primary-color-light-hover: #e5e7eb;
+  --mantine-primary-color-light-color: #111111;
+  --mantine-primary-color-contrast: #ffffff;
+}
+
+/* All Badge variants → monochrome */
+.mantine-Badge-root[data-variant="light"],
+.mantine-Badge-root[data-variant="default"] {
+  background-color: #f3f4f6 !important;
+  color: #111111 !important;
+  border-color: #e5e7eb !important;
+}
+
+.mantine-Badge-root[data-variant="filled"] {
+  background-color: #111111 !important;
+  color: #ffffff !important;
+}
+
+.mantine-Badge-root[data-variant="outline"] {
+  background-color: transparent !important;
+  color: #111111 !important;
+  border: 1px solid #111111 !important;
+}
+
+.mantine-Badge-root[data-variant="dot"] {
+  background-color: transparent !important;
+  color: #111111 !important;
+  border: 1px solid #e5e7eb !important;
+}
+
+/* Filled buttons → strict black */
+.mantine-Button-root[data-variant="filled"] {
+  background-color: #111111 !important;
+  color: #ffffff !important;
+  border-color: #111111 !important;
+}
+
+.mantine-Button-root[data-variant="filled"]:hover {
+  background-color: #1f2937 !important;
+}
+
+.mantine-Button-root[data-variant="outline"] {
+  border-color: #111111 !important;
+  color: #111111 !important;
+  background-color: transparent !important;
+}
+
+.mantine-Button-root[data-variant="outline"]:hover {
+  background-color: #f5f5f5 !important;
+}
+
+.mantine-Button-root[data-variant="light"] {
+  background-color: #f3f4f6 !important;
+  color: #111111 !important;
+}
+
+.mantine-Button-root[data-variant="light"]:hover {
+  background-color: #e5e7eb !important;
+}
+
+/* ThemeIcon → neutral light gray with dark icon */
+.mantine-ThemeIcon-root {
+  background-color: #f3f4f6 !important;
+  color: #111111 !important;
+  border: 1px solid #e5e7eb !important;
+}
+
+.mantine-ThemeIcon-root[data-variant="filled"] {
+  background-color: #111111 !important;
+  color: #ffffff !important;
+  border: none !important;
+}
+
+/* Avatar */
+.mantine-Avatar-root[data-variant="filled"] {
+  background-color: #111111 !important;
+  color: #ffffff !important;
+}
+
+.mantine-Avatar-root[data-variant="light"] {
+  background-color: #f3f4f6 !important;
+  color: #111111 !important;
+}
+
+/* Tabler icons: thinner stroke for minimalist feel */
+.tabler-icon {
+  stroke-width: 1.5 !important;
+}
+
+/* ActionIcon */
+.mantine-ActionIcon-root[data-variant="filled"] {
+  background-color: #111111 !important;
+  color: #ffffff !important;
+}
+
+.mantine-ActionIcon-root[data-variant="light"] {
+  background-color: #f3f4f6 !important;
+  color: #111111 !important;
+}
+
+.mantine-ActionIcon-root[data-variant="subtle"] {
+  color: #111111 !important;
+}
+
+.mantine-ActionIcon-root[data-variant="subtle"]:hover {
+  background-color: #f5f5f5 !important;
+}
+
+/* Progress bar */
+.mantine-Progress-section {
+  background-color: #111111 !important;
+}
+
+.mantine-Progress-root {
+  background-color: #e5e7eb !important;
+}
+
+/* Switch */
+.mantine-Switch-track[data-checked] {
+  background-color: #111111 !important;
+  border-color: #111111 !important;
+}
+
+/* Tabs */
+.mantine-Tabs-tab[data-active] {
+  color: #111111 !important;
+  border-color: #111111 !important;
+}
+
+/* Anchor / link */
+.mantine-Anchor-root,
+.mantine-Anchor-root:hover {
+  color: #111111 !important;
+}
+
+/* Indicator (red dot etc.) */
+.mantine-Indicator-indicator {
+  background-color: #111111 !important;
+  color: #ffffff !important;
+}
+
+/* Slider */
+.mantine-Slider-bar {
+  background-color: #111111 !important;
+}
+
+.mantine-Slider-thumb {
+  background-color: #111111 !important;
+  border-color: #111111 !important;
+}
+
+/* Drop colored gradients on cards inside dashboard */
+[class*="sections"] .mantine-Card-root[style*="gradient"],
+[class*="sections"] .mantine-Paper-root[style*="gradient"],
+.dashboard-layout .mantine-Card-root[style*="gradient"],
+.dashboard-layout .mantine-Paper-root[style*="gradient"] {
+  background: #ffffff !important;
+}
+
+/* Drop colored backgrounds (pastel fills like *-color-blue-0) on dashboard cards */
+.dashboard-layout .mantine-Card-root[style*="mantine-color-"],
+.dashboard-layout .mantine-Paper-root[style*="mantine-color-"] {
   background: #ffffff !important;
   background-color: #ffffff !important;
   border: 1px solid #e5e7eb !important;
 }
 
-/* Headings inside dashboard — flat dark color, no gradients */
+/* Headings inside dashboard — flat dark color, no gradient text */
 .mantine-Text-root[style*="linear-gradient"],
 .mantine-Title-root[style*="linear-gradient"] {
   background: none !important;
-  color: #111827 !important;
-  -webkit-text-fill-color: #111827 !important;
+  color: #111111 !important;
+  -webkit-text-fill-color: #111111 !important;
   -webkit-background-clip: unset !important;
 }

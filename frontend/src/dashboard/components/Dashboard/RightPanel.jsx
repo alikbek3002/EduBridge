@@ -105,12 +105,12 @@ const RightPanel = ({
           <Card shadow="md" p="lg" radius="lg" withBorder style={{ background: 'var(--app-color-surface)' }}>
             <Group justify="space-between" mb="md">
               <Group gap="xs">
-                <Avatar size="sm" color="grape">
-                  <IconBulb size={14} />
+                <Avatar size="sm" color="dark" variant="filled">
+                  <IconBulb size={14} stroke={1.5} />
                 </Avatar>
                 <Text size="lg" fw={600}>AI рекомендации</Text>
               </Group>
-              <Badge radius="sm" variant="light" color="blue">
+              <Badge radius="sm" variant="light" color="gray">
                 {aiRecommendations.length}
               </Badge>
             </Group>
@@ -161,7 +161,7 @@ const RightPanel = ({
             <Group justify="space-between" mb="md">
               <Text size="lg" fw={600}>Уведомления</Text>
               <Group gap="xs">
-                <Badge color="red" radius="sm" variant="light">{unreadCount}</Badge>
+                <Badge color="dark" radius="sm" variant="filled">{unreadCount}</Badge>
                 <ActionIcon
                   size="sm"
                   variant="light"
@@ -208,8 +208,8 @@ const RightPanel = ({
                           }}
                           onClick={() => markAsRead(notification.id)}
                         >
-                          <Avatar size="sm" color="blue">
-                            <IconBell size={14} />
+                          <Avatar size="sm" color="dark" variant="filled">
+                            <IconBell size={14} stroke={1.5} />
                           </Avatar>
                           <Box style={{ flex: 1 }}>
                             <Text size="sm" fw={500}>
@@ -220,7 +220,7 @@ const RightPanel = ({
                             </Text>
                           </Box>
                           {!notification.is_read && (
-                            <Badge size="xs" color="red">
+                            <Badge size="xs" color="dark" variant="filled">
                               Новое
                             </Badge>
                           )}

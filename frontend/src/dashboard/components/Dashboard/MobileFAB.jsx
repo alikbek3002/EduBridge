@@ -31,7 +31,7 @@ const MobileFAB = ({
     {
       icon: IconBell,
       label: 'Уведомления',
-      color: 'blue',
+      color: 'dark',
       action: () => {
         onNotificationsToggle();
         setIsOpen(false);
@@ -41,7 +41,7 @@ const MobileFAB = ({
     {
       icon: IconRobot,
       label: 'AI Помощник',
-      color: 'grape',
+      color: 'dark',
       action: () => {
         onAiToggle();
         setIsOpen(false);
@@ -50,7 +50,7 @@ const MobileFAB = ({
     {
       icon: IconSettings,
       label: 'Настройки',
-      color: 'gray',
+      color: 'dark',
       action: () => {
         onSettingsToggle();
         setIsOpen(false);
@@ -145,15 +145,16 @@ const MobileFAB = ({
                   }}
                   className="mobile-fab-item touch-target"
                 >
-                  <item.icon size={20} />
+                  <item.icon size={20} stroke={1.5} />
                   {item.badge && (
                     <div
                       style={{
                         position: 'absolute',
                         top: -2,
                         right: -2,
-                        background: theme.colors.red[6],
-                        color: theme.white,
+                        background: '#ffffff',
+                        color: '#111111',
+                        border: '1px solid #111111',
                         borderRadius: '50%',
                         width: 18,
                         height: 18,
@@ -178,7 +179,7 @@ const MobileFAB = ({
       <ActionIcon
         size="xl"
         radius="xl"
-        color="blue"
+        color="dark"
         variant="filled"
         onClick={toggleFAB}
         className="mobile-fab touch-target"
@@ -194,7 +195,7 @@ const MobileFAB = ({
           transition: 'transform 0.2s ease'
         }}
       >
-        {isOpen ? <IconX size={24} /> : <IconPlus size={24} />}
+        {isOpen ? <IconX size={24} stroke={1.5} /> : <IconPlus size={24} stroke={1.5} />}
       </ActionIcon>
     </>
   );

@@ -68,17 +68,18 @@ const MobileHeader = ({
           {/* Кнопка уведомлений */}
           <Tooltip label="Уведомления" position="bottom">
             <ActionIcon
-              variant="light"
-              color="blue"
+              variant="subtle"
+              color="dark"
               size="lg"
               onClick={onNotificationsToggle}
               style={{ position: 'relative' }}
             >
-              <IconBell size={18} />
+              <IconBell size={18} stroke={1.5} />
               {unreadNotifications > 0 && (
                 <Badge
                   size="xs"
-                  color="red"
+                  color="dark"
+                  variant="filled"
                   style={{
                     position: 'absolute',
                     top: -2,
@@ -98,22 +99,24 @@ const MobileHeader = ({
           {/* Кнопка AI помощника */}
           <Tooltip label="AI Помощник" position="bottom">
             <ActionIcon
-              variant="light"
-              color="grape"
+              variant="subtle"
+              color="dark"
               size="lg"
               onClick={onAiToggle}
             >
-              <IconRobot size={18} />
+              <IconRobot size={18} stroke={1.5} />
             </ActionIcon>
           </Tooltip>
 
           {/* Аватар пользователя */}
-          <Avatar 
+          <Avatar
             src={avatarSrc}
             size="md"
             radius="xl"
-            style={{ 
-              border: '2px solid var(--mantine-color-blue-4)',
+            color="dark"
+            variant="filled"
+            style={{
+              border: '1px solid #111111',
               cursor: 'pointer'
             }}
           >

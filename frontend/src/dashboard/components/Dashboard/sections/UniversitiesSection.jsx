@@ -270,7 +270,7 @@ const UniversitiesSection = () => {
               placeholder="Поиск по названию, городу или программе..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              leftSection={<IconSearch size={16} color="#2563eb" />}
+              leftSection={<IconSearch size={16} stroke={1.5} color="#111111" />}
               size="md"
               radius="md"
               variant="filled"
