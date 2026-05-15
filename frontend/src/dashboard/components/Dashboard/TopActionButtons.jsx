@@ -91,7 +91,7 @@ const TopActionButtons = ({ isMobile = false, isTablet = false }) => {
           variant="light"
           color="blue"
           size={buttonSize}
-          leftIcon={<IconBell size={isMobile ? 16 : 18} />}
+          leftSection={<IconBell size={isMobile ? 16 : 18} stroke={1.5} />}
           onClick={() => setNotificationsOpened(true)}
           className={styles.actionButton}
         >
@@ -108,7 +108,7 @@ const TopActionButtons = ({ isMobile = false, isTablet = false }) => {
           variant="light"
           color="grape"
           size={buttonSize}
-          leftIcon={<IconRobot size={isMobile ? 16 : 18} />}
+          leftSection={<IconRobot size={isMobile ? 16 : 18} stroke={1.5} />}
           onClick={() => setAiRecommendationsOpened(true)}
           className={styles.actionButton}
         >

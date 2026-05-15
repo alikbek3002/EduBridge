@@ -1,5 +1,6 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import React, { useState } from 'react';
+import { updateProfileComplete, fetchProfile } from '../../../../store/authSlice';
 import { 
   Box, 
   Stack, 
@@ -35,7 +36,21 @@ import {
 } from '@tabler/icons-react';
 
 const CodiceSection = ({ progress }) => {
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+  const [markingStep, setMarkingStep] = useState(null);
+
+  const toggleStep = async (stepNum, value) => {
+    setMarkingStep(stepNum);
+    try {
+      await dispatch(updateProfileComplete({ [`codice_step_${stepNum}_completed`]: value })).unwrap();
+      await dispatch(fetchProfile());
+    } catch (e) {
+      console.error('Failed to update step', e);
+    } finally {
+      setMarkingStep(null);
+    }
+  };
   // Рассчитываем прогресс на основе реальных данных
   const _overallProgress = progress?.overallProgress || 0;
   const [opened, setOpened] = useState(false);
@@ -69,7 +84,7 @@ const CodiceSection = ({ progress }) => {
       id: 1,
       title: 'Получение справки о доходах',
       description: 'Справка с работы или из налоговой',
-      completed: user?.profile?.codice_step_1_completed || false,
+      completed: !!user?.profile?.codice_step_1_completed,
       required: true,
       documents: ['Справка о доходах', 'Справка с работы']
     },
@@ -77,7 +92,7 @@ const CodiceSection = ({ progress }) => {
       id: 2,
       title: 'Заполнение заявления',
       description: 'Заполнение формы на получение Codice Fiscale',
-      completed: user?.profile?.codice_step_1_completed || false,
+      completed: !!user?.profile?.codice_step_2_completed,
       required: true,
       documents: ['Заявление', 'Копия паспорта', 'Справка о доходах']
     },
@@ -85,7 +100,7 @@ const CodiceSection = ({ progress }) => {
       id: 3,
       title: 'Подача документов',
       description: 'Подача в итальянское консульство',
-      completed: false,
+      completed: !!user?.profile?.codice_step_3_completed,
       required: true,
       documents: ['Все документы', 'Оплата пошлины']
     },
@@ -93,7 +108,7 @@ const CodiceSection = ({ progress }) => {
       id: 4,
       title: 'Получение Codice Fiscale',
       description: 'Получение готового документа',
-      completed: false,
+      completed: !!user?.profile?.codice_step_4_completed,
       required: true,
       documents: ['Codice Fiscale']
     }
@@ -271,10 +286,13 @@ const CodiceSection = ({ progress }) => {
                     )}
                     <Button
                       size="sm"
-                      variant="outline"
-                      leftSection={<IconEye size={16} />}
+                      variant={step.completed ? 'subtle' : 'filled'}
+                      color="dark"
+                      onClick={() => toggleStep(step.id, !step.completed)}
+                      loading={markingStep === step.id}
+                      leftSection={step.completed ? <IconEye size={16} /> : <IconCheck size={16} />}
                     >
-                      Подробнее
+                      {step.completed ? 'Отменить' : 'Отметить'}
                     </Button>
                   </Group>
                 </Group>
@@ -364,7 +382,15 @@ const CodiceSection = ({ progress }) => {
                   <Text size="sm" c="dimmed">
                     Инструкция по получению справки в налоговой
                   </Text>
-                  <Button color="blue" variant="outline" fullWidth>
+                  <Button
+                    color="dark"
+                    variant="outline"
+                    fullWidth
+                    component="a"
+                    href="https://www.youtube.com/results?search_query=codice+fiscale+come+ottenere"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Смотреть видео
                   </Button>
                 </Stack>
@@ -374,7 +400,7 @@ const CodiceSection = ({ progress }) => {
               <Card shadow="sm" padding="lg" radius="md" withBorder style={{ background: 'var(--app-color-surface)' }}>
                 <Stack gap="md">
                   <Group>
-                    <IconPlayerPlay size={24} color="var(--mantine-color-green-6)" />
+                    <IconPlayerPlay size={24} stroke={1.5} color="#111111" />
                     <Text size="md" fw={600}>
                       Заполнение заявления
                     </Text>
@@ -382,7 +408,15 @@ const CodiceSection = ({ progress }) => {
                   <Text size="sm" c="dimmed">
                     Пошаговая инструкция по заполнению формы
                   </Text>
-                  <Button color="green" variant="outline" fullWidth>
+                  <Button
+                    color="dark"
+                    variant="outline"
+                    fullWidth
+                    component="a"
+                    href="https://www.youtube.com/results?search_query=codice+fiscale+richiesta+modulo"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Смотреть видео
                   </Button>
                 </Stack>
@@ -399,27 +433,42 @@ const CodiceSection = ({ progress }) => {
           <Stack gap="sm">
             <Button
               variant="outline"
-              leftSection={<IconExternalLink size={16} />}
+              color="dark"
+              leftSection={<IconExternalLink size={16} stroke={1.5} />}
               fullWidth
               justify="flex-start"
+              component="a"
+              href="https://www.agenziaentrate.gov.it/portale/web/english/individuals/tax-identification-number-for-foreign-citizens"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              Официальный сайт для получения Codice Fiscale
+              Agenzia delle Entrate — Codice Fiscale для иностранцев
             </Button>
             <Button
               variant="outline"
-              leftSection={<IconExternalLink size={16} />}
+              color="dark"
+              leftSection={<IconExternalLink size={16} stroke={1.5} />}
               fullWidth
               justify="flex-start"
+              component="a"
+              href="https://www.esteri.it/en/servizi-consolari-e-visti/italiani-all-estero/rete-consolare/"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              Итальянское консульство в Казахстане
+              Список итальянских консульств за рубежом
             </Button>
             <Button
               variant="outline"
-              leftSection={<IconExternalLink size={16} />}
+              color="dark"
+              leftSection={<IconExternalLink size={16} stroke={1.5} />}
               fullWidth
               justify="flex-start"
+              component="a"
+              href="https://www.agenziaentrate.gov.it/portale/documents/20143/233937/Modello_AA4_8_2014.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              Список необходимых документов
+              Бланк заявления (Modello AA4/8) — PDF
             </Button>
           </Stack>
         </Paper>

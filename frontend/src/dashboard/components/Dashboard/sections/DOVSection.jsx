@@ -1,5 +1,6 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import React, { useState } from 'react';
+import { updateProfileComplete, fetchProfile } from '../../../../store/authSlice';
 import { 
   Box, 
   Stack, 
@@ -35,7 +36,21 @@ import {
 } from '@tabler/icons-react';
 
 const DOVSection = ({ progress }) => {
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+  const [markingStep, setMarkingStep] = useState(null);
+
+  const toggleStep = async (stepNum, value) => {
+    setMarkingStep(stepNum);
+    try {
+      await dispatch(updateProfileComplete({ [`dov_step_${stepNum}_completed`]: value })).unwrap();
+      await dispatch(fetchProfile());
+    } catch (e) {
+      console.error('Failed to update DOV step', e);
+    } finally {
+      setMarkingStep(null);
+    }
+  };
   // Рассчитываем прогресс на основе реальных данных
   const _overallProgress = progress?.overallProgress || 0;
   const [opened, setOpened] = useState(false);
@@ -69,7 +84,7 @@ const DOVSection = ({ progress }) => {
       id: 1,
       title: 'Подготовка документов',
       description: 'Сбор всех необходимых документов',
-      completed: user?.profile?.dov_step_1_completed || false,
+      completed: !!user?.profile?.dov_step_1_completed,
       required: true,
       documents: ['Аттестат', 'IELTS', 'Мотивационное письмо', 'Рекомендации']
     },
@@ -77,7 +92,7 @@ const DOVSection = ({ progress }) => {
       id: 2,
       title: 'Апостилирование документов',
       description: 'Легализация документов для Италии',
-      completed: false,
+      completed: !!user?.profile?.dov_step_2_completed,
       required: true,
       documents: ['Апостилированные документы', 'Переводы']
     },
@@ -85,7 +100,7 @@ const DOVSection = ({ progress }) => {
       id: 3,
       title: 'Подача в консульство',
       description: 'Подача документов в итальянское консульство',
-      completed: false,
+      completed: !!user?.profile?.dov_step_3_completed,
       required: true,
       documents: ['Все документы', 'Заявление', 'Оплата пошлины']
     },
@@ -93,7 +108,7 @@ const DOVSection = ({ progress }) => {
       id: 4,
       title: 'Получение DOV',
       description: 'Получение готового документа',
-      completed: false,
+      completed: !!user?.profile?.dov_step_4_completed,
       required: true,
       documents: ['DOV']
     }
@@ -277,10 +292,13 @@ const DOVSection = ({ progress }) => {
                     )}
                     <Button
                       size="sm"
-                      variant="outline"
-                      leftSection={<IconEye size={16} />}
+                      variant={step.completed ? 'subtle' : 'filled'}
+                      color="dark"
+                      onClick={() => toggleStep(step.id, !step.completed)}
+                      loading={markingStep === step.id}
+                      leftSection={step.completed ? <IconEye size={16} /> : <IconCheck size={16} />}
                     >
-                      Подробнее
+                      {step.completed ? 'Отменить' : 'Отметить'}
                     </Button>
                   </Group>
                 </Group>
@@ -375,7 +393,15 @@ const DOVSection = ({ progress }) => {
                   <Text size="sm" c="dimmed">
                     Инструкция по апостилированию документов
                   </Text>
-                  <Button color="blue" variant="outline" fullWidth>
+                  <Button
+                    color="dark"
+                    variant="outline"
+                    fullWidth
+                    component="a"
+                    href="https://www.youtube.com/results?search_query=apostille+aja+convention+documents"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Смотреть видео
                   </Button>
                 </Stack>
@@ -385,7 +411,7 @@ const DOVSection = ({ progress }) => {
               <Card shadow="sm" padding="lg" radius="md" withBorder style={{ background: 'var(--app-color-surface)' }}>
                 <Stack gap="md">
                   <Group>
-                    <IconPlayerPlay size={24} color="var(--mantine-color-green-6)" />
+                    <IconPlayerPlay size={24} stroke={1.5} color="#111111" />
                     <Text size="md" fw={600}>
                       Подача документов в консульство
                     </Text>
@@ -393,7 +419,15 @@ const DOVSection = ({ progress }) => {
                   <Text size="sm" c="dimmed">
                     Пошаговая инструкция по подаче документов
                   </Text>
-                  <Button color="green" variant="outline" fullWidth>
+                  <Button
+                    color="dark"
+                    variant="outline"
+                    fullWidth
+                    component="a"
+                    href="https://www.youtube.com/results?search_query=dichiarazione+di+valore+come+ottenere"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Смотреть видео
                   </Button>
                 </Stack>
@@ -410,27 +444,42 @@ const DOVSection = ({ progress }) => {
           <Stack gap="sm">
             <Button
               variant="outline"
-              leftSection={<IconExternalLink size={16} />}
+              color="dark"
+              leftSection={<IconExternalLink size={16} stroke={1.5} />}
               fullWidth
               justify="flex-start"
+              component="a"
+              href="https://www.esteri.it/en/servizi-consolari-e-visti/italiani-all-estero/legalizzazione/"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              Министерство юстиции - апостилирование
+              MAECI — Апостиль и легализация
             </Button>
             <Button
               variant="outline"
-              leftSection={<IconExternalLink size={16} />}
+              color="dark"
+              leftSection={<IconExternalLink size={16} stroke={1.5} />}
               fullWidth
               justify="flex-start"
+              component="a"
+              href="https://www.esteri.it/en/servizi-consolari-e-visti/italiani-all-estero/dichiarazione-di-valore/"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              Итальянское консульство - DOV
+              Официальная страница Dichiarazione di Valore
             </Button>
             <Button
               variant="outline"
-              leftSection={<IconExternalLink size={16} />}
+              color="dark"
+              leftSection={<IconExternalLink size={16} stroke={1.5} />}
               fullWidth
               justify="flex-start"
+              component="a"
+              href="https://www.universitaly.it/index.php/registration/firststep"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              Список переводчиков
+              Реестр аккредитованных переводчиков
             </Button>
           </Stack>
         </Paper>

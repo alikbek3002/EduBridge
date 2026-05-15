@@ -11,13 +11,24 @@ const QUICK_QUESTIONS = [
   'Как улучшить IELTS Listening?',
   'Что нужно для поступления в Bocconi?',
   'Объясни структуру мотивационного письма',
+  'Какие документы нужны для DOV?',
+  'Как получить Codice Fiscale?',
+  'Чем отличаются TOLC-I и TOLC-E?',
+  'Сколько стоит обучение в Италии?',
+  'Какой минимальный балл IELTS нужен для Politecnico di Milano?',
+  'Как подать заявку через Universitaly?',
+  'Как оформить студенческую визу type D?',
+  'Можно ли работать во время учёбы в Италии?',
+  'Что такое ISEE и нужен ли он мне?',
 ];
 
 const RESOURCES = [
-  { icon: IconBook, label: 'IELTS.org — официальные материалы', desc: 'Образцы заданий и советы по подготовке' },
-  { icon: IconBrandYoutube, label: 'Кейти Энгл — IELTS на YouTube', desc: 'Бесплатные видео-уроки по всем секциям' },
-  { icon: IconHeadphones, label: 'BBC Learning English', desc: 'Подкасты и упражнения на восприятие на слух' },
-  { icon: IconBulb, label: 'Quizlet — академическая лексика', desc: 'Карточки Oxford AWL и IELTS-словарь' },
+  { icon: IconBook, label: 'IELTS.org — официальные материалы', desc: 'Образцы заданий и советы по подготовке', url: 'https://www.ielts.org/for-test-takers/sample-test-questions' },
+  { icon: IconBrandYoutube, label: 'IELTS Liz / E2 IELTS — YouTube', desc: 'Бесплатные видео-уроки по всем секциям', url: 'https://www.youtube.com/@IELTSLizOfficial' },
+  { icon: IconHeadphones, label: 'BBC Learning English', desc: 'Подкасты и упражнения на восприятие на слух', url: 'https://www.bbc.co.uk/learningenglish' },
+  { icon: IconBulb, label: 'Quizlet — академическая лексика', desc: 'Карточки Oxford AWL и IELTS-словарь', url: 'https://quizlet.com/subject/ielts-academic-vocabulary/' },
+  { icon: IconExternalLink, label: 'Universitaly — официальный портал', desc: 'Подача заявок в итальянские университеты', url: 'https://www.universitaly.it/' },
+  { icon: IconExternalLink, label: 'MAECI — Dichiarazione di Valore', desc: 'Информация по DOV от МИД Италии', url: 'https://www.esteri.it/en/servizi-consolari-e-visti/italiani-all-estero/dichiarazione-di-valore/' },
 ];
 
 const AIMentorSection = () => {
@@ -94,13 +105,20 @@ const AIMentorSection = () => {
               <List.Item
                 key={r.label}
                 icon={
-                  <ThemeIcon size={22} radius="md" color="teal" variant="light">
-                    <Icon size={13} />
+                  <ThemeIcon size={22} radius="md" color="gray" variant="light">
+                    <Icon size={13} stroke={1.5} />
                   </ThemeIcon>
                 }
               >
-                <Text size="sm" fw={500}>{r.label}</Text>
-                <Text size="xs" c="dimmed">{r.desc}</Text>
+                <a
+                  href={r.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ textDecoration: 'none', color: 'inherit' }}
+                >
+                  <Text size="sm" fw={500}>{r.label}</Text>
+                  <Text size="xs" c="dimmed">{r.desc}</Text>
+                </a>
               </List.Item>
             );
           })}

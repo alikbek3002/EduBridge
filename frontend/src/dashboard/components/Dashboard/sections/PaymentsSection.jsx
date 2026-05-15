@@ -91,7 +91,14 @@ const PaymentsSection = () => {
         setSelectedPlan(null);
       }, 1800);
     } catch (e) {
-      setPayError(e?.response?.data?.error || 'Ошибка при обработке платежа');
+      const backendMsg = e?.response?.data?.error;
+      const status = e?.response?.status;
+      // Stripe / payment gateway пока не подключён — показываем дружелюбный fallback
+      if (status === 501 || status === 502 || status === 503 || /not implemented|stripe|gateway/i.test(backendMsg || '')) {
+        setPayError('Оплата временно недоступна. Свяжитесь с менеджером EduBridge для активации подписки.');
+      } else {
+        setPayError(backendMsg || 'Оплата временно недоступна. Свяжитесь с менеджером EduBridge.');
+      }
     } finally {
       setPaying(false);
     }

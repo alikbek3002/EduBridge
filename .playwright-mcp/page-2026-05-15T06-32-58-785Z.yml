@@ -1,0 +1,42 @@
+- main [ref=e4]:
+  - generic [ref=e10]:
+    - generic [ref=e11]:
+      - generic [ref=e12]:
+        - button [ref=e13] [cursor=pointer]:
+          - img [ref=e15]
+        - generic [ref=e18]:
+          - img [ref=e20]
+          - paragraph [ref=e24]: EduBridge
+      - generic [ref=e25]:
+        - heading "Добро пожаловать!" [level=1] [ref=e26]
+        - paragraph [ref=e27]: Войдите в свой аккаунт для продолжения
+    - generic [ref=e29]:
+      - generic [ref=e30]:
+        - generic [ref=e31]: Email *
+        - generic [ref=e32]:
+          - img [ref=e34]
+          - textbox "Email" [active] [ref=e37]:
+            - /placeholder: Введите ваш email
+      - generic [ref=e38]:
+        - generic [ref=e39]: Пароль *
+        - generic [ref=e40]:
+          - generic:
+            - img
+          - textbox "Пароль" [ref=e42]:
+            - /placeholder: Введите ваш пароль
+          - button [ref=e44] [cursor=pointer]:
+            - img [ref=e46]
+      - generic [ref=e49]:
+        - generic [ref=e50]: Код 2FA (если включён)
+        - textbox "Код 2FA (если включён)" [ref=e52]:
+          - /placeholder: "123456"
+      - generic [ref=e53]:
+        - generic [ref=e55]:
+          - generic [ref=e56]:
+            - checkbox "Запомнить меня" [ref=e57]
+            - img
+          - generic [ref=e59]: Запомнить меня
+        - generic [ref=e60] [cursor=pointer]: Забыли пароль?
+      - button "Войти" [disabled] [ref=e61]:
+        - generic [ref=e63]: Войти
+      - paragraph [ref=e64]: Если у вас ещё нет аккаунта, обратитесь к команде EduBridge для получения доступа.

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Box, Stack, Group, Text, Paper, Card, Badge, Button, SegmentedControl, Switch } from '@mantine/core';
+import { Box, Stack, Group, Text, Paper, Card, Badge, Button, SegmentedControl, Switch, Tooltip } from '@mantine/core';
 import { IconBell, IconCheck, IconX, IconMail } from '@tabler/icons-react';
 import { fetchNotifications, markNotificationAsRead } from '../../../../store/notificationsSlice';
 import notificationsApi from '../../../../shared/api/notificationsApi';
@@ -33,9 +33,13 @@ export default function NotificationsSection() {
               data={[{ label: 'Все', value: 'all' }, { label: 'Непрочитанные', value: 'unread' }]}
             />
             <Group gap="sm">
-              <Switch label="Email уведомления" defaultChecked />
-              <Switch label="Push уведомления" defaultChecked />
-              <Button size="xs" variant="light" onClick={async ()=>{ await notificationsApi.markAllAsRead(); dispatch(fetchNotifications()); }}>Отметить все прочитанными</Button>
+              <Tooltip label="Email-нотификации скоро будут доступны" position="bottom">
+                <Switch label="Email" disabled defaultChecked />
+              </Tooltip>
+              <Tooltip label="Push-нотификации скоро будут доступны" position="bottom">
+                <Switch label="Push" disabled defaultChecked />
+              </Tooltip>
+              <Button size="xs" variant="filled" color="dark" onClick={async ()=>{ await notificationsApi.markAllAsRead(); dispatch(fetchNotifications()); }}>Отметить все прочитанными</Button>
             </Group>
           </Group>
         </Paper>

@@ -586,6 +586,15 @@ def submit_ielts_attempt(request, pk):
         answers=user_answers,
     )
 
+    # Auto-bump UserProfile.ielts_current_score to the best band so far (IELTS sections only)
+    if test.section in ('listening', 'reading', 'writing', 'speaking'):
+        profile = getattr(request.user, 'profile', None)
+        if profile is not None:
+            current = float(profile.ielts_current_score or 0)
+            if band_score > current:
+                profile.ielts_current_score = band_score
+                profile.save(update_fields=['ielts_current_score'])
+
     return Response({
         'attempt_id': attempt.id,
         'score': score,

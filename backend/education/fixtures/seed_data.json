@@ -8,6 +8,7 @@
       "city": "Milan",
       "description": "Один из ведущих частных университетов Европы, специализирующийся на экономике, менеджменте, финансах и праве.",
       "website": "https://www.unibocconi.it/",
+      "logo": "https://picsum.photos/seed/bocconi/800/450",
       "level": "Top",
       "student_count": 14000,
       "deadline": "2026-04-15",
@@ -25,8 +26,9 @@
       "name": "Politecnico di Milano",
       "country": "Italy",
       "city": "Milan",
-      "description": "Крупнейший технический университет Италии — инженерия, архитектура, дизайн.",
+      "description": "Крупнейший технический университет Италии — инженерия, архитектура, дизайн. Один из лучших в мире по индустриальному дизайну.",
       "website": "https://www.polimi.it/",
+      "logo": "https://picsum.photos/seed/polimi/800/450",
       "level": "Top",
       "student_count": 47000,
       "deadline": "2026-04-30",
@@ -44,8 +46,9 @@
       "name": "Università di Bologna",
       "country": "Italy",
       "city": "Bologna",
-      "description": "Старейший университет в мире, основан в 1088 году. Полный спектр гуманитарных и научных направлений.",
+      "description": "Старейший университет в мире, основан в 1088 году. Полный спектр гуманитарных и научных направлений, 5 кампусов в Эмилии-Романье.",
       "website": "https://www.unibo.it/",
+      "logo": "https://picsum.photos/seed/unibo/800/450",
       "level": "Top",
       "student_count": 87000,
       "deadline": "2026-05-31",
@@ -63,8 +66,9 @@
       "name": "Sapienza Università di Roma",
       "country": "Italy",
       "city": "Rome",
-      "description": "Один из крупнейших европейских университетов, более 700 лет истории. Сильные программы по медицине и архитектуре.",
+      "description": "Один из крупнейших европейских университетов, более 700 лет истории. Сильные программы по медицине и архитектуре, около 700 кафедр.",
       "website": "https://www.uniroma1.it/",
+      "logo": "https://picsum.photos/seed/sapienza/800/450",
       "level": "High",
       "student_count": 113000,
       "deadline": "2026-07-15",
@@ -82,8 +86,9 @@
       "name": "Politecnico di Torino",
       "country": "Italy",
       "city": "Turin",
-      "description": "Один из старейших технических университетов Италии. Сильные программы по автомобильной и аэрокосмической инженерии.",
+      "description": "Один из старейших технических университетов Италии (1859). Сильные программы по автомобильной, аэрокосмической инженерии и материаловедению.",
       "website": "https://www.polito.it/",
+      "logo": "https://picsum.photos/seed/polito/800/450",
       "level": "High",
       "student_count": 35000,
       "deadline": "2026-06-30",
@@ -101,13 +106,134 @@
       "name": "Università degli Studi di Padova",
       "country": "Italy",
       "city": "Padova",
-      "description": "Исторический университет с 1222 года. Сильна медицина, право и инженерия.",
+      "description": "Исторический университет с 1222 года. Сильная медицина, право, инженерия. Здесь преподавал Галилео Галилей.",
       "website": "https://www.unipd.it/",
+      "logo": "https://picsum.photos/seed/unipd/800/450",
       "level": "High",
       "student_count": 60000,
       "deadline": "2026-07-31",
       "latitude": 45.4064,
       "longitude": 11.8768,
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z",
+      "updated_at": "2026-05-13T00:00:00Z"
+    }
+  },
+  {
+    "model": "education.university",
+    "pk": 7,
+    "fields": {
+      "name": "Università degli Studi di Firenze",
+      "country": "Italy",
+      "city": "Florence",
+      "description": "Тосканский университет с богатой историей искусств и архитектуры. Сильные программы по реставрации, дизайну и итальянскому языку.",
+      "website": "https://www.unifi.it/",
+      "logo": "https://picsum.photos/seed/unifi/800/450",
+      "level": "High",
+      "student_count": 51000,
+      "deadline": "2026-07-20",
+      "latitude": 43.7696,
+      "longitude": 11.2558,
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z",
+      "updated_at": "2026-05-13T00:00:00Z"
+    }
+  },
+  {
+    "model": "education.university",
+    "pk": 8,
+    "fields": {
+      "name": "Università di Pisa",
+      "country": "Italy",
+      "city": "Pisa",
+      "description": "Один из престижнейших университетов Италии (1343). Здесь учился Энрико Ферми. Сильные программы по физике, математике и информатике.",
+      "website": "https://www.unipi.it/",
+      "logo": "https://picsum.photos/seed/unipi/800/450",
+      "level": "High",
+      "student_count": 50000,
+      "deadline": "2026-08-10",
+      "latitude": 43.7228,
+      "longitude": 10.4017,
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z",
+      "updated_at": "2026-05-13T00:00:00Z"
+    }
+  },
+  {
+    "model": "education.university",
+    "pk": 9,
+    "fields": {
+      "name": "Università degli Studi di Trento",
+      "country": "Italy",
+      "city": "Trento",
+      "description": "Молодой и динамичный университет в Альпах. Топовые программы по компьютерным наукам, когнитивистике и физике.",
+      "website": "https://www.unitn.it/",
+      "logo": "https://picsum.photos/seed/unitn/800/450",
+      "level": "Top",
+      "student_count": 16000,
+      "deadline": "2026-04-30",
+      "latitude": 46.0667,
+      "longitude": 11.1167,
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z",
+      "updated_at": "2026-05-13T00:00:00Z"
+    }
+  },
+  {
+    "model": "education.university",
+    "pk": 10,
+    "fields": {
+      "name": "Università Cattolica del Sacro Cuore",
+      "country": "Italy",
+      "city": "Milan",
+      "description": "Крупнейший частный католический университет Европы. Сильные программы по психологии, экономике, политологии и медицине.",
+      "website": "https://www.unicatt.it/",
+      "logo": "https://picsum.photos/seed/cattolica/800/450",
+      "level": "High",
+      "student_count": 42000,
+      "deadline": "2026-05-20",
+      "latitude": 45.4642,
+      "longitude": 9.1900,
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z",
+      "updated_at": "2026-05-13T00:00:00Z"
+    }
+  },
+  {
+    "model": "education.university",
+    "pk": 11,
+    "fields": {
+      "name": "Università di Roma Tor Vergata",
+      "country": "Italy",
+      "city": "Rome",
+      "description": "Современный исследовательский университет. Топовые позиции в Италии по экономике, инженерии и медицине. Большой кампус в южной части Рима.",
+      "website": "https://web.uniroma2.it/",
+      "logo": "https://picsum.photos/seed/torvergata/800/450",
+      "level": "High",
+      "student_count": 33000,
+      "deadline": "2026-07-25",
+      "latitude": 41.8542,
+      "longitude": 12.6233,
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z",
+      "updated_at": "2026-05-13T00:00:00Z"
+    }
+  },
+  {
+    "model": "education.university",
+    "pk": 12,
+    "fields": {
+      "name": "Università degli Studi di Milano",
+      "country": "Italy",
+      "city": "Milan",
+      "description": "Государственный университет Милана, известный как 'La Statale'. Сильные программы по медицине, праву и гуманитарным наукам.",
+      "website": "https://www.unimi.it/",
+      "logo": "https://picsum.photos/seed/unimi/800/450",
+      "level": "High",
+      "student_count": 64000,
+      "deadline": "2026-07-15",
+      "latitude": 45.4584,
+      "longitude": 9.1969,
       "is_active": true,
       "created_at": "2026-05-13T00:00:00Z",
       "updated_at": "2026-05-13T00:00:00Z"
@@ -165,6 +291,39 @@
       "name": "Medicine",
       "description": "Медицина и хирургия.",
       "category": "Health",
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z"
+    }
+  },
+  {
+    "model": "education.major",
+    "pk": 6,
+    "fields": {
+      "name": "Law",
+      "description": "Юриспруденция и международное право.",
+      "category": "Humanities",
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z"
+    }
+  },
+  {
+    "model": "education.major",
+    "pk": 7,
+    "fields": {
+      "name": "Psychology",
+      "description": "Психология и когнитивные науки.",
+      "category": "Health",
+      "is_active": true,
+      "created_at": "2026-05-13T00:00:00Z"
+    }
+  },
+  {
+    "model": "education.major",
+    "pk": 8,
+    "fields": {
+      "name": "Design",
+      "description": "Промышленный, графический и интерьерный дизайн.",
+      "category": "Design",
       "is_active": true,
       "created_at": "2026-05-13T00:00:00Z"
     }

@@ -454,13 +454,23 @@ def update_user_profile(request):
         
         # Поля профиля
         profile_fields = [
-            'bio', 'interests', 'goals', 'language_levels', 
-            'education_background', 'work_experience', 
+            'bio', 'interests', 'goals', 'language_levels',
+            'education_background', 'work_experience',
             'preferred_countries', 'onboarding_completed',
             'ielts_exam_date',
             # прямые поля для результатов экзаменов
             'ielts_current_score', 'ielts_target_score',
-            'tolc_current_score', 'tolc_target_score', 'tolc_exam_date'
+            'tolc_current_score', 'tolc_target_score', 'tolc_exam_date',
+            # workflow step completion flags
+            'codice_step_1_completed', 'codice_step_2_completed',
+            'codice_step_3_completed', 'codice_step_4_completed',
+            'dov_step_1_completed', 'dov_step_2_completed',
+            'dov_step_3_completed', 'dov_step_4_completed',
+            'universitaly_step_1_completed', 'universitaly_step_2_completed',
+            'universitaly_step_3_completed', 'universitaly_step_4_completed',
+            'universitaly_step_5_completed',
+            'visa_step_1_completed', 'visa_step_2_completed',
+            'visa_step_3_completed', 'visa_step_4_completed',
         ]
         for field in profile_fields:
             if field in data:

@@ -48,6 +48,32 @@ class UserProfile(models.Model):
     tolc_target_score = models.FloatField(null=True, blank=True)
     # Дата экзамена TOLC (если планируется/сдан)
     tolc_exam_date = models.DateField(null=True, blank=True)
+
+    # Codice Fiscale workflow steps
+    codice_step_1_completed = models.BooleanField(default=False)
+    codice_step_2_completed = models.BooleanField(default=False)
+    codice_step_3_completed = models.BooleanField(default=False)
+    codice_step_4_completed = models.BooleanField(default=False)
+
+    # Dichiarazione di Valore (DOV) workflow steps
+    dov_step_1_completed = models.BooleanField(default=False)
+    dov_step_2_completed = models.BooleanField(default=False)
+    dov_step_3_completed = models.BooleanField(default=False)
+    dov_step_4_completed = models.BooleanField(default=False)
+
+    # Universitaly portal workflow steps
+    universitaly_step_1_completed = models.BooleanField(default=False)
+    universitaly_step_2_completed = models.BooleanField(default=False)
+    universitaly_step_3_completed = models.BooleanField(default=False)
+    universitaly_step_4_completed = models.BooleanField(default=False)
+    universitaly_step_5_completed = models.BooleanField(default=False)
+
+    # Visa workflow steps
+    visa_step_1_completed = models.BooleanField(default=False)
+    visa_step_2_completed = models.BooleanField(default=False)
+    visa_step_3_completed = models.BooleanField(default=False)
+    visa_step_4_completed = models.BooleanField(default=False)
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

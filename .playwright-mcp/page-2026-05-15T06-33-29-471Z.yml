@@ -1,0 +1,263 @@
+- main [ref=e68]:
+  - generic [ref=e70]:
+    - generic [ref=e73]:
+      - generic [ref=e76] [cursor=pointer]:
+        - generic [ref=e78]: DU
+        - generic [ref=e79]:
+          - paragraph [ref=e80]: Demo User
+          - paragraph [ref=e81]: Студент
+        - generic [ref=e83]: Активен
+      - generic [ref=e84]:
+        - button "Главная Обзор и статистика" [ref=e85] [cursor=pointer]:
+          - generic [ref=e86]:
+            - img [ref=e89]
+            - generic [ref=e94]:
+              - paragraph [ref=e95]: Главная
+              - paragraph [ref=e96]: Обзор и статистика
+        - button "IELTS Подготовка к IELTS 0%" [ref=e97] [cursor=pointer]:
+          - generic [ref=e98]:
+            - img [ref=e101]
+            - generic [ref=e105]:
+              - paragraph [ref=e106]: IELTS
+              - paragraph [ref=e107]: Подготовка к IELTS
+            - generic [ref=e110]: 0%
+        - button "TOLC Подготовка к TOLC 0%" [ref=e111] [cursor=pointer]:
+          - generic [ref=e112]:
+            - img [ref=e115]
+            - generic [ref=e119]:
+              - paragraph [ref=e120]: TOLC
+              - paragraph [ref=e121]: Подготовка к TOLC
+            - generic [ref=e124]: 0%
+        - button "Университеты Поиск университетов" [ref=e125] [cursor=pointer]:
+          - generic [ref=e126]:
+            - img [ref=e129]
+            - generic [ref=e132]:
+              - paragraph [ref=e133]: Университеты
+              - paragraph [ref=e134]: Поиск университетов
+        - button "Universitaly Платформа Universitaly 0%" [ref=e135] [cursor=pointer]:
+          - generic [ref=e136]:
+            - img [ref=e139]
+            - generic [ref=e142]:
+              - paragraph [ref=e143]: Universitaly
+              - paragraph [ref=e144]: Платформа Universitaly
+            - generic [ref=e147]: 0%
+        - button "Codice Fiscale Документы и коды 0%" [ref=e148] [cursor=pointer]:
+          - generic [ref=e149]:
+            - img [ref=e152]
+            - generic [ref=e156]:
+              - paragraph [ref=e157]: Codice Fiscale
+              - paragraph [ref=e158]: Документы и коды
+            - generic [ref=e161]: 0%
+        - button "DOV Декларация о стоимости 0%" [ref=e162] [cursor=pointer]:
+          - generic [ref=e163]:
+            - img [ref=e166]
+            - generic [ref=e170]:
+              - paragraph [ref=e171]: DOV
+              - paragraph [ref=e172]: Декларация о стоимости
+            - generic [ref=e175]: 0%
+        - button "Визовая поддержка Помощь с визами 0%" [ref=e176] [cursor=pointer]:
+          - generic [ref=e177]:
+            - img [ref=e180]
+            - generic [ref=e183]:
+              - paragraph [ref=e184]: Визовая поддержка
+              - paragraph [ref=e185]: Помощь с визами
+            - generic [ref=e188]: 0%
+        - button "AI Ментор Персональный помощник" [ref=e189] [cursor=pointer]:
+          - generic [ref=e190]:
+            - img [ref=e193]
+            - generic [ref=e197]:
+              - paragraph [ref=e198]: AI Ментор
+              - paragraph [ref=e199]: Персональный помощник
+      - separator [ref=e200]
+      - button "Настройки Профиль и предпочтения" [ref=e201] [cursor=pointer]:
+        - generic [ref=e202]:
+          - img [ref=e204]
+          - generic [ref=e208]:
+            - paragraph [ref=e209]: Настройки
+            - paragraph [ref=e210]: Профиль и предпочтения
+      - generic [ref=e211]:
+        - button "Помощь FAQ и поддержка" [ref=e212] [cursor=pointer]:
+          - generic [ref=e213]:
+            - img [ref=e215]
+            - generic [ref=e219]:
+              - paragraph [ref=e220]: Помощь
+              - paragraph [ref=e221]: FAQ и поддержка
+        - button "Уведомления Настройки уведомлений" [ref=e222] [cursor=pointer]:
+          - generic [ref=e223]:
+            - img [ref=e225]
+            - generic [ref=e229]:
+              - paragraph [ref=e230]: Уведомления
+              - paragraph [ref=e231]: Настройки уведомлений
+    - generic [ref=e236]:
+      - generic [ref=e237]:
+        - button "Уведомления 8" [ref=e238] [cursor=pointer]:
+          - generic [ref=e239]:
+            - img [ref=e241]
+            - generic [ref=e244]:
+              - text: Уведомления
+              - generic [ref=e246]: "8"
+        - button "AI Рекомендации 3" [ref=e247] [cursor=pointer]:
+          - generic [ref=e248]:
+            - img [ref=e250]
+            - generic [ref=e254]:
+              - text: AI Рекомендации
+              - generic [ref=e256]: "3"
+      - generic [ref=e260]:
+        - paragraph [ref=e262]: Добро пожаловать, Demo!
+        - generic [ref=e264]:
+          - generic [ref=e266]:
+            - generic [ref=e267]:
+              - img [ref=e269]
+              - generic [ref=e271]:
+                - paragraph [ref=e272]: "0"
+                - paragraph [ref=e273]: дней подряд
+            - paragraph [ref=e274]: Учебная серия
+          - generic [ref=e276]:
+            - generic [ref=e277]:
+              - img [ref=e279]
+              - generic [ref=e283]:
+                - paragraph [ref=e284]:
+                  - text: "0"
+                  - generic [ref=e285]: / 20
+                - paragraph [ref=e286]: задач на неделе
+            - generic [ref=e287]:
+              - progressbar
+          - generic [ref=e289]:
+            - generic [ref=e290]:
+              - img [ref=e292]
+              - generic [ref=e296]:
+                - paragraph [ref=e297]: "0"
+                - paragraph [ref=e298]: достижений
+            - paragraph [ref=e299]: Получено наград
+        - generic [ref=e300]:
+          - generic [ref=e301]:
+            - img [ref=e303]
+            - paragraph [ref=e308]: Слово дня
+          - paragraph [ref=e309]: Pre-iscrizione
+          - paragraph [ref=e310]: Предварительная регистрация
+          - paragraph [ref=e311]: La pre-iscrizione si fa su Universitaly.
+        - generic [ref=e312]:
+          - paragraph [ref=e314]: Календарь
+          - generic [ref=e317]:
+            - generic [ref=e318]:
+              - button [disabled] [ref=e319]:
+                - img [ref=e320]
+              - button "May 2026" [ref=e322] [cursor=pointer]
+              - button [ref=e323] [cursor=pointer]:
+                - img [ref=e324]
+            - table [ref=e326]:
+              - rowgroup [ref=e327]:
+                - row "Mo Tu We Th Fr Sa Su" [ref=e328]:
+                  - columnheader "Mo" [ref=e329]
+                  - columnheader "Tu" [ref=e330]
+                  - columnheader "We" [ref=e331]
+                  - columnheader "Th" [ref=e332]
+                  - columnheader "Fr" [ref=e333]
+                  - columnheader "Sa" [ref=e334]
+                  - columnheader "Su" [ref=e335]
+              - rowgroup [ref=e336]:
+                - row "27 April 2026 28 April 2026 29 April 2026 30 April 2026 1 May 2026 2 May 2026 3 May 2026" [ref=e337]:
+                  - cell "27 April 2026" [ref=e338]:
+                    - button "27 April 2026" [disabled] [ref=e339]: "27"
+                  - cell "28 April 2026" [ref=e340]:
+                    - button "28 April 2026" [disabled] [ref=e341]: "28"
+                  - cell "29 April 2026" [ref=e342]:
+                    - button "29 April 2026" [disabled] [ref=e343]: "29"
+                  - cell "30 April 2026" [ref=e344]:
+                    - button "30 April 2026" [disabled] [ref=e345]: "30"
+                  - cell "1 May 2026" [ref=e346]:
+                    - button "1 May 2026" [disabled] [ref=e347]: "1"
+                  - cell "2 May 2026" [ref=e348]:
+                    - button "2 May 2026" [disabled] [ref=e349]: "2"
+                  - cell "3 May 2026" [ref=e350]:
+                    - button "3 May 2026" [disabled] [ref=e351]: "3"
+                - row "4 May 2026 5 May 2026 6 May 2026 7 May 2026 8 May 2026 9 May 2026 10 May 2026" [ref=e352]:
+                  - cell "4 May 2026" [ref=e353]:
+                    - button "4 May 2026" [disabled] [ref=e354]: "4"
+                  - cell "5 May 2026" [ref=e355]:
+                    - button "5 May 2026" [disabled] [ref=e356]: "5"
+                  - cell "6 May 2026" [ref=e357]:
+                    - button "6 May 2026" [disabled] [ref=e358]: "6"
+                  - cell "7 May 2026" [ref=e359]:
+                    - button "7 May 2026" [disabled] [ref=e360]: "7"
+                  - cell "8 May 2026" [ref=e361]:
+                    - button "8 May 2026" [disabled] [ref=e362]: "8"
+                  - cell "9 May 2026" [ref=e363]:
+                    - button "9 May 2026" [disabled] [ref=e364]: "9"
+                  - cell "10 May 2026" [ref=e365]:
+                    - button "10 May 2026" [disabled] [ref=e366]: "10"
+                - row "11 May 2026 12 May 2026 13 May 2026 14 May 2026 15 May 2026 16 May 2026 17 May 2026" [ref=e367]:
+                  - cell "11 May 2026" [ref=e368]:
+                    - button "11 May 2026" [disabled] [ref=e369]: "11"
+                  - cell "12 May 2026" [ref=e370]:
+                    - button "12 May 2026" [disabled] [ref=e371]: "12"
+                  - cell "13 May 2026" [ref=e372]:
+                    - button "13 May 2026" [disabled] [ref=e373]: "13"
+                  - cell "14 May 2026" [ref=e374]:
+                    - button "14 May 2026" [disabled] [ref=e375]: "14"
+                  - cell "15 May 2026" [ref=e376]:
+                    - button "15 May 2026" [ref=e377] [cursor=pointer]: "15"
+                  - cell "16 May 2026" [ref=e378]:
+                    - button "16 May 2026" [ref=e379] [cursor=pointer]: "16"
+                  - cell "17 May 2026" [ref=e380]:
+                    - button "17 May 2026" [ref=e381] [cursor=pointer]: "17"
+                - row "18 May 2026 19 May 2026 20 May 2026 21 May 2026 22 May 2026 23 May 2026 24 May 2026" [ref=e382]:
+                  - cell "18 May 2026" [ref=e383]:
+                    - button "18 May 2026" [ref=e384] [cursor=pointer]: "18"
+                  - cell "19 May 2026" [ref=e385]:
+                    - button "19 May 2026" [ref=e386] [cursor=pointer]: "19"
+                  - cell "20 May 2026" [ref=e387]:
+                    - button "20 May 2026" [ref=e388] [cursor=pointer]: "20"
+                  - cell "21 May 2026" [ref=e389]:
+                    - button "21 May 2026" [ref=e390] [cursor=pointer]: "21"
+                  - cell "22 May 2026" [ref=e391]:
+                    - button "22 May 2026" [ref=e392] [cursor=pointer]: "22"
+                  - cell "23 May 2026" [ref=e393]:
+                    - button "23 May 2026" [ref=e394] [cursor=pointer]: "23"
+                  - cell "24 May 2026" [ref=e395]:
+                    - button "24 May 2026" [ref=e396] [cursor=pointer]: "24"
+                - row "25 May 2026 26 May 2026 27 May 2026 28 May 2026 29 May 2026 30 May 2026 31 May 2026" [ref=e397]:
+                  - cell "25 May 2026" [ref=e398]:
+                    - button "25 May 2026" [ref=e399] [cursor=pointer]: "25"
+                  - cell "26 May 2026" [ref=e400]:
+                    - button "26 May 2026" [ref=e401] [cursor=pointer]: "26"
+                  - cell "27 May 2026" [ref=e402]:
+                    - button "27 May 2026" [ref=e403] [cursor=pointer]: "27"
+                  - cell "28 May 2026" [ref=e404]:
+                    - button "28 May 2026" [ref=e405] [cursor=pointer]: "28"
+                  - cell "29 May 2026" [ref=e406]:
+                    - button "29 May 2026" [ref=e407] [cursor=pointer]: "29"
+                  - cell "30 May 2026" [ref=e408]:
+                    - button "30 May 2026" [ref=e409] [cursor=pointer]: "30"
+                  - cell "31 May 2026" [ref=e410]:
+                    - button "31 May 2026" [ref=e411] [cursor=pointer]: "31"
+          - generic [ref=e412]:
+            - paragraph [ref=e413]: События на 2026-05-15
+            - paragraph [ref=e414]: Нет событий
+            - button "Добавить событие" [ref=e416] [cursor=pointer]:
+              - generic [ref=e418]: Добавить событие
+        - generic [ref=e419]:
+          - generic [ref=e420]:
+            - paragraph [ref=e421]: Прогресс профиля
+            - generic [ref=e423]: Not started
+          - generic [ref=e424]:
+            - generic [ref=e425]:
+              - img [ref=e426]
+              - img [ref=e428]
+              - paragraph [ref=e432]: 0%
+            - generic [ref=e433]:
+              - generic [ref=e434]:
+                - paragraph [ref=e435]: Личные данные
+                - generic [ref=e437]: Не заполнено
+              - generic [ref=e438]:
+                - paragraph [ref=e439]: Образование
+                - generic [ref=e441]: Не заполнено
+              - generic [ref=e442]:
+                - paragraph [ref=e443]: Интересы и цели
+                - generic [ref=e445]: Не заполнено
+              - generic [ref=e446]:
+                - paragraph [ref=e447]: Языковые навыки
+                - generic [ref=e449]: Не заполнено
+              - generic [ref=e450]:
+                - paragraph [ref=e451]: Предпочтения
+                - generic [ref=e453]: Не заполнено

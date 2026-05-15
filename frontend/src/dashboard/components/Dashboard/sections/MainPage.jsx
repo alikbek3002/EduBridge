@@ -41,6 +41,44 @@ const VOCAB_ITEMS = [
   { word: 'Crediti formativi', translation: 'Кредиты / Зачётные единицы', context: 'Ogni esame vale dei crediti formativi.' },
   { word: 'Propedeutico', translation: 'Вводный / подготовительный курс', context: 'Il corso propedeutico è obbligatorio.' },
   { word: 'Ateneo', translation: 'Университет', context: 'L\'ateneo è molto rinomato.' },
+  { word: 'Permesso di soggiorno', translation: 'Вид на жительство', context: 'Devo rinnovare il permesso di soggiorno.' },
+  { word: 'Codice fiscale', translation: 'Налоговый код', context: 'Senza codice fiscale non posso aprire un conto.' },
+  { word: 'Visto di studio', translation: 'Студенческая виза', context: 'Ho ottenuto il visto di studio per l\'Italia.' },
+  { word: 'Pre-iscrizione', translation: 'Предварительная регистрация', context: 'La pre-iscrizione si fa su Universitaly.' },
+  { word: 'Test d\'ingresso', translation: 'Вступительный тест', context: 'Il test d\'ingresso è obbligatorio per medicina.' },
+  { word: 'TOLC', translation: 'Тест ориентации по разделам', context: 'Devo superare il TOLC-I per ingegneria.' },
+  { word: 'Facoltà', translation: 'Факультет', context: 'Sono iscritto alla facoltà di economia.' },
+  { word: 'Dipartimento', translation: 'Кафедра / Департамент', context: 'Il dipartimento di matematica è famoso.' },
+  { word: 'Anno accademico', translation: 'Учебный год', context: 'L\'anno accademico inizia a ottobre.' },
+  { word: 'Sessione d\'esami', translation: 'Сессия', context: 'La sessione invernale è a gennaio.' },
+  { word: 'Voto', translation: 'Оценка', context: 'Ho preso un voto di 28 su 30.' },
+  { word: 'Tesi di laurea', translation: 'Дипломная работа', context: 'Sto scrivendo la tesi di laurea.' },
+  { word: 'Relatore', translation: 'Научный руководитель', context: 'Il mio relatore è un professore noto.' },
+  { word: 'Erasmus', translation: 'Программа обмена Erasmus', context: 'Vado in Erasmus a Madrid.' },
+  { word: 'ISEE', translation: 'Декларация о доходах семьи', context: 'L\'ISEE serve per calcolare la tassa.' },
+  { word: 'Stage', translation: 'Стажировка', context: 'Ho fatto uno stage in azienda.' },
+  { word: 'Tirocinio', translation: 'Практика / Интернатура', context: 'Il tirocinio è obbligatorio per medicina.' },
+  { word: 'Mensa universitaria', translation: 'Студенческая столовая', context: 'Pranzo alla mensa universitaria.' },
+  { word: 'Studentato', translation: 'Студенческое общежитие', context: 'Vivo nello studentato di Bologna.' },
+  { word: 'Aula magna', translation: 'Большой зал / актовый зал', context: 'La cerimonia è nell\'aula magna.' },
+  { word: 'Biblioteca', translation: 'Библиотека', context: 'Studio in biblioteca tutti i giorni.' },
+  { word: 'Esame orale', translation: 'Устный экзамен', context: 'L\'esame orale di storia è domani.' },
+  { word: 'Esame scritto', translation: 'Письменный экзамен', context: 'Lo scritto di matematica dura tre ore.' },
+  { word: 'Frequenza obbligatoria', translation: 'Обязательное посещение', context: 'Per alcuni corsi la frequenza è obbligatoria.' },
+  { word: 'Appello', translation: 'Дата экзамена', context: 'Mi iscrivo all\'appello di luglio.' },
+  { word: 'Verbalizzazione', translation: 'Регистрация оценки', context: 'La verbalizzazione è automatica.' },
+  { word: 'Lode', translation: 'С отличием (cum laude)', context: 'Ho preso 30 e lode in italiano.' },
+  { word: 'Trasferimento', translation: 'Перевод (в другой ВУЗ)', context: 'Ho chiesto il trasferimento a Milano.' },
+  { word: 'Convalida esami', translation: 'Зачёт сданных экзаменов', context: 'La convalida richiede tempo.' },
+  { word: 'Diploma supplement', translation: 'Приложение к диплому', context: 'Il diploma supplement è in inglese.' },
+  { word: 'Albo professionale', translation: 'Профессиональный реестр', context: 'Per esercitare bisogna iscriversi all\'albo.' },
+  { word: 'Master di primo livello', translation: 'Магистратура 1 уровня (после бакалавриата)', context: 'Faccio un master di primo livello.' },
+  { word: 'Dottorato di ricerca', translation: 'Аспирантура / PhD', context: 'Sono al secondo anno di dottorato.' },
+  { word: 'Numerus clausus', translation: 'Ограниченный набор', context: 'Medicina ha il numerus clausus.' },
+  { word: 'Graduatoria', translation: 'Рейтинговый список', context: 'La graduatoria esce a luglio.' },
+  { word: 'Lettera motivazionale', translation: 'Мотивационное письмо', context: 'La lettera motivazionale è importante.' },
+  { word: 'Certificato di lingua', translation: 'Языковой сертификат', context: 'Serve un certificato di lingua B2.' },
+  { word: 'Apostille', translation: 'Апостиль', context: 'Devo mettere l\'apostille sul diploma.' },
 ];
 
 const MainPage = ({ isMobile = false, isTablet = false }) => {
@@ -188,9 +226,10 @@ const MainPage = ({ isMobile = false, isTablet = false }) => {
     if (!canSave) return;
     setSavingEvent(true);
     try {
+      const dateObj = newDate instanceof Date ? newDate : new Date(newDate);
       const res = await educationAPI.createEvent({
         title: newTitle.trim(),
-        date: newDate.toISOString(),
+        date: dateObj.toISOString().slice(0, 10),
       });
       const item = {
         id: res?.data?.id || Date.now(),

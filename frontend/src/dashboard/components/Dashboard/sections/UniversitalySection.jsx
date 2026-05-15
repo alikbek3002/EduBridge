@@ -1,5 +1,6 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import React, { useState } from 'react';
+import { updateProfileComplete, fetchProfile } from '../../../../store/authSlice';
 import { 
   Box, 
   Stack, 
@@ -35,11 +36,25 @@ import {
 } from '@tabler/icons-react';
 
 const UniversitalySection = ({ progress }) => {
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const [opened, setOpened] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState(null);
+  const [markingStep, setMarkingStep] = useState(null);
+
+  const toggleStep = async (stepNum, value) => {
+    setMarkingStep(stepNum);
+    try {
+      await dispatch(updateProfileComplete({ [`universitaly_step_${stepNum}_completed`]: value })).unwrap();
+      await dispatch(fetchProfile());
+    } catch (e) {
+      console.error('Failed to update Universitaly step', e);
+    } finally {
+      setMarkingStep(null);
+    }
+  };
 
   const handleUpload = async () => {
     if (!selectedFile) return;
@@ -71,7 +86,7 @@ const UniversitalySection = ({ progress }) => {
       id: 1,
       title: 'Создание аккаунта на Universitaly',
       description: 'Регистрация на официальном сайте',
-      completed: user?.profile?.universitaly_step_1_completed || false,
+      completed: !!user?.profile?.universitaly_step_1_completed,
       required: true,
       documents: ['Email', 'Пароль', 'Личные данные']
     },
@@ -79,7 +94,7 @@ const UniversitalySection = ({ progress }) => {
       id: 2,
       title: 'Заполнение анкеты',
       description: 'Подробная информация о себе',
-      completed: user?.profile?.universitaly_step_1_completed || false,
+      completed: !!user?.profile?.universitaly_step_2_completed,
       required: true,
       documents: ['Фото', 'Документы', 'Справки']
     },
@@ -87,7 +102,7 @@ const UniversitalySection = ({ progress }) => {
       id: 3,
       title: 'Выбор специальности',
       description: 'Выбор направления обучения',
-      completed: false,
+      completed: !!user?.profile?.universitaly_step_3_completed,
       required: true,
       documents: ['Мотивационное письмо', 'Рекомендации']
     },
@@ -95,7 +110,7 @@ const UniversitalySection = ({ progress }) => {
       id: 4,
       title: 'Подача документов',
       description: 'Загрузка всех необходимых файлов',
-      completed: false,
+      completed: !!user?.profile?.universitaly_step_4_completed,
       required: true,
       documents: ['Диплом', 'Сертификаты', 'Портфолио']
     },
@@ -103,7 +118,7 @@ const UniversitalySection = ({ progress }) => {
       id: 5,
       title: 'Ожидание результатов',
       description: 'Рассмотрение заявки университетом',
-      completed: false,
+      completed: !!user?.profile?.universitaly_step_5_completed,
       required: false,
       documents: []
     }
@@ -258,20 +273,17 @@ const UniversitalySection = ({ progress }) => {
                       )}
                     </Box>
                     <Group gap="sm">
-                      {step.completed ? (
-                        <Badge color="green" variant="light" radius="sm">
-                          Завершено
-                        </Badge>
-                      ) : (
-                        <Button
-                          size="sm"
-                          variant="light"
-                          leftSection={<IconPlayerPlay size={16} />}
-                          radius="md"
-                        >
-                          Начать
-                        </Button>
-                      )}
+                      <Button
+                        size="sm"
+                        variant={step.completed ? 'subtle' : 'filled'}
+                        color="dark"
+                        loading={markingStep === step.id}
+                        onClick={() => toggleStep(step.id, !step.completed)}
+                        leftSection={step.completed ? <IconX size={14} /> : <IconCheck size={14} />}
+                        radius="md"
+                      >
+                        {step.completed ? 'Отменить' : 'Отметить выполненным'}
+                      </Button>
                     </Group>
                   </Group>
                 </Paper>
@@ -288,23 +300,34 @@ const UniversitalySection = ({ progress }) => {
             </Text>
             <Group>
               <Button
-                leftSection={<IconUpload size={16} />}
+                leftSection={<IconUpload size={16} stroke={1.5} />}
                 onClick={() => setOpened(true)}
+                color="dark"
                 radius="md"
               >
                 Загрузить документы
               </Button>
               <Button
                 variant="light"
-                leftSection={<IconDownload size={16} />}
+                color="gray"
+                leftSection={<IconDownload size={16} stroke={1.5} />}
                 radius="md"
+                component="a"
+                href="https://www.universitaly.it/index.php/students/scegli-il-tuo-percorso"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 Скачать шаблоны
               </Button>
               <Button
                 variant="light"
-                leftSection={<IconEye size={16} />}
+                color="gray"
+                leftSection={<IconEye size={16} stroke={1.5} />}
                 radius="md"
+                component="a"
+                href="https://www.universitaly.it/index.php/preiscrizione/visualizza"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 Просмотреть заявку
               </Button>

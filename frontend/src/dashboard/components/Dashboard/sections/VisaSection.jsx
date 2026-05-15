@@ -1,5 +1,6 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import React, { useState } from 'react';
+import { updateProfileComplete, fetchProfile } from '../../../../store/authSlice';
 import { 
   Box, 
   Stack, 
@@ -37,12 +38,26 @@ import {
 } from '@tabler/icons-react';
 
 const VisaSection = ({ progress }) => {
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const _overallProgress = progress?.overallProgress || 0;
   const [opened, setOpened] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState(null);
+  const [markingStep, setMarkingStep] = useState(null);
+
+  const toggleStep = async (stepNum, value) => {
+    setMarkingStep(stepNum);
+    try {
+      await dispatch(updateProfileComplete({ [`visa_step_${stepNum}_completed`]: value })).unwrap();
+      await dispatch(fetchProfile());
+    } catch (e) {
+      console.error('Failed to update visa step', e);
+    } finally {
+      setMarkingStep(null);
+    }
+  };
 
   const handleUpload = async () => {
     if (!selectedFile) return;
@@ -272,15 +287,21 @@ const VisaSection = ({ progress }) => {
                     </Box>
                   </Group>
                   <Group>
-                    {step.completed ? (
-                      <Badge color="green" variant="light">
+                    {step.completed && (
+                      <Badge color="dark" variant="filled">
                         Завершено
                       </Badge>
-                    ) : (
-                      <Badge color="blue" variant="light">
-                        В процессе
-                      </Badge>
                     )}
+                    <Button
+                      size="sm"
+                      variant={step.completed ? 'subtle' : 'filled'}
+                      color="dark"
+                      loading={markingStep === step.id}
+                      onClick={() => toggleStep(step.id, !step.completed)}
+                      leftSection={step.completed ? <IconEye size={16} /> : <IconCheck size={16} />}
+                    >
+                      {step.completed ? 'Отменить' : 'Отметить'}
+                    </Button>
                   </Group>
                 </Group>
               </Card>

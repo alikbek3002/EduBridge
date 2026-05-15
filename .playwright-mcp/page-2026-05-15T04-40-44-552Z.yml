@@ -1,0 +1,80 @@
+- main [ref=e68]:
+  - generic [ref=e72]:
+    - generic [ref=e75]:
+      - generic [ref=e76] [cursor=pointer]:
+        - generic [ref=e78]: "1"
+        - paragraph [ref=e79]: Личные данные
+      - generic [ref=e80] [cursor=pointer]:
+        - generic [ref=e82]: "2"
+        - paragraph [ref=e83]: Образование
+      - generic [ref=e84] [cursor=pointer]:
+        - generic [ref=e86]: "3"
+        - paragraph [ref=e87]: Сертификаты
+      - generic [ref=e88] [cursor=pointer]:
+        - generic [ref=e90]: "4"
+        - paragraph [ref=e91]: География
+      - generic [ref=e92] [cursor=pointer]:
+        - generic [ref=e94]: "5"
+        - paragraph [ref=e95]: Желаемая специальность
+      - generic [ref=e96] [cursor=pointer]:
+        - generic [ref=e98]: "6"
+        - paragraph [ref=e99]: Завершение
+    - generic [ref=e101]:
+      - generic [ref=e102]:
+        - heading "Личные данные" [level=2] [ref=e103]
+        - generic [ref=e104]:
+          - paragraph [ref=e105]: 1/6
+          - progressbar [ref=e107]
+      - generic [ref=e109]:
+        - generic [ref=e111]:
+          - generic [ref=e113]:
+            - generic [ref=e114]: Имя
+            - generic [ref=e115]:
+              - img [ref=e117]
+              - textbox "Имя" [ref=e120]: Demo
+          - generic [ref=e122]:
+            - generic [ref=e123]: Фамилия
+            - generic [ref=e124]:
+              - img [ref=e126]
+              - textbox "Фамилия" [ref=e129]: User
+        - generic [ref=e131]:
+          - generic [ref=e133]:
+            - generic [ref=e134]: Дата рождения
+            - textbox "Дата рождения" [ref=e136]:
+              - /placeholder: Выберите дату
+          - generic [ref=e138]:
+            - generic [ref=e139]:
+              - generic [ref=e140]: Код
+              - generic [ref=e141]:
+                - textbox "Код" [ref=e142]: рџ‡°рџ‡ї +7
+                - generic:
+                  - img
+            - generic [ref=e143]:
+              - generic [ref=e144]: Телефон
+              - generic [ref=e145]:
+                - img [ref=e147]
+                - textbox "Телефон" [ref=e149]:
+                  - /placeholder: "например: 7012345678"
+        - generic [ref=e151]:
+          - generic [ref=e153]:
+            - generic [ref=e154]: Страна проживания
+            - generic [ref=e155]:
+              - textbox "Страна проживания" [ref=e156]:
+                - /placeholder: Выберите страну
+              - generic:
+                - img
+          - generic [ref=e158]:
+            - generic [ref=e159]: Город
+            - textbox "Город" [ref=e161]:
+              - /placeholder: Введите город
+      - generic [ref=e162]:
+        - button "Назад" [disabled] [ref=e163]:
+          - generic [ref=e164]:
+            - img [ref=e166]
+            - generic [ref=e169]: Назад
+        - button "Далее" [ref=e170] [cursor=pointer]:
+          - generic [ref=e171]:
+            - generic [ref=e172]: Далее
+            - img [ref=e174]
+      - paragraph [ref=e178]: Черновик сохраняется автоматически
+    - paragraph [ref=e182]: "Заполните личные данные: имя, фамилию, дату рождения, телефон и город."
